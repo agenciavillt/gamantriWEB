@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAMANTRI — Fine Art Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --base:    #080808;
+      --surface: #141414;
+      --stone:   #2E2E2C;
+      --text:    #F2EDE8;
+      --muted:   #7a7a76;
+      --accent:  #D4571E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--base);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    nav { display: flex; align-items: center; gap: 40px; }
+
+    nav a {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    nav a:hover { color: var(--text); }
+
+    .lang-toggle { display: flex; gap: 4px; margin-left: 24px; }
+    .lang-btn {
+      background: none; border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; padding: 4px 8px; transition: color 0.3s;
+    }
+    .lang-btn.active { color: var(--accent); }
+    .lang-btn:hover { color: var(--text); }
+    .lang-sep { color: var(--stone); line-height: 1; align-self: center; font-size: 10px; }
+
+    /* HERO */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 80px 48px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('shared/assets/images/gamantri_11_01.jpg') center/cover no-repeat;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+    #hero:hover .hero-bg { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.2) 60%, transparent 100%);
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 0.9;
+      margin-bottom: 24px;
+    }
+
+    .hero-tagline {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scroll-hint {
+      position: absolute; bottom: 40px; right: 48px;
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); writing-mode: vertical-rl;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .scroll-hint::before {
+      content: ''; width: 1px; height: 48px;
+      background: var(--accent); display: block;
+    }
+
+    /* SECCIONES */
+    section { padding: 120px 48px; }
+
+    .section-label {
+      font-size: 10px; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 300; line-height: 1.1; margin-bottom: 48px;
+    }
+
+    /* OBRAS */
+    #obras { background: var(--base); border-top: 1px solid var(--stone); }
+
+    .obras-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 64px;
+    }
+
+    .obras-copy {
+      font-size: 15px; color: var(--muted);
+      max-width: 440px; line-height: 1.8;
+    }
+
+    .obras-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    }
+
+    .obra-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      aspect-ratio: 3/4; background: var(--surface);
+    }
+
+    .obra-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease, filter 0.6s ease;
+      filter: brightness(0.85);
+    }
+    .obra-card:hover img { transform: scale(1.04); filter: brightness(1); }
+
+    .obra-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px 24px 24px;
+      background: linear-gradient(to top, rgba(8,8,8,0.92), transparent);
+      transform: translateY(8px); transition: transform 0.4s ease;
+    }
+    .obra-card:hover .obra-info { transform: translateY(0); }
+
+    .obra-serie {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400; margin-bottom: 6px;
+    }
+
+    .obra-meta {
+      display: flex; justify-content: space-between;
+      align-items: center; font-size: 11px;
+      letter-spacing: 0.1em; color: var(--muted);
+    }
+
+    .obra-badge {
+      font-size: 10px; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 3px 10px;
+      border: 1px solid var(--accent); color: var(--accent);
+    }
+    .obra-badge.sold { border-color: var(--muted); color: var(--muted); }
+
+    .cta-link {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; margin-top: 48px;
+      transition: gap 0.3s; cursor: pointer;
+    }
+    .cta-link::after { content: '→'; color: var(--accent); transition: transform 0.3s; }
+    .cta-link:hover { gap: 20px; }
+    .cta-link:hover::after { transform: translateX(4px); }
+
+    /* DOS COLUMNAS */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+
+    .col-block {
+      padding: 80px 56px; background: var(--surface);
+      position: relative; overflow: hidden; cursor: pointer;
+      transition: background 0.4s;
+    }
+
+    .col-block::before {
+      content: ''; position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0.12; transition: opacity 0.5s;
+    }
+    .col-block:hover::before { opacity: 0.22; }
+    .col-block:hover { background: var(--stone); }
+
+    #cursos-block::before { background-image: url('shared/assets/images/gamantri_07_01.jpg'); }
+    #servicios-block::before { background-image: url('shared/assets/images/gamantri_06_01.jpg'); }
+
+    .col-block .section-label,
+    .col-block .section-title { position: relative; }
+    .col-block .section-title { font-size: clamp(28px, 3vw, 40px); margin-bottom: 24px; }
+
+    .col-copy {
+      position: relative; font-size: 14px; line-height: 1.8;
+      color: var(--muted); margin-bottom: 40px; max-width: 360px;
+    }
+
+    .btn {
+      display: inline-block; position: relative;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text); text-decoration: none; padding: 14px 32px;
+      border: 1px solid var(--stone); transition: border-color 0.3s, background 0.3s;
+      cursor: pointer; background: none; font-family: 'Inter', sans-serif;
+    }
+    .btn:hover { border-color: var(--accent); background: rgba(212,87,30,0.08); }
+    .btn-accent { border-color: var(--accent); color: var(--accent); }
+    .btn-accent:hover { background: rgba(212,87,30,0.15); }
+
+    /* CLIENTES */
+    #clientes {
+      padding: 80px 48px; border-top: 1px solid var(--stone); text-align: center;
+    }
+    .clientes-label {
+      font-size: 10px; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 48px;
+    }
+    .logos-row {
+      display: flex; justify-content: center;
+      align-items: center; gap: 64px; flex-wrap: wrap;
+    }
+    .logo-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); opacity: 0.6; transition: opacity 0.3s;
+    }
+    .logo-item:hover { opacity: 1; }
+
+    /* FOOTER */
+    footer {
+      padding: 64px 48px; border-top: 1px solid var(--stone);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; letter-spacing: 0.25em; text-transform: uppercase;
+    }
+    .footer-links { display: flex; gap: 32px; align-items: center; }
+    .footer-links a, .footer-btn {
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; background: none; border: none;
+      cursor: pointer; font-family: 'Inter', sans-serif; transition: color 0.3s;
+    }
+    .footer-links a:hover, .footer-btn:hover { color: var(--text); }
+    .footer-copy { font-size: 11px; color: var(--stone); letter-spacing: 0.08em; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(8,8,8,0.92);
+      z-index: 200; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--surface); max-width: 760px; width: 90%;
+      max-height: 90vh; overflow-y: auto;
+      display: grid; grid-template-columns: 280px 1fr;
+      position: relative; transform: translateY(20px); transition: transform 0.4s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+
+    .modal-foto {
+      background: url('shared/assets/images/gamantri_01_02.jpg') center/cover;
+      min-height: 480px;
+    }
+    .modal-body { padding: 56px 48px; }
+
+    .modal-close {
+      position: absolute; top: 20px; right: 24px;
+      background: none; border: none; color: var(--muted);
+      font-size: 22px; cursor: pointer; transition: color 0.3s; z-index: 10;
+    }
+    .modal-close:hover { color: var(--text); }
+
+    .modal-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 400; margin-bottom: 6px;
+    }
+    .modal-role {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 32px;
+    }
+    .modal-bio {
+      font-size: 14px; line-height: 1.9; color: var(--muted); margin-bottom: 32px;
+    }
+    .modal-stats {
+      display: flex; gap: 32px; margin-bottom: 36px;
+      padding-top: 24px; border-top: 1px solid var(--stone);
+    }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--text); }
+    .stat-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .modal-social { display: flex; gap: 16px; }
+
+    /* PÁGINAS */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* OBRA DETALLE */
+    .obra-detalle {
+      display: grid; grid-template-columns: 1fr 480px;
+      min-height: 100vh; padding-top: 80px;
+    }
+    .obra-detalle-img {
+      position: sticky; top: 80px;
+      height: calc(100vh - 80px); overflow: hidden;
+    }
+    .obra-detalle-img img { width: 100%; height: 100%; object-fit: cover; }
+    .obra-detalle-info {
+      padding: 80px 64px; background: var(--surface);
+      display: flex; flex-direction: column; justify-content: center; gap: 24px;
+    }
+    .obra-precio { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; }
+    .obra-edicion { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+    .obra-desc { font-size: 14px; line-height: 1.9; color: var(--muted); }
+    .obra-specs { display: flex; flex-direction: column; gap: 12px; padding: 24px 0; border-top: 1px solid var(--stone); }
+    .spec-row { display: flex; justify-content: space-between; font-size: 12px; }
+    .spec-key { color: var(--muted); letter-spacing: 0.1em; }
+    .spec-val { color: var(--text); }
+
+    /* CURSOS */
+    .cursos-hero {
+      height: 60vh; display: flex; align-items: flex-end;
+      padding: 80px 48px; position: relative; overflow: hidden; margin-top: 80px;
+    }
+    .cursos-hero-bg {
+      position: absolute; inset: 0;
+      background: url('shared/assets/images/gamantri_08_01.jpg') center/cover;
+    }
+    .cursos-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.9), rgba(8,8,8,0.3));
+    }
+
+    .proceso-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+    .step { background: var(--surface); padding: 48px 40px; }
+    .step-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 64px;
+      font-weight: 300; color: var(--stone); line-height: 1; margin-bottom: 16px;
+    }
+    .step-title {
+      font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .step-desc { font-size: 14px; line-height: 1.8; color: var(--muted); }
+
+    /* SERVICIOS */
+    .servicios-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 64px; }
+    .servicio-item { position: relative; aspect-ratio: 16/10; overflow: hidden; cursor: pointer; }
+    .servicio-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s, filter 0.6s; filter: brightness(0.6);
+    }
+    .servicio-item:hover img { transform: scale(1.04); filter: brightness(0.8); }
+    .servicio-label {
+      position: absolute; bottom: 32px; left: 32px;
+      font-family: 'Cormorant Garamond', serif; font-size: 24px;
+    }
+
+    /* FORMULARIOS */
+    .form-page { padding-top: 80px; }
+    .form-container { max-width: 680px; margin: 0 auto; padding: 120px 48px; }
+    .form-intro {
+      font-family: 'Cormorant Garamond', serif; font-size: 13px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    }
+    .form-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; margin-bottom: 48px; }
+    .form-group { margin-bottom: 32px; }
+    .form-label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .form-input, .form-textarea, .form-select {
+      width: 100%; background: transparent; border: none;
+      border-bottom: 1px solid var(--stone); color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 14px;
+      padding: 14px 0; outline: none; transition: border-color 0.3s;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
+    .form-textarea { resize: vertical; min-height: 100px; padding: 14px; background: var(--surface); border: 1px solid var(--stone); }
+    .form-select { background: var(--surface); border: 1px solid var(--stone); padding: 14px; }
+    .form-select option { background: var(--surface); }
+    .radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+    .radio-opt { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .radio-opt input { accent-color: var(--accent); }
+    .radio-opt span { font-size: 13px; color: var(--muted); }
+
+    /* ANIMACIÓN */
+    .fade-in { animation: fadeIn 0.5s ease forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header { padding: 20px 24px; }
+      nav { display: none; }
+      section { padding: 80px 24px; }
+      .obras-grid, .two-col, .proceso-steps, .servicios-grid { grid-template-columns: 1fr; }
+      .obras-header { flex-direction: column; gap: 24px; }
+      .modal { grid-template-columns: 1fr; }
+      .modal-foto { display: none; }
+      .obra-detalle { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 24px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <span class="logo" onclick="showPage('home')">Gamantri</span>
+    <nav>
+      <a onclick="showPage('obras')">Obras</a>
+      <a onclick="showPage('cursos')">Cursos</a>
+      <a onclick="showPage('servicios')">Servicios</a>
+    </nav>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <!-- ════════════════════ HOME ════════════════════ -->
+  <div id="page-home" class="page active">
+
+    <section id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-title">Gamantri</div>
+        <div class="hero-tagline"
+             data-es="Fotografía de naturaleza · Ediciones limitadas"
+             data-en="Nature Photography · Limited Editions">
+          Fotografía de naturaleza · Ediciones limitadas
+        </div>
+      </div>
+      <div class="scroll-hint">Scroll</div>
+    </section>
+
+    <section id="obras">
+      <div class="obras-header">
+        <div>
+          <div class="section-label" data-es="Colección" data-en="Collection">Colección</div>
+          <div class="section-title" data-es="Obras Seriadas" data-en="Limited Editions">Obras Seriadas</div>
+        </div>
+        <p class="obras-copy"
+           data-es="Fotografías impresas en papel Fine Art de máxima calidad, enmarcadas y editadas en series finales y exclusivas. Cada obra llega lista para colgar."
+           data-en="Fine Art photographs printed on premium archival paper, framed and released in exclusive limited editions. Each piece arrives ready to hang.">
+          Fotografías impresas en papel Fine Art de máxima calidad, enmarcadas y editadas en series finales y exclusivas. Cada obra llega lista para colgar.
+        </p>
+      </div>
+      <div class="obras-grid">
+        <div class="obra-card" onclick="showObra(0)">
+          <img src="shared/assets/images/gamantri_03_01.jpg" alt="Serie Patagonia" />
+          <div class="obra-info">
+            <div class="obra-serie">Serie Patagonia</div>
+            <div class="obra-meta">
+              <span>$ 1.200 USD</span>
+              <span class="obra-badge" data-es="2 disponibles" data-en="2 available">2 disponibles</span>
+            </div>
+          </div>
+        </div>
+        <div class="obra-card" onclick="showObra(1)">
+          <img src="shared/assets/images/gamantri_04_01.jpg" alt="Serie Vertical" />
+          <div class="obra-info">
+            <div class="obra-serie">Serie Vertical</div>
+            <div class="obra-meta">
+              <span>$ 1.400 USD</span>
+              <span class="obra-badge sold" data-es="Agotada" data-en="Sold Out">Agotada</span>
+            </div>
+          </div>
+        </div>
+        <div class="obra-card" onclick="showObra(2)">
+          <img src="shared/assets/images/gamantri_06_01.jpg" alt="Serie Luz de Hora" />
+          <div class="obra-info">
+            <div class="obra-serie">Serie Luz de Hora</div>
+            <div class="obra-meta">
+              <span>$ 980 USD</span>
+              <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="cta-link" onclick="showPage('obras')"
+            data-es="Ver colección completa" data-en="View full collection">
+        Ver colección completa
+      </span>
+    </section>
+
+    <div class="two-col">
+      <div class="col-block" id="cursos-block" onclick="showPage('cursos')">
+        <div class="section-label" data-es="Aprendé fotografía" data-en="Learn Photography">Aprendé fotografía</div>
+        <div class="section-title" data-es="Cursos" data-en="Courses">Cursos</div>
+        <p class="col-copy"
+           data-es="Clases personalizadas diseñadas para tu nivel y tus intereses. Online o presencial. El proceso es tuyo."
+           data-en="Personalized lessons designed around your level. Online or in person. The process is yours.">
+          Clases personalizadas diseñadas para tu nivel y tus intereses. Online o presencial. El proceso es tuyo.
+        </p>
+        <span class="btn btn-accent"
+              data-es="Quiero aprender" data-en="I want to learn">Quiero aprender</span>
+      </div>
+      <div class="col-block" id="servicios-block" onclick="showPage('servicios')">
+        <div class="section-label" data-es="Para marcas y atletas" data-en="For brands & athletes">Para marcas y atletas</div>
+        <div class="section-title" data-es="Servicios" data-en="Services">Servicios</div>
+        <p class="col-copy"
+           data-es="Fotografía y video para marcas, atletas y proyectos con alma outdoor. Si tenés una historia que contar, acá está el ojo que la captura."
+           data-en="Photography and video for brands, athletes, and outdoor projects. If you have a story to tell, here's the eye that captures it.">
+          Fotografía y video para marcas, atletas y proyectos con alma outdoor. Si tenés una historia que contar, acá está el ojo que la captura.
+        </p>
+        <span class="btn btn-accent"
+              data-es="Hablemos de tu proyecto" data-en="Let's talk">Hablemos de tu proyecto</span>
+      </div>
+    </div>
+
+    <section id="clientes">
+      <div class="clientes-label" data-es="Clientes & Colaboraciones" data-en="Clients & Collaborations">Clientes & Colaboraciones</div>
+      <div class="logos-row">
+        <span class="logo-item">The North Face</span>
+        <span class="logo-item">Mammut</span>
+        <span class="logo-item">Red Bull</span>
+        <span class="logo-item">Patagonia</span>
+        <span class="logo-item">Petzl</span>
+        <span class="logo-item">Black Diamond</span>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">Gamantri</div>
+      <div class="footer-links">
+        <button class="footer-btn" onclick="openModal()">Sobre Cris</button>
+        <a href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a>
+        <a href="mailto:contacto@gamantri.com">Email</a>
+      </div>
+      <div class="footer-copy">© 2026 Gamantri</div>
+    </footer>
+  </div>
+
+  <!-- ════════════════════ OBRAS ════════════════════ -->
+  <div id="page-obras" class="page" style="padding-top:80px">
+    <section>
+      <div class="section-label" data-es="Ediciones Limitadas" data-en="Limited Editions">Ediciones Limitadas</div>
+      <div class="section-title" data-es="Obras Seriadas" data-en="Fine Art Works">Obras Seriadas</div>
+      <div class="obras-grid">
+        <div class="obra-card" onclick="showObra(0)"><img src="shared/assets/images/gamantri_03_01.jpg" alt="" /><div class="obra-info"><div class="obra-serie">Serie Patagonia</div><div class="obra-meta"><span>$ 1.200 USD</span><span class="obra-badge">2 / 3</span></div></div></div>
+        <div class="obra-card" onclick="showObra(1)"><img src="shared/assets/images/gamantri_04_01.jpg" alt="" /><div class="obra-info"><div class="obra-serie">Serie Vertical</div><div class="obra-meta"><span>$ 1.400 USD</span><span class="obra-badge sold">Sold Out</span></div></div></div>
+        <div class="obra-card" onclick="showObra(2)"><img src="shared/assets/images/gamantri_06_01.jpg" alt="" /><div class="obra-info"><div class="obra-serie">Serie Luz de Hora</div><div class="obra-meta"><span>$ 980 USD</span><span class="obra-badge">3 / 3</span></div></div></div>
+        <div class="obra-card" onclick="showObra(3)"><img src="shared/assets/images/gamantri_07_01.jpg" alt="" /><div class="obra-info"><div class="obra-serie">Serie Roca Viva</div><div class="obra-meta"><span>$ 1.100 USD</span><span class="obra-badge">1 / 3</span></div></div></div>
+        <div class="obra-card" onclick="showObra(4)"><img src="shared/assets/images/gamantri_09_01.jpg" alt="" /><div class="obra-info"><div class="obra-serie">Serie Silencio</div><div class="obra-meta"><span>$ 1.300 USD</span><span class="obra-badge">2 / 3</span></div></div></div>
+        <div class="obra-card" onclick="showObra(5)"><img src="shared/assets/images/gamantri_10_01.jpg" alt="" /><div class="obra-info"><div class="obra-serie">Serie Frontera</div><div class="obra-meta"><span>$ 1.500 USD</span><span class="obra-badge">1 / 3</span></div></div></div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-logo">Gamantri</div>
+      <div class="footer-links">
+        <button class="footer-btn" onclick="openModal()">Sobre Cris</button>
+        <a href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a>
+      </div>
+      <div class="footer-copy">© 2026 Gamantri</div>
+    </footer>
+  </div>
+
+  <!-- ════════════════════ OBRA DETALLE ════════════════════ -->
+  <div id="page-obra-detalle" class="page" style="padding-top:0">
+    <div class="obra-detalle">
+      <div class="obra-detalle-img">
+        <img id="obra-detalle-img" src="" alt="" />
+      </div>
+      <div class="obra-detalle-info">
+        <span class="cta-link" onclick="showPage('obras')" style="margin-top:0;margin-bottom:32px">← Volver</span>
+        <div class="section-label" data-es="Obra Seriada" data-en="Limited Edition">Obra Seriada</div>
+        <div class="section-title" id="obra-detalle-titulo" style="margin-bottom:8px">Serie Patagonia</div>
+        <div class="obra-edicion" id="obra-detalle-edicion">Edición 2 de 3</div>
+        <p class="obra-desc" id="obra-detalle-desc"></p>
+        <div class="obra-specs">
+          <div class="spec-row"><span class="spec-key">Técnica</span><span class="spec-val">Impresión Fine Art</span></div>
+          <div class="spec-row"><span class="spec-key">Soporte</span><span class="spec-val">Papel 300gsm</span></div>
+          <div class="spec-row"><span class="spec-key">Dimensiones</span><span class="spec-val">60 × 90 cm</span></div>
+          <div class="spec-row"><span class="spec-key">Marco</span><span class="spec-val">Madera natural incluido</span></div>
+          <div class="spec-row"><span class="spec-key">Envío</span><span class="spec-val">Internacional disponible</span></div>
+        </div>
+        <div class="obra-precio" id="obra-detalle-precio">$ 1.200 USD</div>
+        <a class="btn btn-accent" href="mailto:contacto@gamantri.com" style="margin-top:8px"
+           data-es="Comprar esta obra" data-en="Purchase this work">Comprar esta obra</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ CURSOS ════════════════════ -->
+  <div id="page-cursos" class="page">
+    <div class="cursos-hero">
+      <div class="cursos-hero-bg"></div>
+      <div class="cursos-hero-overlay"></div>
+      <div style="position:relative;z-index:2">
+        <div class="section-label" data-es="Aprendé fotografía" data-en="Learn Photography">Aprendé fotografía</div>
+        <div class="hero-title" style="font-size:clamp(40px,6vw,72px)" data-es="Cursos" data-en="Courses">Cursos</div>
+      </div>
+    </div>
+    <section>
+      <p style="font-size:15px;line-height:1.9;color:var(--muted);max-width:680px;margin-bottom:64px"
+         data-es="Clases personalizadas, diseñadas para tu nivel y tus intereses; puedes aprender a tu ritmo y gusto. La teoría es online; la práctica, donde vos elijas — presencial o también online. No importa si estás empezando o querés llevar tu fotografía al siguiente nivel: el proceso es tuyo. Disponible en español e inglés."
+         data-en="Personalized lessons designed around your level and your interests — learn at your own pace. Theory online; practice wherever you choose. Available in Spanish and English.">
+        Clases personalizadas, diseñadas para tu nivel y tus intereses; puedes aprender a tu ritmo y gusto. La teoría es online; la práctica, donde vos elijas — presencial o también online. No importa si estás empezando o querés llevar tu fotografía al siguiente nivel: el proceso es tuyo. Disponible en español e inglés.
+      </p>
+      <div class="section-label" data-es="El proceso" data-en="The process">El proceso</div>
+      <div class="proceso-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title" data-es="Diagnóstico" data-en="Assessment">Diagnóstico</div>
+          <p class="step-desc" data-es="Completás un formulario sobre tu nivel, intereses y objetivos. Cris lo revisa y arma una propuesta personalizada." data-en="Fill out a short form about your level and goals. Cris reviews it and builds a personalized proposal.">Completás un formulario sobre tu nivel, intereses y objetivos. Cris lo revisa y arma una propuesta personalizada.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title" data-es="Propuesta" data-en="Proposal">Propuesta</div>
+          <p class="step-desc" data-es="Recibís una propuesta a medida: modalidad, temario, ritmo y precio. Sin compromiso hasta que confirmés." data-en="You receive a tailored proposal: format, syllabus, pace and price. No commitment until you confirm.">Recibís una propuesta a medida: modalidad, temario, ritmo y precio. Sin compromiso hasta que confirmés.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title" data-es="Empieza" data-en="Begins">Empieza</div>
+          <p class="step-desc" data-es="Confirmás, reservás tu lugar y arrancamos. El proceso es tuyo." data-en="You confirm, secure your spot and we begin. The process is yours.">Confirmás, reservás tu lugar y arrancamos. El proceso es tuyo.</p>
+        </div>
+      </div>
+      <div style="margin-top:64px">
+        <span class="btn btn-accent" onclick="showPage('form-cursos')"
+              data-es="Quiero empezar — Hacer diagnóstico" data-en="I want to start — Take assessment">
+          Quiero empezar — Hacer diagnóstico
+        </span>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-logo">Gamantri</div>
+      <div class="footer-links"><button class="footer-btn" onclick="openModal()">Sobre Cris</button><a href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a></div>
+      <div class="footer-copy">© 2026 Gamantri</div>
+    </footer>
+  </div>
+
+  <!-- ════════════════════ SERVICIOS ════════════════════ -->
+  <div id="page-servicios" class="page" style="padding-top:80px">
+    <section>
+      <div class="section-label" data-es="Para marcas y atletas" data-en="For brands & athletes">Para marcas y atletas</div>
+      <div class="section-title" data-es="Servicios Audiovisuales" data-en="Visual Services">Servicios Audiovisuales</div>
+      <p style="font-size:15px;line-height:1.9;color:var(--muted);max-width:580px"
+         data-es="Fotografía y video para marcas, atletas y proyectos con alma outdoor. Desde registros de expediciones hasta contenido para redes y campañas digitales."
+         data-en="Photography and video for brands, athletes, and projects with an outdoor soul. From expedition documentation to social media content and digital campaigns.">
+        Fotografía y video para marcas, atletas y proyectos con alma outdoor. Desde registros de expediciones hasta contenido para redes y campañas digitales.
+      </p>
+      <div class="servicios-grid">
+        <div class="servicio-item"><img src="shared/assets/images/gamantri_16_01.jpg" alt="" /><div class="servicio-label" data-es="Expediciones" data-en="Expeditions">Expediciones</div></div>
+        <div class="servicio-item"><img src="shared/assets/images/gamantri_17_01.jpg" alt="" /><div class="servicio-label" data-es="Marcas" data-en="Brands">Marcas</div></div>
+        <div class="servicio-item"><img src="shared/assets/images/gamantri_20_01.jpg" alt="" /><div class="servicio-label" data-es="Atletas" data-en="Athletes">Atletas</div></div>
+        <div class="servicio-item"><img src="shared/assets/images/gamantri_22_01.jpg" alt="" /><div class="servicio-label" data-es="Campañas" data-en="Campaigns">Campañas</div></div>
+      </div>
+      <div style="margin-top:64px;padding-top:64px;border-top:1px solid var(--stone)">
+        <div class="logos-row">
+          <span class="logo-item">The North Face</span><span class="logo-item">Mammut</span>
+          <span class="logo-item">Red Bull</span><span class="logo-item">Patagonia</span><span class="logo-item">Petzl</span>
+        </div>
+      </div>
+      <div style="margin-top:64px">
+        <span class="btn btn-accent" onclick="showPage('form-servicios')"
+              data-es="Hablemos de tu proyecto" data-en="Let's talk about your project">
+          Hablemos de tu proyecto
+        </span>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-logo">Gamantri</div>
+      <div class="footer-links"><button class="footer-btn" onclick="openModal()">Sobre Cris</button><a href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a></div>
+      <div class="footer-copy">© 2026 Gamantri</div>
+    </footer>
+  </div>
+
+  <!-- ════════════════════ FORM CURSOS ════════════════════ -->
+  <div id="page-form-cursos" class="page form-page">
+    <div class="form-container">
+      <span class="cta-link" onclick="showPage('cursos')" style="margin-top:0;margin-bottom:48px">← Cursos</span>
+      <div class="form-intro" data-es="Paso 1 de 3" data-en="Step 1 of 3">Paso 1 de 3</div>
+      <div class="form-title" data-es="Diagnóstico" data-en="Assessment">Diagnóstico</div>
+      <form onsubmit="event.preventDefault();showPage('form-ok')">
+        <div class="form-group">
+          <label class="form-label" data-es="Nombre y País" data-en="Name and Country">Nombre y País</label>
+          <input class="form-input" type="text" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Nivel" data-en="Level">Nivel</label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="nivel" required /><span data-es="Principiante" data-en="Beginner">Principiante</span></label>
+            <label class="radio-opt"><input type="radio" name="nivel" /><span data-es="Intermedio" data-en="Intermediate">Intermedio</span></label>
+            <label class="radio-opt"><input type="radio" name="nivel" /><span data-es="Avanzado" data-en="Advanced">Avanzado</span></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="¿Qué tipo de fotografía te interesa?" data-en="What type of photography interests you?">¿Qué tipo de fotografía te interesa?</label>
+          <input class="form-input" type="text" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Modalidad" data-en="Format">Modalidad</label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="modal" required /><span>Online</span></label>
+            <label class="radio-opt"><input type="radio" name="modal" /><span data-es="Presencial" data-en="In person">Presencial</span></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="¿Qué cámara tenés?" data-en="What camera do you have?">¿Qué cámara tenés?</label>
+          <input class="form-input" type="text" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="¿Qué querés lograr?" data-en="What do you want to achieve?">¿Qué querés lograr?</label>
+          <textarea class="form-textarea" rows="4"></textarea>
+        </div>
+        <button class="btn btn-accent" type="submit" data-es="Enviar diagnóstico" data-en="Send assessment">Enviar diagnóstico</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ════════════════════ FORM SERVICIOS ════════════════════ -->
+  <div id="page-form-servicios" class="page form-page">
+    <div class="form-container">
+      <span class="cta-link" onclick="showPage('servicios')" style="margin-top:0;margin-bottom:48px">← Servicios</span>
+      <div class="form-intro" data-es="Contanos tu proyecto" data-en="Tell us about your project">Contanos tu proyecto</div>
+      <div class="form-title" data-es="Briefing" data-en="Briefing">Briefing</div>
+      <form onsubmit="event.preventDefault();showPage('form-ok')">
+        <div class="form-group">
+          <label class="form-label" data-es="Nombre / Empresa o marca" data-en="Name / Company or brand">Nombre / Empresa o marca</label>
+          <input class="form-input" type="text" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Tipo de proyecto" data-en="Project type">Tipo de proyecto</label>
+          <select class="form-select">
+            <option data-es="Expedición / Documental" data-en="Expedition / Documentary">Expedición / Documental</option>
+            <option data-es="Campaña de marca" data-en="Brand campaign">Campaña de marca</option>
+            <option data-es="Contenido para redes" data-en="Social media content">Contenido para redes</option>
+            <option data-es="Atleta / Deportista" data-en="Athlete">Atleta / Deportista</option>
+            <option data-es="Otro" data-en="Other">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Locación / Contexto" data-en="Location / Context">Locación / Contexto</label>
+          <input class="form-input" type="text" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Fechas estimadas" data-en="Estimated dates">Fechas estimadas</label>
+          <input class="form-input" type="text" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Referentes visuales" data-en="Visual references">Referentes visuales</label>
+          <textarea class="form-textarea" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Presupuesto aproximado (opcional)" data-en="Approximate budget (optional)">Presupuesto aproximado (opcional)</label>
+          <input class="form-input" type="text" />
+        </div>
+        <button class="btn btn-accent" type="submit" data-es="Enviar briefing" data-en="Send briefing">Enviar briefing</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ════════════════════ FORM OK ════════════════════ -->
+  <div id="page-form-ok" class="page" style="display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:48px">
+    <div>
+      <div class="section-label" style="margin-bottom:16px" data-es="Enviado" data-en="Sent">Enviado</div>
+      <div class="section-title" style="font-size:48px;margin-bottom:0" data-es="Gracias" data-en="Thank you">Gracias</div>
+      <p style="color:var(--muted);font-size:15px;line-height:1.9;max-width:400px;margin:24px auto 40px"
+         data-es="Cris va a revisar tu mensaje y te va a contactar pronto con una propuesta personalizada."
+         data-en="Cris will review your message and get back to you shortly with a personalized response.">
+        Cris va a revisar tu mensaje y te va a contactar pronto con una propuesta personalizada.
+      </p>
+      <span class="btn" onclick="showPage('home')" data-es="← Volver al inicio" data-en="← Back to home">← Volver al inicio</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════ MODAL SOBRE CRIS ════════════════════ -->
+  <div class="modal-overlay" id="modal-cris" onclick="closeModal(event)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div class="modal-foto"></div>
+      <div class="modal-body">
+        <div class="modal-name">Cristóbal Posadas</div>
+        <div class="modal-role">Photographer · Filmmaker · Founder of Gamantri</div>
+        <p class="modal-bio"
+           data-es="Fotógrafo y cineasta especializado en naturaleza, escalada y aventura outdoor. Fundó Gamantri en 2019 para crear obras que documenten momentos irrepetibles en los rincones más salvajes del planeta. Trabaja con marcas internacionales, atletas y expediciones. Ingeniero civil, músico, fotógrafo de alma. Argentino. 37 años."
+           data-en="Photographer and filmmaker specialized in nature, climbing and outdoor adventure. Founded Gamantri in 2019 to document unrepeatable moments in the world's wildest places. Works with international brands, athletes and expeditions. Civil engineer, musician, photographer at heart. Argentine. 37 years old.">
+          Fotógrafo y cineasta especializado en naturaleza, escalada y aventura outdoor. Fundó Gamantri en 2019 para crear obras que documenten momentos irrepetibles en los rincones más salvajes del planeta. Trabaja con marcas internacionales, atletas y expediciones. Ingeniero civil, músico, fotógrafo de alma. Argentino. 37 años.
+        </p>
+        <div class="modal-stats">
+          <div><div class="stat-num">2019</div><div class="stat-label" data-es="Fundación" data-en="Founded">Fundación</div></div>
+          <div><div class="stat-num">37</div><div class="stat-label" data-es="Años" data-en="Years old">Años</div></div>
+          <div><div class="stat-num">Intl.</div><div class="stat-label" data-es="Clientes" data-en="Clients">Clientes</div></div>
+        </div>
+        <div class="modal-social">
+          <a class="btn" href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a>
+          <a class="btn" href="mailto:contacto@gamantri.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const obras = [
+      { titulo:'Serie Patagonia',  img:'shared/assets/images/gamantri_03_01.jpg', edicion:'Edición 2 de 3', precio:'$ 1.200 USD', desc:'Registro de los cielos australes en las cumbres de la Patagonia. Fine Art 300gsm, enmarcada en madera natural.' },
+      { titulo:'Serie Vertical',   img:'shared/assets/images/gamantri_04_01.jpg', edicion:'Agotada',         precio:'$ 1.400 USD', desc:'La dimensión vertical del mundo de la roca. Serie completa — obra de colección.' },
+      { titulo:'Serie Luz de Hora',img:'shared/assets/images/gamantri_06_01.jpg', edicion:'Edición 3 de 3', precio:'$ 980 USD',   desc:'La luz que dura minutos. Captada en el instante exacto en que el mundo cambia de color.' },
+      { titulo:'Serie Roca Viva',  img:'shared/assets/images/gamantri_07_01.jpg', edicion:'Edición 1 de 3', precio:'$ 1.100 USD', desc:'La textura y el silencio de la roca en sus formas más puras.' },
+      { titulo:'Serie Silencio',   img:'shared/assets/images/gamantri_09_01.jpg', edicion:'Edición 2 de 3', precio:'$ 1.300 USD', desc:'El silencio tiene una imagen. Esta es.' },
+      { titulo:'Serie Frontera',   img:'shared/assets/images/gamantri_10_01.jpg', edicion:'Edición 1 de 3', precio:'$ 1.500 USD', desc:'El límite entre el mundo conocido y lo que queda por descubrir.' },
+    ];
+
+    function showObra(i) {
+      const o = obras[i];
+      document.getElementById('obra-detalle-img').src = o.img;
+      document.getElementById('obra-detalle-titulo').textContent = o.titulo;
+      document.getElementById('obra-detalle-edicion').textContent = o.edicion;
+      document.getElementById('obra-detalle-desc').textContent = o.desc;
+      document.getElementById('obra-detalle-precio').textContent = o.precio;
+      showPage('obra-detalle');
+    }
+
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const t = document.getElementById('page-' + name);
+      if (t) { t.classList.add('active'); window.scrollTo({ top:0, behavior:'smooth' }); }
+    }
+
+    function openModal() {
+      document.getElementById('modal-cris').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(e) {
+      if (!e || e.target.id === 'modal-cris' || e.target.classList.contains('modal-close')) {
+        document.getElementById('modal-cris').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    let lang = 'es';
+    function setLang(l) {
+      lang = l;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
+      document.querySelectorAll(`[data-${l}]`).forEach(el => {
+        el.textContent = el.getAttribute(`data-${l}`);
+      });
+    }
+  </script>
+</body>
+</html>
