@@ -51,15 +51,17 @@
     }
 
     .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 400;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
+      display: flex;
+      align-items: center;
       cursor: pointer;
     }
+    .logo img {
+      height: 48px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: opacity 0.3s;
+    }
+    .logo img:hover { opacity: 0.8; }
 
     nav { display: flex; align-items: center; gap: 40px; }
 
@@ -281,9 +283,11 @@
       padding: 64px 48px; border-top: 1px solid var(--stone);
       display: flex; justify-content: space-between; align-items: center;
     }
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px; letter-spacing: 0.25em; text-transform: uppercase;
+    .footer-logo img {
+      height: 40px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.5;
     }
     .footer-links { display: flex; gap: 32px; align-items: center; }
     .footer-links a, .footer-btn {
@@ -458,7 +462,7 @@
 
   <!-- HEADER -->
   <header>
-    <span class="logo" onclick="showPage('home')">Gamantri</span>
+    <span class="logo" onclick="showPage('home')"><img src="shared/assets/logo-gamantri.png" alt="Gamantri" /></span>
     <nav>
       <a onclick="showPage('obras')">Obras</a>
       <a onclick="showPage('cursos')">Cursos</a>
@@ -576,7 +580,7 @@
     </section>
 
     <footer>
-      <div class="footer-logo">Gamantri</div>
+      <div class="footer-logo"><img src="shared/assets/logo-gamantri.png" alt="Gamantri" /></div>
       <div class="footer-links">
         <button class="footer-btn" onclick="openModal()">Sobre Cris</button>
         <a href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a>
@@ -601,7 +605,7 @@
       </div>
     </section>
     <footer>
-      <div class="footer-logo">Gamantri</div>
+      <div class="footer-logo"><img src="shared/assets/logo-gamantri.png" alt="Gamantri" /></div>
       <div class="footer-links">
         <button class="footer-btn" onclick="openModal()">Sobre Cris</button>
         <a href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a>
@@ -678,7 +682,7 @@
       </div>
     </section>
     <footer>
-      <div class="footer-logo">Gamantri</div>
+      <div class="footer-logo"><img src="shared/assets/logo-gamantri.png" alt="Gamantri" /></div>
       <div class="footer-links"><button class="footer-btn" onclick="openModal()">Sobre Cris</button><a href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a></div>
       <div class="footer-copy">© 2026 Gamantri</div>
     </footer>
@@ -714,7 +718,7 @@
       </div>
     </section>
     <footer>
-      <div class="footer-logo">Gamantri</div>
+      <div class="footer-logo"><img src="shared/assets/logo-gamantri.png" alt="Gamantri" /></div>
       <div class="footer-links"><button class="footer-btn" onclick="openModal()">Sobre Cris</button><a href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a></div>
       <div class="footer-copy">© 2026 Gamantri</div>
     </footer>
