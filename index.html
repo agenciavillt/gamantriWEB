@@ -91,25 +91,7 @@
     .lang-btn.active { color: var(--accent); }
     .lang-sep { color: var(--stone); font-size: 10px; }
 
-    /* ── ANIMACIONES DE SCROLL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-d1 { transition-delay: 0.12s; }
-    .reveal-d2 { transition-delay: 0.24s; }
-    .reveal-d3 { transition-delay: 0.36s; }
-    .reveal-d4 { transition-delay: 0.48s; }
-    .reveal-d5 { transition-delay: 0.60s; }
-
-    .reveal-scale {
-      opacity: 0; transform: scale(1.04);
-      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-    }
-    .reveal-scale.visible { opacity: 1; transform: scale(1); }
-
+    /* ── ANIMACIONES DE SCROLL (manejadas por GSAP) ── */
     .reveal-line {
       transform: scaleX(0); transform-origin: left;
       transition: transform 0.8s var(--ease);
@@ -131,8 +113,8 @@
     }
     .hero-img {
       position: absolute; inset: 0;
-      background: url('shared/assets/images/gamantri_11_01.jpg') center/cover no-repeat;
-      will-change: transform;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+      will-change: transform, clip-path;
     }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -487,9 +469,144 @@
       .nav-links { display: none; }
       footer { flex-direction: column; gap: 24px; text-align: center; }
     }
+    /* ── CURSOR PERSONALIZADO ── */
+    * { cursor: none !important; }
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.2s;
+      will-change: transform;
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(212,87,30,0.35);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.45s var(--ease), height 0.45s var(--ease), border-color 0.3s, opacity 0.3s;
+      will-change: transform;
+    }
+    .cursor.hovered { width: 5px; height: 5px; }
+    .cursor-ring.hovered { width: 52px; height: 52px; border-color: rgba(212,87,30,0.6); }
+    .cursor-ring.clicking { width: 24px; height: 24px; }
+
+    /* ── HERO REVEAL ANIMATION ── */
+    @keyframes heroReveal {
+      0% {
+        clip-path: inset(48% 18% 8% 60%);
+        transform: scale(1.14) translateX(-3%);
+        filter: brightness(0.6);
+      }
+      70% {
+        clip-path: inset(2% 0% 0% 2%);
+        transform: scale(1.03) translateX(-0.5%);
+        filter: brightness(0.9);
+      }
+      100% {
+        clip-path: inset(0% 0% 0% 0%);
+        transform: scale(1) translateX(0%);
+        filter: brightness(1);
+      }
+    }
+    @keyframes heroTextIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-img {
+      animation: heroReveal 2.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+    .hero-content .hero-logo {
+      animation: heroTextIn 0.9s var(--ease) 2.2s both !important;
+      opacity: 0;
+    }
+    .hero-content .hero-tagline {
+      animation: heroTextIn 0.9s var(--ease) 2.5s both !important;
+      opacity: 0;
+    }
+
+    /* ── MOBILE NAV ── */
+    .hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; align-items: center;
+      gap: 5px; width: 32px; height: 32px;
+      background: none; border: none; cursor: none !important;
+      padding: 0; z-index: 502;
+    }
+    .hamburger span {
+      display: block; width: 20px; height: 1px;
+      background: var(--text);
+      transition: transform 0.4s var(--ease), opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 0; z-index: 501;
+      background: var(--base);
+      flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s var(--ease);
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a, .mobile-menu button {
+      font-family: 'Play', sans-serif;
+      font-size: clamp(28px, 8vw, 48px); font-weight: 400;
+      color: var(--text); text-decoration: none;
+      background: none; border: none;
+      letter-spacing: 0.04em;
+      transition: color 0.3s; line-height: 1.3;
+    }
+    .mobile-menu a:hover, .mobile-menu button:hover { color: var(--accent); }
+    .mobile-menu .mobile-lang {
+      margin-top: 40px;
+    }
+
+    /* ── SEPARADORES DE SECCIÓN ── */
+    .section-sep {
+      height: 80px; position: relative; overflow: hidden;
+      background: var(--base);
+    }
+    .section-sep::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--surface);
+      clip-path: polygon(0 0, 100% 0, 100% 40%, 0 100%);
+    }
+
+    @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      .nav-links { display: none !important; }
+    }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 </head>
 <body>
+
+  <!-- Cursores -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Menú mobile -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a onclick="scrollToSection('#obras'); closeMobileMenu()">Obras</a>
+    <a onclick="scrollToSection('#cursos'); closeMobileMenu()">Cursos</a>
+    <a onclick="scrollToSection('#servicios'); closeMobileMenu()">Servicios</a>
+    <button onclick="openOverlay('overlay-cris'); closeMobileMenu()">Sobre Cris</button>
+    <div class="lang-toggle mobile-lang" style="margin-top:40px">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <span class="lang-sep">·</span>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
 
   <!-- ── HEADER ── -->
   <header id="header">
@@ -507,12 +624,15 @@
         <span class="lang-sep">·</span>
         <button class="lang-btn" onclick="setLang('en')">EN</button>
       </div>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
   <!-- ══════════════ HERO ══════════════ -->
   <section id="hero">
-    <div class="hero-img" data-parallax="0.3"></div>
+    <div class="hero-img" style="background-image:url('shared/assets/images/hero-basalt.jpg')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <img class="hero-logo reveal" src="shared/assets/logo-horizontal-blanco.png" alt="Gamantri" />
@@ -611,7 +731,7 @@
 
   </section>
 
-  <div class="divider reveal"></div>
+  <div class="section-sep"></div>
 
   <!-- ══════════════ CURSOS ══════════════ -->
   <section id="cursos">
@@ -660,7 +780,7 @@
 
   </section>
 
-  <div class="divider reveal"></div>
+  <div class="section-sep" style="transform:scaleX(-1)"></div>
 
   <!-- ══════════════ SERVICIOS ══════════════ -->
   <section id="servicios">
@@ -885,6 +1005,44 @@
 
 
   <script>
+    // ── CURSOR ──
+    const cur = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = -100, my = -100, rx = -100, ry = -100;
+
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    document.addEventListener('mousedown', () => ring.classList.add('clicking'));
+    document.addEventListener('mouseup',   () => ring.classList.remove('clicking'));
+
+    const hoverTargets = 'a, button, .obra-card, [onclick], .logo-btn, .hamburger';
+    document.querySelectorAll(hoverTargets).forEach(el => {
+      el.addEventListener('mouseenter', () => { cur.classList.add('hovered'); ring.classList.add('hovered'); });
+      el.addEventListener('mouseleave', () => { cur.classList.remove('hovered'); ring.classList.remove('hovered'); });
+    });
+
+    (function animCursor() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      cur.style.transform  = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animCursor);
+    })();
+
+    // ── MOBILE MENU ──
+    let menuOpen = false;
+    function toggleMobileMenu() {
+      menuOpen = !menuOpen;
+      document.getElementById('mobile-menu').classList.toggle('open', menuOpen);
+      document.getElementById('hamburger').classList.toggle('open', menuOpen);
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+    }
+    function closeMobileMenu() {
+      menuOpen = false;
+      document.getElementById('mobile-menu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
     // ── DATOS OBRAS ──
     const obras = [
       { titulo:'Serie Patagonia',   img:'shared/assets/images/gamantri_03_01.jpg', edicion:'Edición 2 de 3', precio:'$ 1.200 USD', desc:'Registro de los cielos australes en las cumbres de la Patagonia. Fine Art 300gsm, enmarcada en madera natural.' },
@@ -929,53 +1087,68 @@
       }
     });
 
-    // ── SCROLL-TRIGGERED REVEAL ──
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+    // ── GSAP + ScrollTrigger ──
+    window.addEventListener('load', () => {
+      if (typeof gsap === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Reveals con scrub leve
+      const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');
+      revealEls.forEach(el => {
+        const delay = el.classList.contains('reveal-d1') ? 0.12
+                    : el.classList.contains('reveal-d2') ? 0.24
+                    : el.classList.contains('reveal-d3') ? 0.36
+                    : el.classList.contains('reveal-d4') ? 0.48
+                    : el.classList.contains('reveal-d5') ? 0.60 : 0;
+        gsap.from(el, {
+          opacity: 0, y: 38,
+          duration: 0.9, delay,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+        });
       });
-    }, { threshold: 0.12 });
 
-    document.querySelectorAll('.reveal, .reveal-scale, .reveal-line').forEach(el => observer.observe(el));
+      // Reveal-scale
+      document.querySelectorAll('.reveal-scale').forEach(el => {
+        gsap.from(el, {
+          opacity: 0, scale: 1.04, duration: 0.95, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
+        });
+      });
 
-    // Trigger hero reveals immediately
-    setTimeout(() => {
-      document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
-    }, 300);
-
-    // ── PARALLAX ──
-    const parallaxEls = document.querySelectorAll('[data-parallax]');
-
-    function updateParallax() {
-      parallaxEls.forEach(el => {
+      // Parallax con scrub
+      document.querySelectorAll('[data-parallax]').forEach(el => {
         const speed = parseFloat(el.dataset.parallax);
-        const rect = el.parentElement.getBoundingClientRect();
-        const offset = (rect.top / window.innerHeight) * speed * 100;
-        el.style.transform = `translateY(${offset}px)`;
+        gsap.to(el, {
+          yPercent: speed * 28,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: el.parentElement,
+            start: 'top bottom', end: 'bottom top',
+            scrub: true
+          }
+        });
       });
-    }
+
+      // Obras cards stagger al entrar
+      gsap.from('.obra-card', {
+        opacity: 0, y: 50, duration: 0.8, stagger: 0.1, ease: 'power3.out',
+        scrollTrigger: { trigger: '.obras-grid', start: 'top 85%', toggleActions: 'play none none none' }
+      });
+    });
 
     // ── HEADER HIDE/SHOW ──
     let lastScroll = 0;
     const header = document.getElementById('header');
 
-    function onScroll() {
+    window.addEventListener('scroll', () => {
       const current = window.scrollY;
       if (current > 80) header.classList.add('scrolled');
       else header.classList.remove('scrolled');
-
       if (current > lastScroll + 8 && current > 200) header.classList.add('hidden');
       else if (current < lastScroll - 4) header.classList.remove('hidden');
-
       lastScroll = current;
-      updateParallax();
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    updateParallax();
+    }, { passive: true });
 
     // ── SCROLL TO ──
     function scrollToSection(selector) {
