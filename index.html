@@ -182,45 +182,32 @@
   <section id="cursos">
 
     <div class="cursos-text">
-      <p class="label reveal" data-es="Aprendé fotografía" data-en="Learn Photography">Aprendé fotografía</p>
+      <p class="label reveal"
+         data-es="Aprende fotografía en todos los niveles"
+         data-en="Learn photography at every level">Aprende fotografía en todos los niveles</p>
       <h2 class="cursos-title reveal reveal-d1" data-es="Cursos" data-en="Courses">Cursos</h2>
-      <p class="cursos-copy reveal reveal-d2"
-         data-es="Clases personalizadas, diseñadas para tu nivel y tus intereses. Aprendé a tu ritmo — online o presencial. Disponible en español e inglés."
-         data-en="Personalized lessons designed around your level and interests. Learn at your own pace — online or in person. Available in Spanish and English.">
-        Clases personalizadas, diseñadas para tu nivel y tus intereses. Aprendé a tu ritmo — online o presencial. Disponible en español e inglés.
+      <p class="cursos-hook reveal reveal-d2"
+         data-es="&ldquo;Aprende a ver lo que los demás no ven&rdquo;"
+         data-en="&ldquo;Learn to see what others can&rsquo;t&rdquo;">
+        &ldquo;Aprende a ver lo que los demás no ven&rdquo;
       </p>
-      <div class="pasos reveal reveal-d2">
-        <div class="paso">
-          <span class="paso-num">01</span>
-          <div class="paso-info">
-            <div class="paso-title" data-es="Diagnóstico" data-en="Assessment">Diagnóstico</div>
-            <div class="paso-desc" data-es="Completás un formulario sobre tu nivel y objetivos." data-en="You fill out a form about your level and goals.">Completás un formulario sobre tu nivel y objetivos.</div>
-          </div>
-        </div>
-        <div class="paso">
-          <span class="paso-num">02</span>
-          <div class="paso-info">
-            <div class="paso-title" data-es="Propuesta" data-en="Proposal">Propuesta</div>
-            <div class="paso-desc" data-es="Cris arma un programa a medida para vos." data-en="Cris builds a personalized program for you.">Cris arma un programa a medida para vos.</div>
-          </div>
-        </div>
-        <div class="paso">
-          <span class="paso-num">03</span>
-          <div class="paso-info">
-            <div class="paso-title" data-es="El curso empieza" data-en="It begins">El curso empieza</div>
-            <div class="paso-desc" data-es="Confirmás y arrancamos. El proceso es tuyo." data-en="You confirm and we begin. The process is yours.">Confirmás y arrancamos. El proceso es tuyo.</div>
-          </div>
-        </div>
-      </div>
+      <p class="cursos-copy reveal reveal-d2"
+         data-es="Clases personalizadas en tiempo real con Cris Posadas, on-line y presencial. Desde un celular o una cámara, desde cero o para perfeccionar tus habilidades."
+         data-en="Personalized real-time lessons with Cris Posadas, online and in person. From a phone or a camera, from scratch or to sharpen your skills.">
+        Clases personalizadas en tiempo real con Cris Posadas, online y presencial.<br>
+        Desde un celular o una cámara, desde cero o para perfeccionar tus habilidades.
+      </p>
       <div class="reveal reveal-d3">
-        <button class="btn" onclick="openOverlay('overlay-diagnostico')"
-                data-es="Hacer diagnóstico" data-en="Take assessment">Hacer diagnóstico</button>
+        <a class="cursos-cta" href="cursos.html"
+           data-es="&rsaquo;&rsaquo; Ver Cursos"
+           data-en="&rsaquo;&rsaquo; View Courses">&rsaquo;&rsaquo; Ver Cursos</a>
       </div>
     </div>
 
-    <div class="cursos-img">
-      <div class="cursos-img-inner" data-parallax="0.2"></div>
-      <div class="cursos-img-overlay"></div>
+    <div class="cursos-video">
+      <video autoplay muted loop playsinline>
+        <source src="shared/assets/videos/CURSOS_1_web.mp4" type="video/mp4" />
+      </video>
     </div>
 
   </section>
@@ -378,50 +365,6 @@
           <a class="btn-outline" href="mailto:contacto@gamantri.com">Email</a>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Diagnóstico Cursos -->
-  <div class="overlay" id="overlay-diagnostico">
-    <button class="overlay-close" onclick="closeOverlay('overlay-diagnostico')">×</button>
-    <div class="form-overlay-inner">
-      <p class="form-step" data-es="Cursos · Paso 1 de 3" data-en="Courses · Step 1 of 3">Cursos · Paso 1 de 3</p>
-      <h2 class="form-title" data-es="Diagnóstico" data-en="Assessment">Diagnóstico</h2>
-      <form onsubmit="event.preventDefault(); closeOverlay('overlay-diagnostico'); openOverlay('overlay-ok')">
-        <div class="form-group">
-          <label class="form-label" data-es="Nombre y País" data-en="Name and Country">Nombre y País</label>
-          <input class="form-input" type="text" required />
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-es="Nivel" data-en="Level">Nivel</label>
-          <div class="radio-group">
-            <label class="radio-opt"><input type="radio" name="nivel" required /><span data-es="Principiante" data-en="Beginner">Principiante</span></label>
-            <label class="radio-opt"><input type="radio" name="nivel" /><span data-es="Intermedio" data-en="Intermediate">Intermedio</span></label>
-            <label class="radio-opt"><input type="radio" name="nivel" /><span data-es="Avanzado" data-en="Advanced">Avanzado</span></label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-es="¿Qué tipo de fotografía te interesa?" data-en="What type of photography interests you?">¿Qué tipo de fotografía te interesa?</label>
-          <input class="form-input" type="text" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-es="Modalidad" data-en="Format">Modalidad</label>
-          <div class="radio-group">
-            <label class="radio-opt"><input type="radio" name="modal" required /><span>Online</span></label>
-            <label class="radio-opt"><input type="radio" name="modal" /><span data-es="Presencial" data-en="In person">Presencial</span></label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-es="¿Qué cámara tenés?" data-en="What camera do you have?">¿Qué cámara tenés?</label>
-          <input class="form-input" type="text" />
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-es="¿Qué querés lograr?" data-en="What do you want to achieve?">¿Qué querés lograr?</label>
-          <textarea class="form-textarea" rows="4"></textarea>
-        </div>
-        <button class="btn-outline btn-accent-outline" type="submit" style="font-family:'Jura',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase"
-                data-es="Enviar diagnóstico" data-en="Send assessment">Enviar diagnóstico</button>
-      </form>
     </div>
   </div>
 
