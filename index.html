@@ -1037,8 +1037,8 @@
       const heroW  = heroEl.offsetWidth;
       const heroH  = heroEl.offsetHeight;
 
-      // Origen: figura humana en la foto basalt (~76% x, ~67% y)
-      const cx = heroW * 0.76;
+      // Origen: figura humana en la foto basalt (~71% x, ~67% y)
+      const cx = heroW * 0.71;
       const cy = heroH * 0.67;
 
       // Centrar el símbolo (viewBox 113.39×113.39) sobre la figura
@@ -1046,7 +1046,7 @@
         `translate(${cx - 56.695} ${cy - 56.695})`);
 
       const startScale = Math.min(heroW, heroH) * 0.20 / 113.39;
-      const endScale   = Math.hypot(heroW, heroH) / 110;
+      const endScale   = Math.hypot(heroW, heroH) / 37;
 
       gsap.set('#symbol-reveal-g', { scale: startScale, svgOrigin: `${cx} ${cy}` });
       gsap.set('.hero-logo',    { opacity: 0, y: 18 });
