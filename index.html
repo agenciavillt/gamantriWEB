@@ -63,12 +63,17 @@
           <feGaussianBlur stdDeviation="20"/>
         </filter>
         <mask id="hex-reveal-mask">
-          <rect x="-10000" y="-10000" width="20000" height="20000" fill="black"/>
+          <!-- Blanco = tapa la capa negra. Negro = transparenta → revela imagen. -->
+          <rect x="-10000" y="-10000" width="20000" height="20000" fill="white"/>
+          <!-- outer: escalado por GSAP (el IIFE lo pone en scale 0 antes del primer paint) -->
           <g id="hex-reveal-g">
-            <!-- Hexágono punta arriba, radio 100, centrado en origen — se posiciona y escala via JS -->
-            <polygon id="hex-shape"
-              points="0,-100 86.6,-50 86.6,50 0,100 -86.6,50 -86.6,-50"
-              fill="white" filter="url(#hex-blur)"/>
+            <!-- inner: traducido por JS para centrar sobre la figura humana -->
+            <g id="hex-inner-g">
+              <!-- Hexágono flat-top (rotado 90°), radio 100, centrado en origen -->
+              <polygon id="hex-shape"
+                points="-100,0 -50,-86.6 50,-86.6 100,0 50,86.6 -50,86.6"
+                fill="black" filter="url(#hex-blur)"/>
+            </g>
           </g>
         </mask>
       </defs>

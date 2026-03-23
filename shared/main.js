@@ -1,3 +1,17 @@
+// ── INIT INMEDIATO: posicionar y ocultar hexágono antes del primer paint ──
+// defer garantiza que corre antes del primer frame del browser
+(function() {
+  const heroEl = document.getElementById('hero');
+  if (!heroEl || typeof gsap === 'undefined') return;
+  const cx = heroEl.offsetWidth  * 0.71;
+  const cy = heroEl.offsetHeight * 0.67;
+  // Posicionar inner group sobre la figura humana
+  const innerG = document.getElementById('hex-inner-g');
+  if (innerG) innerG.setAttribute('transform', `translate(${cx} ${cy})`);
+  // Con inner group posicionado, getBBox() es correcto — GSAP puede calcular svgOrigin bien
+  gsap.set('#hex-reveal-g', { scale: 0, svgOrigin: `${cx} ${cy}` });
+})();
+
 // ── MOBILE MENU ──
 let menuOpen = false;
 function toggleMobileMenu() {
@@ -70,8 +84,8 @@ window.addEventListener('load', () => {
   const cx = heroW * 0.71;
   const cy = heroH * 0.67;
 
-  // Posicionar hexágono sobre la figura humana
-  document.getElementById('hex-reveal-g').setAttribute('transform', `translate(${cx} ${cy})`);
+  // Confirmar posición (por si el hero redimensionó entre defer y load)
+  document.getElementById('hex-inner-g').setAttribute('transform', `translate(${cx} ${cy})`);
 
   // Fase 1 (lenta): parte muy pequeño y crece despacio
   // Fase 2 (rápida): acelera hasta cubrir todo el viewport
@@ -79,18 +93,15 @@ window.addEventListener('load', () => {
   const midScale   = 2.8;
   const endScale   = Math.hypot(heroW, heroH) / 75;
 
+  // svgOrigin: punto de escala en coordenadas del viewport SVG (figura humana)
   gsap.set('#hex-reveal-g', { scale: startScale, svgOrigin: `${cx} ${cy}` });
   gsap.set('.hero-logo',    { opacity: 0, y: 18 });
   gsap.set('.hero-tagline', { opacity: 0, y: 18 });
 
-  // Interpolación fluida: lento → rápido
+  // Un solo tween expo.in: curva continua, sin saltos de velocidad
   gsap.timeline({ delay: 0.2 })
     .to('#hex-reveal-g', {
-      scale: midScale, duration: 1.5, ease: 'power1.in',
-      svgOrigin: `${cx} ${cy}`
-    })
-    .to('#hex-reveal-g', {
-      scale: endScale, duration: 0.7, ease: 'power3.in',
+      scale: endScale, duration: 2.3, ease: 'expo.in',
       svgOrigin: `${cx} ${cy}`
     })
     .to('#hero-mask-svg',   { opacity: 0, duration: 0.35 }, '-=0.3')
