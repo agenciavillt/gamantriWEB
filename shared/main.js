@@ -1,15 +1,8 @@
-// ── INIT INMEDIATO: posicionar y ocultar hexágono antes del primer paint ──
-// defer garantiza que corre antes del primer frame del browser
+// ── INIT INMEDIATO: ocultar elementos header antes del primer paint ──
 (function() {
-  const heroEl = document.getElementById('hero');
-  if (!heroEl || typeof gsap === 'undefined') return;
-  const cx = heroEl.offsetWidth  * 0.71;
-  const cy = heroEl.offsetHeight * 0.67;
-  // Posicionar inner group sobre la figura humana
-  const innerG = document.getElementById('hex-inner-g');
-  if (innerG) innerG.setAttribute('transform', `translate(${cx} ${cy})`);
-  // Con inner group posicionado, getBBox() es correcto — GSAP puede calcular svgOrigin bien
-  gsap.set('#hex-reveal-g', { scale: 0, svgOrigin: `${cx} ${cy}` });
+  if (typeof gsap === 'undefined') return;
+  gsap.set('.logo-btn',  { opacity: 0 });
+  gsap.set('.nav-links, .lang-toggle, .hamburger', { opacity: 0, y: -50 });
 })();
 
 // ── MOBILE MENU ──
@@ -75,38 +68,20 @@ window.addEventListener('load', () => {
   if (typeof gsap === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
-  // ── HERO REVEAL — HEXÁGONO CON BORDE DIFUSO ──
-  const heroEl = document.getElementById('hero');
-  const heroW  = heroEl.offsetWidth;
-  const heroH  = heroEl.offsetHeight;
+  // ── HERO REVEAL ──
+  gsap.set('.hero-logo',    { y: 80 });
+  gsap.set('.hero-tagline', { clipPath: 'inset(0 100% 0 0)', opacity: 1 });
 
-  // Origen: figura humana en la foto basalt (~71% x, ~67% y)
-  const cx = heroW * 0.71;
-  const cy = heroH * 0.67;
-
-  // Confirmar posición (por si el hero redimensionó entre defer y load)
-  document.getElementById('hex-inner-g').setAttribute('transform', `translate(${cx} ${cy})`);
-
-  // Fase 1 (lenta): parte muy pequeño y crece despacio
-  // Fase 2 (rápida): acelera hasta cubrir todo el viewport
-  const startScale = 0.08;
-  const midScale   = 2.8;
-  const endScale   = Math.hypot(heroW, heroH) / 75;
-
-  // svgOrigin: punto de escala en coordenadas del viewport SVG (figura humana)
-  gsap.set('#hex-reveal-g', { scale: startScale, svgOrigin: `${cx} ${cy}` });
-  gsap.set('.hero-logo',    { opacity: 0, y: 18 });
-  gsap.set('.hero-tagline', { opacity: 0, y: 18 });
-
-  // Un solo tween expo.in: curva continua, sin saltos de velocidad
-  gsap.timeline({ delay: 0.2 })
-    .to('#hex-reveal-g', {
-      scale: endScale, duration: 2.3, ease: 'expo.in',
-      svgOrigin: `${cx} ${cy}`
-    })
-    .to('#hero-mask-svg',   { opacity: 0, duration: 0.35 }, '-=0.3')
-    .to('.hero-logo',    { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.4')
-    .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, '-=0.35');
+  gsap.timeline()
+    // t=0→1.0s: imagen aparece desde negro
+    .to('.hero-img',    { opacity: 1, duration: 1.0, ease: 'power2.inOut' })
+    // t=1.1s: símbolo (logo-btn) fade in
+    .to('.logo-btn',    { opacity: 1, duration: 0.5, ease: 'power3.out' }, 1.1)
+    // t=1.2s: hero-logo + nav simultáneamente
+    .to('.hero-logo',   { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.2)
+    .to('.nav-links, .lang-toggle, .hamburger', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 1.2)
+    // t=1.5s: tagline se escribe de izquierda a derecha
+    .to('.hero-tagline', { clipPath: 'inset(0 0% 0 0)', duration: 1.0, ease: 'power3.inOut' }, 1.5);
 
   // Reveals con scrub leve
   const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');

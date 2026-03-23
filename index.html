@@ -56,32 +56,9 @@
   <section id="hero">
     <div class="hero-img" style="background-image:url('shared/assets/images/hero-basalt.jpg')"></div>
     <div class="hero-overlay"></div>
-    <!-- Máscara SVG hexágono con borde difuso -->
-    <svg id="hero-mask-svg" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="hex-blur" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="20"/>
-        </filter>
-        <mask id="hex-reveal-mask">
-          <!-- Blanco = tapa la capa negra. Negro = transparenta → revela imagen. -->
-          <rect x="-10000" y="-10000" width="20000" height="20000" fill="white"/>
-          <!-- outer: escalado por GSAP (el IIFE lo pone en scale 0 antes del primer paint) -->
-          <g id="hex-reveal-g">
-            <!-- inner: traducido por JS para centrar sobre la figura humana -->
-            <g id="hex-inner-g">
-              <!-- Hexágono flat-top (rotado 90°), radio 100, centrado en origen -->
-              <polygon id="hex-shape"
-                points="-100,0 -50,-86.6 50,-86.6 100,0 50,86.6 -50,86.6"
-                fill="black" filter="url(#hex-blur)"/>
-            </g>
-          </g>
-        </mask>
-      </defs>
-      <rect width="100%" height="100%" fill="black" mask="url(#hex-reveal-mask)"/>
-    </svg>
     <div class="hero-content">
-      <img class="hero-logo reveal" src="shared/assets/logo-horizontal-blanco.png" alt="Gamantri" />
-      <p class="hero-tagline reveal reveal-d1"
+      <img class="hero-logo" src="shared/assets/logo-horizontal-blanco.png" alt="Gamantri" />
+      <p class="hero-tagline"
          data-es="Fotografía de naturaleza · Ediciones limitadas"
          data-en="Nature Photography · Limited Editions">
         Fotografía de naturaleza · Ediciones limitadas
