@@ -32,7 +32,7 @@ const obras = [
   { titulo:'Serie Patagonia',   img:'shared/assets/images/gamantri_03_01.jpg', edicion:'Edición 2 de 3', precio:'$ 1.200 USD', desc:'Registro de los cielos australes en las cumbres de la Patagonia. Fine Art 300gsm, enmarcada en madera natural.' },
   { titulo:'Serie Vertical',    img:'shared/assets/images/gamantri_04_01.jpg', edicion:'Agotada',         precio:'$ 1.400 USD', desc:'La dimensión vertical del mundo de la roca. Serie completa — obra de colección.' },
   { titulo:'Serie Luz de Hora', img:'shared/assets/images/gamantri_06_01.jpg', edicion:'Edición 3 de 3', precio:'$ 980 USD',   desc:'La luz que dura minutos. Captada en el instante exacto en que el mundo cambia de color.' },
-  { titulo:'Serie Roca Viva',   img:'shared/assets/images/gamantri_07_01.jpg', edicion:'Edición 1 de 3', precio:'$ 1.100 USD', desc:'La textura y el silencio de la roca en sus formas más puras.' },
+  { titulo:'Serie Roca Viva',   img:'shared/assets/images/gamantri_10_01.jpg', edicion:'Edición 1 de 3', precio:'$ 1.100 USD', desc:'La textura y el silencio de la roca en sus formas más puras.' },
   { titulo:'Serie Silencio',    img:'shared/assets/images/gamantri_09_01.jpg', edicion:'Edición 2 de 3', precio:'$ 1.300 USD', desc:'El silencio tiene una imagen. Esta es.' },
   { titulo:'Serie Frontera',    img:'shared/assets/images/gamantri_10_01.jpg', edicion:'Edición 1 de 3', precio:'$ 1.500 USD', desc:'El límite entre el mundo conocido y lo que queda por descubrir.' },
 ];
