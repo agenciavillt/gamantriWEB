@@ -160,16 +160,16 @@ header.scrolled {
 
 /* A1: imagen hero de obras */
 .obras-hero {
-  position: relative; height: 80vh; overflow: hidden;
+  position: relative; aspect-ratio: 4/3; max-height: 95vh; overflow: hidden;
 }
 .obras-hero-img {
-  position: absolute; inset: -10% 0;
+  position: absolute; inset: -20% 0;
   background: url('assets/images/gamantri_07_01.jpg') 58% 60%/cover no-repeat;
   will-change: transform;
 }
 .obras-hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.2) 60%, transparent 100%);
+  background: linear-gradient(to top, rgba(8,8,8,0.72) 0%, rgba(8,8,8,0.15) 48%, transparent 100%);
 }
 .obras-hero-text {
   position: absolute; bottom: 64px; left: 56px; right: 56px;
@@ -330,6 +330,12 @@ header.scrolled {
 }
 #clientes .label {
   padding: 0 56px;
+}
+
+/* Label en obras-hero: más grande y color más oscuro */
+.obras-hero-text .label {
+  font-size: 13px; letter-spacing: 0.28em;
+  color: #b84d1a;
 }
 
 /* Marquee */
