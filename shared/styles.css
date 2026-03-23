@@ -427,11 +427,12 @@ footer {
 
 /* Modal Sobre Cris */
 .modal-cris {
-  display: grid; grid-template-columns: 380px 1fr;
+  display: grid; grid-template-columns: 500px 1fr;
   min-height: 100vh;
 }
 .modal-foto {
   background: url('assets/images/gamantri_01_02.jpg') center/cover;
+  transform: scaleX(-1);
 }
 .modal-body { padding: 100px 80px; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
 .modal-name { font-family: 'Play', sans-serif; font-size: 40px; font-weight: 400; }
