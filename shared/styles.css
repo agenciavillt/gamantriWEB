@@ -350,9 +350,10 @@ header.scrolled {
 }
 .marquee-inner {
   display: flex;
-  gap: 64px;
+  gap: 72px;
+  align-items: center;
   width: max-content;
-  animation: marquee 22s linear infinite;
+  animation: marquee 55s linear infinite;
 }
 .marquee-inner:hover { animation-play-state: paused; }
 @keyframes marquee {
@@ -360,11 +361,15 @@ header.scrolled {
   to   { transform: translateX(-50%); }
 }
 .logo-client {
-  font-family: 'Play', sans-serif;
-  font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--stone); transition: color 0.4s; white-space: nowrap;
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+  transition: opacity 0.4s;
+  flex-shrink: 0;
 }
-.logo-client:hover { color: var(--muted); }
+.logo-client:hover { opacity: 0.9; }
 
 /* ── FOOTER ── */
 footer {
