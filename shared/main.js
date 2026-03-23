@@ -107,7 +107,7 @@ window.addEventListener('load', () => {
     });
   });
 
-  // Parallax con scrub
+  // Parallax con scrub (elementos genéricos)
   document.querySelectorAll('[data-parallax]').forEach(el => {
     const speed = parseFloat(el.dataset.parallax);
     gsap.to(el, {
@@ -120,6 +120,21 @@ window.addEventListener('load', () => {
       }
     });
   });
+
+  // Obras hero: parallax tipo Casper Caviar — imagen casi fija mientras la sección scrollea
+  gsap.fromTo('.obras-hero-img',
+    { yPercent: -10 },
+    {
+      yPercent: 10,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.obras-hero',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    }
+  );
 
   // Obras cards stagger al entrar
   gsap.from('.obra-card', {

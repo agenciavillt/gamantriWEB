@@ -163,8 +163,8 @@ header.scrolled {
   position: relative; aspect-ratio: 4/3; max-height: 95vh; overflow: hidden;
 }
 .obras-hero-img {
-  position: absolute; inset: -20% 0;
-  background: url('assets/images/gamantri_07_01.jpg') 58% 60%/cover no-repeat;
+  position: absolute; inset: -25% 0;
+  background: url('assets/images/gamantri_07_01.jpg') 58% 100%/cover no-repeat;
   will-change: transform;
 }
 .obras-hero-overlay {
