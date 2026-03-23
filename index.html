@@ -1036,11 +1036,12 @@
       const heroEl = document.getElementById('hero');
       const heroW  = heroEl.offsetWidth;
       const heroH  = heroEl.offsetHeight;
-      const cx = heroW / 2;
-      const cy = heroH / 2;
 
-      // Centro del símbolo en el SVG original: (56.695, 56.695) — viewBox 113.39×113.39
-      // Lo trasladamos para que el centro quede en (cx, cy) del viewport
+      // Origen: figura humana en la foto basalt (~76% x, ~67% y)
+      const cx = heroW * 0.76;
+      const cy = heroH * 0.67;
+
+      // Centrar el símbolo (viewBox 113.39×113.39) sobre la figura
       document.getElementById('symbol-inner-g').setAttribute('transform',
         `translate(${cx - 56.695} ${cy - 56.695})`);
 
@@ -1051,12 +1052,13 @@
       gsap.set('.hero-logo',    { opacity: 0, y: 18 });
       gsap.set('.hero-tagline', { opacity: 0, y: 18 });
 
-      gsap.timeline({ delay: 0.3 })
-        .to({}, { duration: 0.8 })
-        .to('#symbol-reveal-g', { scale: endScale, duration: 2.4, ease: 'power2.inOut' })
-        .to('#hero-mask-svg',   { opacity: 0, duration: 0.5 }, '-=0.6')
-        .to('.hero-logo',    { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=1.0')
-        .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.75');
+      // 2× más rápido
+      gsap.timeline({ delay: 0.15 })
+        .to({}, { duration: 0.4 })
+        .to('#symbol-reveal-g', { scale: endScale, duration: 1.2, ease: 'power2.inOut' })
+        .to('#hero-mask-svg',   { opacity: 0, duration: 0.25 }, '-=0.3')
+        .to('.hero-logo',    { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.5')
+        .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.35');
 
       // Reveals con scrub leve
       const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');
