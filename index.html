@@ -469,65 +469,11 @@
       .nav-links { display: none; }
       footer { flex-direction: column; gap: 24px; text-align: center; }
     }
-    /* ── CURSOR PERSONALIZADO ── */
-    * { cursor: none !important; }
-    .cursor {
-      width: 8px; height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.2s;
-      will-change: transform;
-    }
-    .cursor-ring {
-      width: 32px; height: 32px;
-      border: 1px solid rgba(212,87,30,0.35);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: width 0.45s var(--ease), height 0.45s var(--ease), border-color 0.3s, opacity 0.3s;
-      will-change: transform;
-    }
-    .cursor.hovered { width: 5px; height: 5px; }
-    .cursor-ring.hovered { width: 52px; height: 52px; border-color: rgba(212,87,30,0.6); }
-    .cursor-ring.clicking { width: 24px; height: 24px; }
+    /* ── HERO ── (animación manejada por GSAP) */
+    .hero-logo, .hero-tagline { opacity: 0; }
 
-    /* ── HERO REVEAL ANIMATION ── */
-    @keyframes heroReveal {
-      0% {
-        clip-path: inset(48% 18% 8% 60%);
-        transform: scale(1.14) translateX(-3%);
-        filter: brightness(0.6);
-      }
-      70% {
-        clip-path: inset(2% 0% 0% 2%);
-        transform: scale(1.03) translateX(-0.5%);
-        filter: brightness(0.9);
-      }
-      100% {
-        clip-path: inset(0% 0% 0% 0%);
-        transform: scale(1) translateX(0%);
-        filter: brightness(1);
-      }
-    }
-    @keyframes heroTextIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .hero-img {
-      animation: heroReveal 2.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
-    }
-    .hero-content .hero-logo {
-      animation: heroTextIn 0.9s var(--ease) 2.2s both !important;
-      opacity: 0;
-    }
-    .hero-content .hero-tagline {
-      animation: heroTextIn 0.9s var(--ease) 2.5s both !important;
-      opacity: 0;
-    }
+    /* SVG mask de intro del símbolo */
+    #hero-mask-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
 
     /* ── MOBILE NAV ── */
     .hamburger {
@@ -591,10 +537,6 @@
 </head>
 <body>
 
-  <!-- Cursores -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursor-ring"></div>
-
   <!-- Menú mobile -->
   <div class="mobile-menu" id="mobile-menu">
     <a onclick="scrollToSection('#obras'); closeMobileMenu()">Obras</a>
@@ -634,6 +576,26 @@
   <section id="hero">
     <div class="hero-img" style="background-image:url('shared/assets/images/hero-basalt.jpg')"></div>
     <div class="hero-overlay"></div>
+    <!-- Máscara SVG vector real del símbolo Gamantri -->
+    <svg id="hero-mask-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <mask id="gamantri-reveal-mask">
+          <!-- Fondo blanco = negro opaco (oculta imagen). Símbolo negro = transparente (revela imagen). -->
+          <rect x="-10000" y="-10000" width="20000" height="20000" fill="white"/>
+          <g id="symbol-reveal-g">
+            <g id="symbol-inner-g">
+              <polygon fill="black" points="32.13 70.66 20.89 90.15 9.65 70.66 9.69 70.59 32.09 70.59 32.13 70.66"/>
+              <path fill="black" d="M41.38,56.76H1.77l-.1-.15,8.1-14h22.4l-11.21-19.42,8.2-14.2h.04l19.89,34.43c2.46,4.25,1,9.69-3.25,12.15-1.36.79-2.9,1.2-4.47,1.19Z"/>
+              <polygon fill="black" points="56.66 28.54 45.41 9.06 45.46 8.98 67.86 8.98 67.9 9.06 56.66 28.54"/>
+              <path fill="black" d="M64.4,69.93l19.78,34.3-.1.17h-16.21l-11.15-19.4-11.2,19.4h-16.4v-.04l19.89-34.43c2.47-4.25,7.92-5.69,12.17-3.21,1.33.78,2.44,1.88,3.21,3.21Z"/>
+              <polygon fill="black" points="103.62 70.59 103.66 70.66 92.42 90.15 81.18 70.66 81.22 70.59 103.62 70.59"/>
+              <path fill="black" d="M111.72,56.6l-.1.15h-39.62c-4.91,0-8.9-3.97-8.9-8.89,0-1.56.41-3.1,1.19-4.46l19.89-34.43h.05l8.19,14.2-11.19,19.38h22.39l8.09,14.03Z"/>
+            </g>
+          </g>
+        </mask>
+      </defs>
+      <rect width="100%" height="100%" fill="black" mask="url(#gamantri-reveal-mask)"/>
+    </svg>
     <div class="hero-content">
       <img class="hero-logo reveal" src="shared/assets/logo-horizontal-blanco.png" alt="Gamantri" />
       <p class="hero-tagline reveal reveal-d1"
@@ -1005,28 +967,6 @@
 
 
   <script>
-    // ── CURSOR ──
-    const cur = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
-    let mx = -100, my = -100, rx = -100, ry = -100;
-
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    document.addEventListener('mousedown', () => ring.classList.add('clicking'));
-    document.addEventListener('mouseup',   () => ring.classList.remove('clicking'));
-
-    const hoverTargets = 'a, button, .obra-card, [onclick], .logo-btn, .hamburger';
-    document.querySelectorAll(hoverTargets).forEach(el => {
-      el.addEventListener('mouseenter', () => { cur.classList.add('hovered'); ring.classList.add('hovered'); });
-      el.addEventListener('mouseleave', () => { cur.classList.remove('hovered'); ring.classList.remove('hovered'); });
-    });
-
-    (function animCursor() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      cur.style.transform  = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
-      ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-      requestAnimationFrame(animCursor);
-    })();
 
     // ── MOBILE MENU ──
     let menuOpen = false;
@@ -1091,6 +1031,32 @@
     window.addEventListener('load', () => {
       if (typeof gsap === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
+
+      // ── HERO REVEAL — SVG SÍMBOLO GAMANTRI (vector real) ──
+      const heroEl = document.getElementById('hero');
+      const heroW  = heroEl.offsetWidth;
+      const heroH  = heroEl.offsetHeight;
+      const cx = heroW / 2;
+      const cy = heroH / 2;
+
+      // Centro del símbolo en el SVG original: (56.695, 56.695) — viewBox 113.39×113.39
+      // Lo trasladamos para que el centro quede en (cx, cy) del viewport
+      document.getElementById('symbol-inner-g').setAttribute('transform',
+        `translate(${cx - 56.695} ${cy - 56.695})`);
+
+      const startScale = Math.min(heroW, heroH) * 0.20 / 113.39;
+      const endScale   = Math.hypot(heroW, heroH) / 110;
+
+      gsap.set('#symbol-reveal-g', { scale: startScale, svgOrigin: `${cx} ${cy}` });
+      gsap.set('.hero-logo',    { opacity: 0, y: 18 });
+      gsap.set('.hero-tagline', { opacity: 0, y: 18 });
+
+      gsap.timeline({ delay: 0.3 })
+        .to({}, { duration: 0.8 })
+        .to('#symbol-reveal-g', { scale: endScale, duration: 2.4, ease: 'power2.inOut' })
+        .to('#hero-mask-svg',   { opacity: 0, duration: 0.5 }, '-=0.6')
+        .to('.hero-logo',    { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=1.0')
+        .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.75');
 
       // Reveals con scrub leve
       const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');
