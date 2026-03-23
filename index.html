@@ -5,535 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GAMANTRI — Fine Art Photography</title>
 
-  <style>
-    @font-face {
-      font-family: 'Play';
-      src: url('shared/assets/fonts/Play/Play-Regular.ttf') format('truetype');
-      font-weight: 400;
-    }
-    @font-face {
-      font-family: 'Play';
-      src: url('shared/assets/fonts/Play/Play-Bold.ttf') format('truetype');
-      font-weight: 700;
-    }
-    @font-face {
-      font-family: 'Jura';
-      src: url('shared/assets/fonts/Jura/Jura-VariableFont_wght.ttf') format('truetype');
-      font-weight: 100 900;
-    }
+  <!-- Rendimiento: preconnect CDN y preload hero -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="preload" href="shared/assets/images/hero-basalt.jpg" as="image" />
 
-    /* ── RESET ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+  <link rel="stylesheet" href="shared/styles.css" />
 
-    :root {
-      --base:    #080808;
-      --surface: #111111;
-      --stone:   #2E2E2C;
-      --text:    #F2EDE8;
-      --muted:   #7a7a76;
-      --accent:  #D4571E;
-      --ease:    cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    body {
-      background: var(--base);
-      color: var(--text);
-      font-family: 'Jura', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-    }
-
-    /* GRAIN */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity: 0.032; pointer-events: none; z-index: 9998;
-    }
-
-    /* ── HEADER ── */
-    header {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 500;
-      padding: 28px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-      transition: transform 0.5s var(--ease), background 0.4s;
-    }
-    header.hidden { transform: translateY(-100%); }
-    header.scrolled { background: rgba(8,8,8,0.85); backdrop-filter: blur(12px); }
-
-    .logo-btn {
-      cursor: pointer; border: none; background: none; padding: 0;
-      display: flex; align-items: center;
-    }
-    .logo-btn img { height: 36px; width: auto; transition: opacity 0.3s; }
-    .logo-btn:hover img { opacity: 0.7; }
-
-    .nav-links {
-      display: flex; align-items: center; gap: 36px;
-    }
-    .nav-links a {
-      font-family: 'Jura', sans-serif;
-      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none; cursor: pointer;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    .lang-toggle { display: flex; align-items: center; gap: 2px; margin-left: 24px; }
-    .lang-btn {
-      background: none; border: none; cursor: pointer;
-      font-family: 'Jura', sans-serif;
-      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); padding: 4px 8px; transition: color 0.3s;
-    }
-    .lang-btn.active { color: var(--accent); }
-    .lang-sep { color: var(--stone); font-size: 10px; }
-
-    /* ── ANIMACIONES DE SCROLL (manejadas por GSAP) ── */
-    .reveal-line {
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.8s var(--ease);
-    }
-    .reveal-line.visible { transform: scaleX(1); }
-
-    /* ── LABEL ── */
-    .label {
-      font-family: 'Jura', sans-serif;
-      font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 18px;
-    }
-
-    /* ── HERO ── */
-    #hero {
-      position: relative; height: 100vh;
-      display: flex; align-items: flex-end;
-      padding: 72px 56px; overflow: hidden;
-    }
-    .hero-img {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center; background-repeat: no-repeat;
-      will-change: transform, clip-path;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(8,8,8,0.88) 0%, rgba(8,8,8,0.15) 55%, transparent 100%);
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-    .hero-logo { height: clamp(40px, 7vw, 88px); width: auto; margin-bottom: 28px; display: block; }
-    .hero-tagline {
-      font-family: 'Jura', sans-serif;
-      font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
-    }
-    .scroll-indicator {
-      position: absolute; bottom: 40px; right: 56px;
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
-      writing-mode: vertical-rl;
-    }
-    .scroll-indicator::before {
-      content: ''; width: 1px; height: 52px; background: var(--accent); display: block;
-      animation: scrollPulse 2s ease infinite;
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 1; transform: scaleY(1); }
-      50% { opacity: 0.4; transform: scaleY(0.6); }
-    }
-
-    /* ── DIVISOR ── */
-    .divider {
-      height: 1px; background: var(--stone);
-      margin: 0 56px;
-    }
-
-    /* ── SECCIÓN GENÉRICA ── */
-    .section-intro {
-      padding: 100px 56px 64px;
-    }
-
-    /* ══════════════════════════════════════
-       SECCIÓN A — OBRAS
-    ══════════════════════════════════════ */
-    #obras { }
-
-    /* A1: imagen hero de obras */
-    .obras-hero {
-      position: relative; height: 80vh; overflow: hidden;
-    }
-    .obras-hero-img {
-      position: absolute; inset: -10% 0;
-      background: url('shared/assets/images/gamantri_10_01.jpg') center/cover no-repeat;
-      will-change: transform;
-    }
-    .obras-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.2) 60%, transparent 100%);
-    }
-    .obras-hero-text {
-      position: absolute; bottom: 64px; left: 56px; right: 56px;
-      display: flex; justify-content: space-between; align-items: flex-end;
-    }
-    .obras-hero-title {
-      font-family: 'Play', sans-serif;
-      font-size: clamp(40px, 6vw, 72px); font-weight: 400; line-height: 1;
-    }
-    .obras-hero-copy {
-      max-width: 360px; font-size: 14px; line-height: 1.85; color: var(--muted);
-      text-align: right;
-    }
-
-    /* A2: grilla de obras */
-    .obras-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-      margin-top: 2px;
-    }
-    .obra-card {
-      position: relative; overflow: hidden; cursor: pointer;
-      aspect-ratio: 3/4; background: var(--surface);
-    }
-    .obra-card-img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.7s var(--ease), filter 0.5s;
-      filter: brightness(0.8);
-    }
-    .obra-card:hover .obra-card-img { transform: scale(1.05); filter: brightness(1); }
-    .obra-card-info {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 48px 24px 24px;
-      background: linear-gradient(to top, rgba(8,8,8,0.95), transparent);
-      transform: translateY(6px); transition: transform 0.4s var(--ease);
-    }
-    .obra-card:hover .obra-card-info { transform: translateY(0); }
-    .obra-card-title {
-      font-family: 'Play', sans-serif; font-size: 18px; font-weight: 400; margin-bottom: 8px;
-    }
-    .obra-card-meta {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 11px; letter-spacing: 0.1em; color: var(--muted);
-    }
-    .obra-badge {
-      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-      padding: 3px 10px; border: 1px solid var(--accent); color: var(--accent);
-    }
-    .obra-badge.sold { border-color: var(--stone); color: var(--muted); }
-
-    /* ══════════════════════════════════════
-       SECCIÓN B — CURSOS
-    ══════════════════════════════════════ */
-    #cursos {
-      display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh;
-    }
-    .cursos-text {
-      padding: 100px 64px; display: flex; flex-direction: column;
-      justify-content: center; gap: 0; background: var(--surface);
-    }
-    .cursos-title {
-      font-family: 'Play', sans-serif;
-      font-size: clamp(40px, 5vw, 64px); font-weight: 400;
-      line-height: 1.05; margin-bottom: 32px;
-    }
-    .cursos-copy {
-      font-size: 14px; line-height: 1.9; color: var(--muted);
-      max-width: 400px; margin-bottom: 56px;
-    }
-    .pasos {
-      display: flex; flex-direction: column; gap: 0;
-      margin-bottom: 56px;
-    }
-    .paso {
-      display: flex; align-items: flex-start; gap: 20px;
-      padding: 20px 0; border-bottom: 1px solid var(--stone);
-    }
-    .paso:first-child { border-top: 1px solid var(--stone); }
-    .paso-num {
-      font-family: 'Play', sans-serif;
-      font-size: 11px; letter-spacing: 0.2em; color: var(--accent);
-      min-width: 28px; padding-top: 2px;
-    }
-    .paso-info {}
-    .paso-title { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
-    .paso-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
-
-    .cursos-img {
-      position: relative; overflow: hidden;
-    }
-    .cursos-img-inner {
-      position: absolute; inset: -10% 0;
-      background: url('shared/assets/images/gamantri_08_01.jpg') center/cover no-repeat;
-      will-change: transform;
-    }
-    .cursos-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(17,17,17,0.4), transparent);
-    }
-
-    /* ══════════════════════════════════════
-       SECCIÓN C — SERVICIOS
-    ══════════════════════════════════════ */
-    #servicios {
-      position: relative; height: 100vh; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .servicios-img {
-      position: absolute; inset: -10% 0;
-      background: url('shared/assets/images/gamantri_17_01.jpg') center/cover no-repeat;
-      will-change: transform;
-    }
-    .servicios-overlay {
-      position: absolute; inset: 0;
-      background: rgba(8,8,8,0.55);
-    }
-    .servicios-content {
-      position: relative; z-index: 2;
-      text-align: center; max-width: 680px; padding: 0 40px;
-    }
-    .servicios-title {
-      font-family: 'Play', sans-serif;
-      font-size: clamp(48px, 7vw, 96px); font-weight: 400;
-      line-height: 1; margin-bottom: 28px;
-    }
-    .servicios-tags {
-      display: flex; justify-content: center; gap: 32px;
-      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 48px;
-    }
-    .servicios-copy {
-      font-size: 14px; line-height: 1.9; color: var(--muted); margin-bottom: 48px;
-    }
-
-    /* ── BOTONES ── */
-    .btn {
-      display: inline-flex; align-items: center; gap: 14px;
-      font-family: 'Jura', sans-serif;
-      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--text); text-decoration: none; cursor: pointer;
-      background: none; border: none; padding: 0;
-      transition: gap 0.3s var(--ease);
-    }
-    .btn::after { content: '→'; color: var(--accent); transition: transform 0.3s var(--ease); }
-    .btn:hover { gap: 22px; }
-    .btn:hover::after { transform: translateX(4px); }
-
-    .btn-outline {
-      display: inline-block;
-      font-family: 'Jura', sans-serif;
-      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--text); text-decoration: none; cursor: pointer;
-      background: none; border: 1px solid rgba(242,237,232,0.3);
-      padding: 14px 36px;
-      transition: border-color 0.3s, background 0.3s;
-    }
-    .btn-outline:hover { border-color: var(--accent); background: rgba(212,87,30,0.08); }
-
-    .btn-accent-outline {
-      border-color: var(--accent); color: var(--accent);
-    }
-    .btn-accent-outline:hover { background: rgba(212,87,30,0.12); }
-
-    /* ── CLIENTES ── */
-    #clientes {
-      padding: 100px 56px; border-top: 1px solid var(--stone);
-      text-align: center;
-    }
-    .logos-grid {
-      display: flex; justify-content: center; align-items: center;
-      gap: 56px; flex-wrap: wrap; margin-top: 40px;
-    }
-    .logo-client {
-      font-family: 'Play', sans-serif;
-      font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--stone); transition: color 0.4s;
-    }
-    .logo-client:hover { color: var(--muted); }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 56px; border-top: 1px solid var(--stone);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .footer-logo img { height: 32px; width: auto; opacity: 0.4; }
-    .footer-links { display: flex; gap: 28px; }
-    .footer-links a, .footer-links button {
-      font-family: 'Jura', sans-serif;
-      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none; background: none; border: none;
-      cursor: pointer; transition: color 0.3s;
-    }
-    .footer-links a:hover, .footer-links button:hover { color: var(--text); }
-    .footer-copy { font-size: 11px; color: var(--stone); letter-spacing: 0.08em; }
-
-    /* ── OVERLAYS ── */
-    .overlay {
-      position: fixed; inset: 0; z-index: 600;
-      background: rgba(8,8,8,0.95);
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.4s var(--ease);
-      backdrop-filter: blur(6px);
-      overflow-y: auto;
-    }
-    .overlay.open { opacity: 1; pointer-events: all; }
-
-    .overlay-close {
-      position: fixed; top: 28px; right: 40px;
-      background: none; border: none; color: var(--muted);
-      font-size: 28px; cursor: pointer; z-index: 10;
-      transition: color 0.3s; font-weight: 300;
-    }
-    .overlay-close:hover { color: var(--text); }
-
-    /* Obra detalle */
-    .obra-detalle-grid {
-      display: grid; grid-template-columns: 1fr 480px;
-      min-height: 100vh;
-    }
-    .obra-detalle-foto { overflow: hidden; }
-    .obra-detalle-foto img { width: 100%; height: 100%; object-fit: cover; }
-    .obra-detalle-info {
-      padding: 100px 64px; background: var(--surface);
-      display: flex; flex-direction: column; justify-content: center; gap: 20px;
-    }
-    .obra-detalle-title {
-      font-family: 'Play', sans-serif; font-size: 36px; font-weight: 400;
-    }
-    .obra-edicion { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-    .obra-desc { font-size: 14px; line-height: 1.9; color: var(--muted); }
-    .obra-specs { display: flex; flex-direction: column; gap: 10px; padding: 20px 0; border-top: 1px solid var(--stone); }
-    .spec-row { display: flex; justify-content: space-between; font-size: 12px; }
-    .spec-key { color: var(--muted); }
-    .spec-val { color: var(--text); }
-    .obra-precio { font-family: 'Play', sans-serif; font-size: 40px; font-weight: 400; }
-
-    /* Modal Sobre Cris */
-    .modal-cris {
-      display: grid; grid-template-columns: 380px 1fr;
-      min-height: 100vh;
-    }
-    .modal-foto {
-      background: url('shared/assets/images/gamantri_01_02.jpg') center/cover;
-    }
-    .modal-body { padding: 100px 80px; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
-    .modal-name { font-family: 'Play', sans-serif; font-size: 40px; font-weight: 400; }
-    .modal-role { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-    .modal-bio { font-size: 14px; line-height: 1.95; color: var(--muted); max-width: 520px; }
-    .modal-stats { display: flex; gap: 40px; padding-top: 24px; border-top: 1px solid var(--stone); }
-    .stat-num { font-family: 'Play', sans-serif; font-size: 36px; }
-    .stat-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
-    .modal-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-
-    /* Formularios overlay */
-    .form-overlay-inner {
-      max-width: 680px; margin: 0 auto;
-      padding: 120px 40px 80px;
-    }
-    .form-step { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-    .form-title { font-family: 'Play', sans-serif; font-size: 40px; font-weight: 400; margin-bottom: 48px; }
-    .form-group { margin-bottom: 28px; }
-    .form-label { display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-    .form-input, .form-textarea, .form-select {
-      width: 100%; background: transparent; border: none;
-      border-bottom: 1px solid var(--stone); color: var(--text);
-      font-family: 'Jura', sans-serif; font-size: 14px;
-      padding: 12px 0; outline: none; transition: border-color 0.3s;
-    }
-    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--accent); }
-    .form-textarea { resize: vertical; min-height: 90px; background: var(--surface); border: 1px solid var(--stone); padding: 12px; margin-top: 4px; }
-    .form-select { background: var(--surface); border: 1px solid var(--stone); padding: 12px; }
-    .form-select option { background: var(--surface); }
-    .radio-group { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
-    .radio-opt { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-    .radio-opt input { accent-color: var(--accent); }
-    .radio-opt span { font-size: 13px; color: var(--muted); }
-
-    /* Confirmación */
-    .confirm-screen {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; text-align: center; padding: 80px 40px;
-    }
-    .confirm-title { font-family: 'Play', sans-serif; font-size: 56px; font-weight: 400; margin-bottom: 24px; }
-    .confirm-copy { font-size: 15px; line-height: 1.9; color: var(--muted); max-width: 400px; margin: 0 auto 40px; }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      #cursos { grid-template-columns: 1fr; }
-      .cursos-img { height: 50vh; }
-      .cursos-img-inner { inset: 0; }
-      .obras-grid { grid-template-columns: 1fr 1fr; }
-      .obras-hero-text { flex-direction: column; gap: 24px; }
-      .obras-hero-copy { text-align: left; }
-      .obra-detalle-grid { grid-template-columns: 1fr; }
-      .obra-detalle-foto { height: 50vh; }
-      .modal-cris { grid-template-columns: 1fr; }
-      .modal-foto { display: none; }
-      header { padding: 20px 24px; }
-      .nav-links { display: none; }
-      footer { flex-direction: column; gap: 24px; text-align: center; }
-    }
-    /* ── HERO ── (animación manejada por GSAP) */
-    .hero-logo, .hero-tagline { opacity: 0; }
-
-    /* SVG mask de intro del símbolo */
-    #hero-mask-svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
-
-    /* ── MOBILE NAV ── */
-    .hamburger {
-      display: none;
-      flex-direction: column; justify-content: center; align-items: center;
-      gap: 5px; width: 32px; height: 32px;
-      background: none; border: none; cursor: pointer;
-      padding: 0; z-index: 502;
-    }
-    .hamburger span {
-      display: block; width: 20px; height: 1px;
-      background: var(--text);
-      transition: transform 0.4s var(--ease), opacity 0.3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    .mobile-menu {
-      display: none;
-      position: fixed; inset: 0; z-index: 501;
-      background: var(--base);
-      flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.4s var(--ease);
-    }
-    .mobile-menu.open { opacity: 1; pointer-events: all; }
-    .mobile-menu a, .mobile-menu button {
-      font-family: 'Play', sans-serif;
-      font-size: clamp(28px, 8vw, 48px); font-weight: 400;
-      color: var(--text); text-decoration: none;
-      background: none; border: none;
-      letter-spacing: 0.04em;
-      transition: color 0.3s; line-height: 1.3;
-    }
-    .mobile-menu a:hover, .mobile-menu button:hover { color: var(--accent); }
-    .mobile-menu .mobile-lang {
-      margin-top: 40px;
-    }
-
-    /* ── SEPARADORES DE SECCIÓN ── */
-    .section-sep {
-      height: 80px; position: relative; overflow: hidden;
-      background: var(--base);
-    }
-    .section-sep::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: var(--surface);
-      clip-path: polygon(0 0, 100% 0, 100% 40%, 0 100%);
-    }
-
-    @media (max-width: 900px) {
-      .hamburger { display: flex; }
-      .mobile-menu { display: flex; }
-      .nav-links { display: none !important; }
-    }
-  </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="shared/main.js" defer></script>
 </head>
 <body>
 
@@ -576,25 +56,23 @@
   <section id="hero">
     <div class="hero-img" style="background-image:url('shared/assets/images/hero-basalt.jpg')"></div>
     <div class="hero-overlay"></div>
-    <!-- Máscara SVG vector real del símbolo Gamantri -->
+    <!-- Máscara SVG hexágono con borde difuso -->
     <svg id="hero-mask-svg" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <mask id="gamantri-reveal-mask">
-          <!-- Fondo blanco = negro opaco (oculta imagen). Símbolo negro = transparente (revela imagen). -->
-          <rect x="-10000" y="-10000" width="20000" height="20000" fill="white"/>
-          <g id="symbol-reveal-g">
-            <g id="symbol-inner-g">
-              <polygon fill="black" points="32.13 70.66 20.89 90.15 9.65 70.66 9.69 70.59 32.09 70.59 32.13 70.66"/>
-              <path fill="black" d="M41.38,56.76H1.77l-.1-.15,8.1-14h22.4l-11.21-19.42,8.2-14.2h.04l19.89,34.43c2.46,4.25,1,9.69-3.25,12.15-1.36.79-2.9,1.2-4.47,1.19Z"/>
-              <polygon fill="black" points="56.66 28.54 45.41 9.06 45.46 8.98 67.86 8.98 67.9 9.06 56.66 28.54"/>
-              <path fill="black" d="M64.4,69.93l19.78,34.3-.1.17h-16.21l-11.15-19.4-11.2,19.4h-16.4v-.04l19.89-34.43c2.47-4.25,7.92-5.69,12.17-3.21,1.33.78,2.44,1.88,3.21,3.21Z"/>
-              <polygon fill="black" points="103.62 70.59 103.66 70.66 92.42 90.15 81.18 70.66 81.22 70.59 103.62 70.59"/>
-              <path fill="black" d="M111.72,56.6l-.1.15h-39.62c-4.91,0-8.9-3.97-8.9-8.89,0-1.56.41-3.1,1.19-4.46l19.89-34.43h.05l8.19,14.2-11.19,19.38h22.39l8.09,14.03Z"/>
-            </g>
+        <filter id="hex-blur" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="20"/>
+        </filter>
+        <mask id="hex-reveal-mask">
+          <rect x="-10000" y="-10000" width="20000" height="20000" fill="black"/>
+          <g id="hex-reveal-g">
+            <!-- Hexágono punta arriba, radio 100, centrado en origen — se posiciona y escala via JS -->
+            <polygon id="hex-shape"
+              points="0,-100 86.6,-50 86.6,50 0,100 -86.6,50 -86.6,-50"
+              fill="white" filter="url(#hex-blur)"/>
           </g>
         </mask>
       </defs>
-      <rect width="100%" height="100%" fill="black" mask="url(#gamantri-reveal-mask)"/>
+      <rect width="100%" height="100%" fill="black" mask="url(#hex-reveal-mask)"/>
     </svg>
     <div class="hero-content">
       <img class="hero-logo reveal" src="shared/assets/logo-horizontal-blanco.png" alt="Gamantri" />
@@ -630,7 +108,7 @@
 
     <div class="obras-grid">
       <div class="obra-card reveal" onclick="openObra(0)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_03_01.jpg" alt="" />
+        <img class="obra-card-img" src="shared/assets/images/gamantri_03_01.jpg" alt="Serie Patagonia" loading="lazy" />
         <div class="obra-card-info">
           <div class="obra-card-title">Serie Patagonia</div>
           <div class="obra-card-meta">
@@ -640,7 +118,7 @@
         </div>
       </div>
       <div class="obra-card reveal reveal-d1" onclick="openObra(1)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_04_01.jpg" alt="" />
+        <img class="obra-card-img" src="shared/assets/images/gamantri_04_01.jpg" alt="Serie Vertical" loading="lazy" />
         <div class="obra-card-info">
           <div class="obra-card-title">Serie Vertical</div>
           <div class="obra-card-meta">
@@ -650,7 +128,7 @@
         </div>
       </div>
       <div class="obra-card reveal reveal-d2" onclick="openObra(2)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_06_01.jpg" alt="" />
+        <img class="obra-card-img" src="shared/assets/images/gamantri_06_01.jpg" alt="Serie Luz de Hora" loading="lazy" />
         <div class="obra-card-info">
           <div class="obra-card-title">Serie Luz de Hora</div>
           <div class="obra-card-meta">
@@ -660,7 +138,7 @@
         </div>
       </div>
       <div class="obra-card reveal reveal-d1" onclick="openObra(3)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_07_01.jpg" alt="" />
+        <img class="obra-card-img" src="shared/assets/images/gamantri_07_01.jpg" alt="Serie Roca Viva" loading="lazy" />
         <div class="obra-card-info">
           <div class="obra-card-title">Serie Roca Viva</div>
           <div class="obra-card-meta">
@@ -670,7 +148,7 @@
         </div>
       </div>
       <div class="obra-card reveal reveal-d2" onclick="openObra(4)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_09_01.jpg" alt="" />
+        <img class="obra-card-img" src="shared/assets/images/gamantri_09_01.jpg" alt="Serie Silencio" loading="lazy" />
         <div class="obra-card-info">
           <div class="obra-card-title">Serie Silencio</div>
           <div class="obra-card-meta">
@@ -680,7 +158,7 @@
         </div>
       </div>
       <div class="obra-card reveal reveal-d3" onclick="openObra(5)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_10_01.jpg" alt="" />
+        <img class="obra-card-img" src="shared/assets/images/gamantri_10_01.jpg" alt="Serie Frontera" loading="lazy" />
         <div class="obra-card-info">
           <div class="obra-card-title">Serie Frontera</div>
           <div class="obra-card-meta">
@@ -776,20 +254,29 @@
   <section id="clientes">
     <p class="label reveal" style="text-align:center"
        data-es="Clientes & Colaboraciones" data-en="Clients & Collaborations">Clientes & Colaboraciones</p>
-    <div class="logos-grid">
-      <span class="logo-client reveal">The North Face</span>
-      <span class="logo-client reveal reveal-d1">Mammut</span>
-      <span class="logo-client reveal reveal-d2">Red Bull</span>
-      <span class="logo-client reveal reveal-d3">Patagonia</span>
-      <span class="logo-client reveal reveal-d4">Petzl</span>
-      <span class="logo-client reveal reveal-d5">Black Diamond</span>
+    <div class="marquee-track">
+      <div class="marquee-inner">
+        <span class="logo-client">The North Face</span>
+        <span class="logo-client">Mammut</span>
+        <span class="logo-client">Red Bull</span>
+        <span class="logo-client">Patagonia</span>
+        <span class="logo-client">Petzl</span>
+        <span class="logo-client">Black Diamond</span>
+        <!-- duplicado para loop continuo -->
+        <span class="logo-client">The North Face</span>
+        <span class="logo-client">Mammut</span>
+        <span class="logo-client">Red Bull</span>
+        <span class="logo-client">Patagonia</span>
+        <span class="logo-client">Petzl</span>
+        <span class="logo-client">Black Diamond</span>
+      </div>
     </div>
   </section>
 
   <!-- ══════════════ FOOTER ══════════════ -->
   <footer>
     <div class="footer-logo">
-      <img src="shared/assets/logo-simbolo-blanco.png" alt="Gamantri" />
+      <img src="shared/assets/logo-simbolo-blanco.png" alt="Gamantri" loading="lazy" />
     </div>
     <div class="footer-links">
       <button onclick="openOverlay('overlay-cris')" data-es="Sobre Cris" data-en="About Cris">Sobre Cris</button>
@@ -809,7 +296,7 @@
     <button class="overlay-close" onclick="closeOverlay('overlay-obra')">×</button>
     <div class="obra-detalle-grid">
       <div class="obra-detalle-foto">
-        <img id="obra-foto" src="" alt="" />
+        <img id="obra-foto" src="" alt="" loading="lazy" />
       </div>
       <div class="obra-detalle-info">
         <p class="label" data-es="Obra Seriada" data-en="Limited Edition">Obra Seriada</p>
@@ -964,178 +451,6 @@
       </div>
     </div>
   </div>
-
-
-  <script>
-
-    // ── MOBILE MENU ──
-    let menuOpen = false;
-    function toggleMobileMenu() {
-      menuOpen = !menuOpen;
-      document.getElementById('mobile-menu').classList.toggle('open', menuOpen);
-      document.getElementById('hamburger').classList.toggle('open', menuOpen);
-      document.body.style.overflow = menuOpen ? 'hidden' : '';
-    }
-    function closeMobileMenu() {
-      menuOpen = false;
-      document.getElementById('mobile-menu').classList.remove('open');
-      document.getElementById('hamburger').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    // ── DATOS OBRAS ──
-    const obras = [
-      { titulo:'Serie Patagonia',   img:'shared/assets/images/gamantri_03_01.jpg', edicion:'Edición 2 de 3', precio:'$ 1.200 USD', desc:'Registro de los cielos australes en las cumbres de la Patagonia. Fine Art 300gsm, enmarcada en madera natural.' },
-      { titulo:'Serie Vertical',    img:'shared/assets/images/gamantri_04_01.jpg', edicion:'Agotada',         precio:'$ 1.400 USD', desc:'La dimensión vertical del mundo de la roca. Serie completa — obra de colección.' },
-      { titulo:'Serie Luz de Hora', img:'shared/assets/images/gamantri_06_01.jpg', edicion:'Edición 3 de 3', precio:'$ 980 USD',   desc:'La luz que dura minutos. Captada en el instante exacto en que el mundo cambia de color.' },
-      { titulo:'Serie Roca Viva',   img:'shared/assets/images/gamantri_07_01.jpg', edicion:'Edición 1 de 3', precio:'$ 1.100 USD', desc:'La textura y el silencio de la roca en sus formas más puras.' },
-      { titulo:'Serie Silencio',    img:'shared/assets/images/gamantri_09_01.jpg', edicion:'Edición 2 de 3', precio:'$ 1.300 USD', desc:'El silencio tiene una imagen. Esta es.' },
-      { titulo:'Serie Frontera',    img:'shared/assets/images/gamantri_10_01.jpg', edicion:'Edición 1 de 3', precio:'$ 1.500 USD', desc:'El límite entre el mundo conocido y lo que queda por descubrir.' },
-    ];
-
-    function openObra(i) {
-      const o = obras[i];
-      document.getElementById('obra-foto').src = o.img;
-      document.getElementById('obra-titulo').textContent = o.titulo;
-      document.getElementById('obra-edicion').textContent = o.edicion;
-      document.getElementById('obra-desc').textContent = o.desc;
-      document.getElementById('obra-precio').textContent = o.precio;
-      openOverlay('overlay-obra');
-    }
-
-    // ── OVERLAYS ──
-    function openOverlay(id) {
-      document.getElementById(id).classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeOverlay(id) {
-      document.getElementById(id).classList.remove('open');
-      // Solo restaurar scroll si no hay otro overlay abierto
-      const anyOpen = document.querySelector('.overlay.open');
-      if (!anyOpen) document.body.style.overflow = '';
-    }
-    // Cerrar al hacer click en el fondo
-    document.querySelectorAll('.overlay').forEach(o => {
-      o.addEventListener('click', e => {
-        if (e.target === o) closeOverlay(o.id);
-      });
-    });
-    // Cerrar con ESC
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        document.querySelectorAll('.overlay.open').forEach(o => closeOverlay(o.id));
-      }
-    });
-
-    // ── GSAP + ScrollTrigger ──
-    window.addEventListener('load', () => {
-      if (typeof gsap === 'undefined') return;
-      gsap.registerPlugin(ScrollTrigger);
-
-      // ── HERO REVEAL — SVG SÍMBOLO GAMANTRI (vector real) ──
-      const heroEl = document.getElementById('hero');
-      const heroW  = heroEl.offsetWidth;
-      const heroH  = heroEl.offsetHeight;
-
-      // Origen: figura humana en la foto basalt (~71% x, ~67% y)
-      const cx = heroW * 0.71;
-      const cy = heroH * 0.67;
-
-      // Centrar el símbolo (viewBox 113.39×113.39) sobre la figura
-      document.getElementById('symbol-inner-g').setAttribute('transform',
-        `translate(${cx - 56.695} ${cy - 56.695})`);
-
-      const startScale = Math.min(heroW, heroH) * 0.20 / 113.39;
-      const endScale   = Math.hypot(heroW, heroH) / 37;
-
-      gsap.set('#symbol-reveal-g', { scale: startScale, svgOrigin: `${cx} ${cy}` });
-      gsap.set('.hero-logo',    { opacity: 0, y: 18 });
-      gsap.set('.hero-tagline', { opacity: 0, y: 18 });
-
-      // 2× más rápido
-      gsap.timeline({ delay: 0.15 })
-        .to({}, { duration: 0.4 })
-        .to('#symbol-reveal-g', { scale: endScale, duration: 1.2, ease: 'power2.inOut' })
-        .to('#hero-mask-svg',   { opacity: 0, duration: 0.25 }, '-=0.3')
-        .to('.hero-logo',    { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.5')
-        .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, '-=0.35');
-
-      // Reveals con scrub leve
-      const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');
-      revealEls.forEach(el => {
-        const delay = el.classList.contains('reveal-d1') ? 0.12
-                    : el.classList.contains('reveal-d2') ? 0.24
-                    : el.classList.contains('reveal-d3') ? 0.36
-                    : el.classList.contains('reveal-d4') ? 0.48
-                    : el.classList.contains('reveal-d5') ? 0.60 : 0;
-        gsap.from(el, {
-          opacity: 0, y: 38,
-          duration: 0.9, delay,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
-        });
-      });
-
-      // Reveal-scale
-      document.querySelectorAll('.reveal-scale').forEach(el => {
-        gsap.from(el, {
-          opacity: 0, scale: 1.04, duration: 0.95, ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' }
-        });
-      });
-
-      // Parallax con scrub
-      document.querySelectorAll('[data-parallax]').forEach(el => {
-        const speed = parseFloat(el.dataset.parallax);
-        gsap.to(el, {
-          yPercent: speed * 28,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el.parentElement,
-            start: 'top bottom', end: 'bottom top',
-            scrub: true
-          }
-        });
-      });
-
-      // Obras cards stagger al entrar
-      gsap.from('.obra-card', {
-        opacity: 0, y: 50, duration: 0.8, stagger: 0.1, ease: 'power3.out',
-        scrollTrigger: { trigger: '.obras-grid', start: 'top 85%', toggleActions: 'play none none none' }
-      });
-    });
-
-    // ── HEADER HIDE/SHOW ──
-    let lastScroll = 0;
-    const header = document.getElementById('header');
-
-    window.addEventListener('scroll', () => {
-      const current = window.scrollY;
-      if (current > 80) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-      if (current > lastScroll + 8 && current > 200) header.classList.add('hidden');
-      else if (current < lastScroll - 4) header.classList.remove('hidden');
-      lastScroll = current;
-    }, { passive: true });
-
-    // ── SCROLL TO ──
-    function scrollToSection(selector) {
-      const el = document.querySelector(selector);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-    // ── IDIOMA ──
-    let lang = 'es';
-    function setLang(l) {
-      lang = l;
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
-      document.querySelectorAll(`[data-${l}]`).forEach(el => {
-        el.textContent = el.getAttribute(`data-${l}`);
-      });
-    }
-  </script>
 
 </body>
 </html>
