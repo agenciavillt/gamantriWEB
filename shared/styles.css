@@ -75,7 +75,7 @@ header.scrolled {
 .nav-links a {
   font-family: 'Jura', sans-serif;
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: #9a9a96; text-decoration: none; cursor: pointer;
+  color: var(--text); text-decoration: none; cursor: pointer;
   transition: color 0.3s;
 }
 .nav-links a:hover { color: var(--text); }
@@ -167,7 +167,7 @@ header.scrolled {
 }
 .obras-hero-img {
   position: absolute; inset: -20% 0;
-  background: url('assets/images/gamantri_07_01.jpg') 58% 100% / 100% auto no-repeat;
+  background: url('assets/images/gamantri_07_01.jpg') 58% 100% / cover no-repeat;
   will-change: transform;
 }
 .obras-hero-overlay {
@@ -183,7 +183,7 @@ header.scrolled {
   font-size: clamp(40px, 6vw, 72px); font-weight: 400; line-height: 1;
 }
 .obras-hero-copy {
-  max-width: 360px; font-size: 14px; line-height: 1.85; color: var(--muted);
+  max-width: 360px; font-size: 14px; line-height: 1.85; color: #111111;
   text-align: right;
 }
 
@@ -214,7 +214,7 @@ header.scrolled {
 }
 .obra-card-meta {
   display: flex; justify-content: space-between; align-items: center;
-  font-size: 11px; letter-spacing: 0.1em; color: var(--muted);
+  font-size: 11px; letter-spacing: 0.1em; color: var(--text);
 }
 .obra-badge {
   font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -338,7 +338,7 @@ header.scrolled {
 /* Label en obras-hero: más grande y color más oscuro */
 .obras-hero-text .label {
   font-size: 13px; letter-spacing: 0.28em;
-  color: #b84d1a;
+  color: #b84d1a; font-weight: 700;
 }
 
 /* Marquee */
@@ -485,6 +485,7 @@ footer {
   .obras-grid { grid-template-columns: 1fr 1fr; }
   .obras-hero-text { flex-direction: column; gap: 24px; }
   .obras-hero-copy { text-align: left; }
+  .hero-img { background-position: 85% center; }
   .obra-detalle-grid { grid-template-columns: 1fr; }
   .obra-detalle-foto { height: 50vh; }
   .modal-cris { grid-template-columns: 1fr; }
