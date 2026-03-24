@@ -172,7 +172,7 @@ header.scrolled {
 }
 .obras-hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.72) 0%, rgba(8,8,8,0.15) 48%, transparent 100%);
+  background: linear-gradient(to top, rgba(8,8,8,0.22) 0%, rgba(8,8,8,0.08) 40%, transparent 100%);
 }
 .obras-hero-text {
   position: absolute; bottom: 64px; left: 56px; right: 56px;
@@ -485,7 +485,7 @@ footer {
   .obras-grid { grid-template-columns: 1fr 1fr; }
   .obras-hero-text { flex-direction: column; gap: 24px; }
   .obras-hero-copy { text-align: left; }
-  .hero-img { background-position: 85% center; }
+  .hero-img { background-position: 72% center; }
   .obra-detalle-grid { grid-template-columns: 1fr; }
   .obra-detalle-foto { height: 50vh; }
   .modal-cris { grid-template-columns: 1fr; }
