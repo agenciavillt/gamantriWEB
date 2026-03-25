@@ -380,3 +380,46 @@
 @media (max-width: 480px) {
   .talleres-grid { grid-template-columns: 1fr; }
 }
+
+/* ── GRACIAS OVERLAY ── */
+#gracias-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(8,8,8,0.82);
+  backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+#gracias-overlay.visible {
+  opacity: 1; pointer-events: all;
+}
+#gracias-card {
+  background: var(--surface);
+  border: 1px solid rgba(242,237,232,0.1);
+  padding: 52px 48px;
+  max-width: 480px; width: 100%;
+  text-align: center;
+  transform: translateY(24px);
+  transition: transform 0.5s var(--ease);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 16px;
+}
+#gracias-overlay.visible #gracias-card {
+  transform: translateY(0);
+}
+.gracias-logo {
+  height: 40px; opacity: 0.5; margin-bottom: 8px;
+}
+#gracias-card .label { color: var(--accent); }
+#gracias-card h3 {
+  font-family: 'Play', sans-serif;
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 400; color: var(--text);
+  letter-spacing: -0.01em; line-height: 1.2;
+}
+.gracias-text {
+  font-size: 13px; color: var(--muted);
+  line-height: 1.85; max-width: 360px;
+}
+#gracias-close { margin-top: 8px; }

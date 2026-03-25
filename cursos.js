@@ -7,6 +7,50 @@ window.addEventListener('scroll', () => {
   else cursosHeader.classList.remove('scrolled');
 }, { passive: true });
 
+// ── FORMULARIO — submit vía fetch + overlay gracias ──
+const cursosForm    = document.querySelector('.cursos-form');
+const graciasOverlay = document.getElementById('gracias-overlay');
+const graciasClose   = document.getElementById('gracias-close');
+
+cursosForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = cursosForm.querySelector('.btn-submit');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+
+  try {
+    const data = new FormData(cursosForm);
+    const res  = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST', body: data
+    });
+    const json = await res.json();
+
+    if (json.success) {
+      graciasOverlay.classList.add('visible');
+      graciasOverlay.setAttribute('aria-hidden', 'false');
+      cursosForm.reset();
+    } else {
+      btn.textContent = 'Error al enviar. Intentá de nuevo.';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = 'Error de conexión. Intentá de nuevo.';
+    btn.disabled = false;
+  }
+});
+
+graciasClose.addEventListener('click', () => {
+  graciasOverlay.classList.remove('visible');
+  graciasOverlay.setAttribute('aria-hidden', 'true');
+  document.querySelector('.btn-submit').textContent = 'Enviar →';
+  document.querySelector('.btn-submit').disabled = false;
+});
+
+// Cerrar con ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') graciasOverlay.classList.remove('visible');
+});
+
 // Smooth scroll para links internos
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
