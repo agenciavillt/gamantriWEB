@@ -375,7 +375,6 @@
   .form-row { grid-template-columns: 1fr; }
   .cursos-footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
   #cursos-header { padding: 20px 24px; }
-  .cursos-hero-img { background-position: left center; }
 }
 
 @media (max-width: 480px) {
