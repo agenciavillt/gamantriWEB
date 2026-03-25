@@ -83,21 +83,6 @@ window.addEventListener('load', () => {
     // t=1.5s: tagline se escribe de izquierda a derecha
     .to('.hero-tagline', { clipPath: 'inset(0 0% 0 0)', duration: 1.0, ease: 'power3.inOut' }, 1.5);
 
-  // Hero: parallax vertical — imagen se mueve más lento que la página
-  gsap.fromTo('.hero-img',
-    { yPercent: -10 },
-    {
-      yPercent: 10,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    }
-  );
-
   // Reveals con scrub leve
   const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');
   revealEls.forEach(el => {

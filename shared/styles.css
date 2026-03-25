@@ -111,7 +111,7 @@ header.scrolled {
   padding: 72px 56px; overflow: hidden;
 }
 .hero-img {
-  position: absolute; inset: -20% 0;
+  position: absolute; inset: 0;
   background-size: cover; background-position: center; background-repeat: no-repeat;
   will-change: transform, clip-path;
 }
