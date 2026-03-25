@@ -29,7 +29,7 @@
   padding: 80px 56px;
 }
 .cursos-hero-img {
-  position: absolute; inset: 0;
+  position: absolute; inset: -15% 0;
   background-size: cover; background-position: center;
   will-change: transform;
 }
