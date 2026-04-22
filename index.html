@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GAMANTRI — Fine Art Photography</title>
 
-  <!-- Rendimiento: preconnect CDN y preload hero -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="preload" href="shared/assets/images/hero-basalt.jpg" as="image" />
+  <link rel="preload" href="shared/assets/images/1-H-F.jpg" as="image" />
 
   <link rel="stylesheet" href="shared/styles.css" />
 
@@ -19,10 +18,14 @@
 
   <!-- Menú mobile -->
   <div class="mobile-menu" id="mobile-menu">
-    <a onclick="scrollToSection('#obras'); closeMobileMenu()">Obras</a>
-    <a onclick="scrollToSection('#cursos'); closeMobileMenu()">Cursos</a>
-    <a onclick="scrollToSection('#servicios'); closeMobileMenu()">Servicios</a>
-    <button onclick="openOverlay('overlay-cris'); closeMobileMenu()">Sobre Cris</button>
+    <a onclick="scrollToSection('#obras'); closeMobileMenu()"
+       data-es="Obras" data-en="Fine Art">Obras</a>
+    <a onclick="scrollToSection('#cursos'); closeMobileMenu()"
+       data-es="Cursos" data-en="Courses">Cursos</a>
+    <a onclick="scrollToSection('#servicios'); closeMobileMenu()"
+       data-es="Servicios" data-en="Services">Servicios</a>
+    <button onclick="openOverlay('overlay-cris'); closeMobileMenu()"
+            data-es="Sobre Cris" data-en="About Cris">Sobre Cris</button>
     <div class="lang-toggle mobile-lang" style="margin-top:40px">
       <button class="lang-btn active" onclick="setLang('es')">ES</button>
       <span class="lang-sep">·</span>
@@ -37,9 +40,12 @@
     </button>
     <div style="display:flex;align-items:center;gap:0">
       <nav class="nav-links">
-        <a onclick="scrollToSection('#obras')">Obras</a>
-        <a onclick="scrollToSection('#cursos')">Cursos</a>
-        <a onclick="scrollToSection('#servicios')">Servicios</a>
+        <a onclick="scrollToSection('#obras')"
+           data-es="Obras" data-en="Fine Art">Obras</a>
+        <a onclick="scrollToSection('#cursos')"
+           data-es="Cursos" data-en="Courses">Cursos</a>
+        <a onclick="scrollToSection('#servicios')"
+           data-es="Servicios" data-en="Services">Servicios</a>
       </nav>
       <div class="lang-toggle">
         <button class="lang-btn active" onclick="setLang('es')">ES</button>
@@ -54,7 +60,8 @@
 
   <!-- ══════════════ HERO ══════════════ -->
   <section id="hero">
-    <div class="hero-img" style="background-image:url('shared/assets/images/hero-basalt.jpg')"></div>
+    <div class="hero-img-1" style="background-image:url('shared/assets/images/1-H-F.jpg')"></div>
+    <div class="hero-img-2" style="background-image:url('shared/assets/images/2-H-C.jpg')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <img class="hero-logo" src="shared/assets/logo-horizontal-blanco.png" alt="Gamantri" />
@@ -65,6 +72,13 @@
       </p>
     </div>
     <div class="scroll-indicator">Scroll</div>
+  </section>
+
+  <!-- ══════════════ AFTER HERO ══════════════ -->
+  <section id="after-hero">
+    <video class="after-hero-video" autoplay muted loop playsinline data-parallax="-0.2">
+      <source src="shared/assets/videos/After HERO.mp4" type="video/mp4" />
+    </video>
   </section>
 
   <!-- ══════════════ OBRAS ══════════════ -->
@@ -81,74 +95,119 @@
               data-es="Obras Seriadas" data-en="Fine Art Works">Obras Seriadas</h2>
         </div>
         <p class="obras-hero-copy reveal reveal-d2"
-           data-es="Fotografías impresas en papel Fine Art de máxima calidad, enmarcadas y editadas en series finales y exclusivas. Cada obra llega lista para colgar."
-           data-en="Fine Art photographs printed on premium archival paper, framed and released in exclusive limited editions. Each piece arrives ready to hang.">
-          Fotografías impresas en papel Fine Art de máxima calidad, enmarcadas y editadas en series finales y exclusivas. Cada obra llega lista para colgar.
+           data-es="Fotografías impresas en papel Fine Art de máxima calidad, enmarcadas y editadas en series finales y exclusivas."
+           data-en="Fine Art photographs printed on premium archival paper, framed and released in exclusive limited editions.">
+          Fotografías impresas en papel Fine Art de máxima calidad, enmarcadas y editadas en series finales y exclusivas.
         </p>
       </div>
     </div>
 
     <div class="obras-grid">
+
       <div class="obra-card" onclick="openObra(0)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_03_01.jpg" alt="Serie Patagonia" loading="lazy" />
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/1-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/2-O-Mu-Z.jpg')"></div>
         <div class="obra-card-info">
-          <div class="obra-card-title">Serie Patagonia</div>
+          <div class="obra-card-title">La Cárcel</div>
           <div class="obra-card-meta">
-            <span>$ 1.200 USD</span>
-            <span class="obra-badge" data-es="2 disponibles" data-en="2 available">2 disponibles</span>
-          </div>
-        </div>
-      </div>
-      <div class="obra-card" onclick="openObra(1)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_04_01.jpg" alt="Serie Vertical" loading="lazy" />
-        <div class="obra-card-info">
-          <div class="obra-card-title">Serie Vertical</div>
-          <div class="obra-card-meta">
-            <span>$ 1.400 USD</span>
-            <span class="obra-badge sold">Sold Out</span>
-          </div>
-        </div>
-      </div>
-      <div class="obra-card" onclick="openObra(2)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_06_01.jpg" alt="Serie Luz de Hora" loading="lazy" />
-        <div class="obra-card-info">
-          <div class="obra-card-title">Serie Luz de Hora</div>
-          <div class="obra-card-meta">
-            <span>$ 980 USD</span>
             <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
           </div>
         </div>
       </div>
-      <div class="obra-card" onclick="openObra(3)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_10_01.jpg" alt="Serie Roca Viva" loading="lazy" />
+
+      <div class="obra-card" onclick="openObra(1)">
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/4-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/5-O-Mu-Z.jpg')"></div>
         <div class="obra-card-info">
-          <div class="obra-card-title">Serie Roca Viva</div>
+          <div class="obra-card-title">Llaima en Nubes</div>
           <div class="obra-card-meta">
-            <span>$ 1.100 USD</span>
-            <span class="obra-badge" data-es="1 disponible" data-en="1 available">1 disponible</span>
-          </div>
-        </div>
-      </div>
-      <div class="obra-card" onclick="openObra(4)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_09_01.jpg" alt="Serie Silencio" loading="lazy" />
-        <div class="obra-card-info">
-          <div class="obra-card-title">Serie Silencio</div>
-          <div class="obra-card-meta">
-            <span>$ 1.300 USD</span>
             <span class="obra-badge" data-es="2 disponibles" data-en="2 available">2 disponibles</span>
           </div>
         </div>
       </div>
-      <div class="obra-card" onclick="openObra(5)">
-        <img class="obra-card-img" src="shared/assets/images/gamantri_10_01.jpg" alt="Serie Frontera" loading="lazy" />
+
+      <div class="obra-card" onclick="openObra(2)">
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/7-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/8-O-Mu-Z.jpg')"></div>
         <div class="obra-card-info">
-          <div class="obra-card-title">Serie Frontera</div>
+          <div class="obra-card-title">Los Cuatro Elementos</div>
           <div class="obra-card-meta">
-            <span>$ 1.500 USD</span>
+            <span class="obra-badge" data-es="2 disponibles" data-en="2 available">2 disponibles</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="obra-card" onclick="openObra(3)">
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/10-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/11-O-Mu-Z.jpg')"></div>
+        <div class="obra-card-info">
+          <div class="obra-card-title">Era Leo</div>
+          <div class="obra-card-meta">
+            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="obra-card" onclick="openObra(4)">
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/13-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/14-O-Mu-Z.jpg')"></div>
+        <div class="obra-card-info">
+          <div class="obra-card-title">Nodriza</div>
+          <div class="obra-card-meta">
+            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="obra-card" onclick="openObra(5)">
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/16-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/17-O-Mu-Z.jpg')"></div>
+        <div class="obra-card-info">
+          <div class="obra-card-title">Caminos</div>
+          <div class="obra-card-meta">
+            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="obra-card" onclick="openObra(6)">
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/19-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/20-O-Mu-Z.jpg')"></div>
+        <div class="obra-card-info">
+          <div class="obra-card-title">El Último Tango</div>
+          <div class="obra-card-meta">
             <span class="obra-badge" data-es="1 disponible" data-en="1 available">1 disponible</span>
           </div>
         </div>
       </div>
+
+      <div class="obra-card" onclick="openObra(7)">
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/22-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/23-O-Mu-Z.jpg')"></div>
+        <div class="obra-card-info">
+          <div class="obra-card-title">Penitentes</div>
+          <div class="obra-card-meta">
+            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="obra-card" onclick="openObra(8)">
+        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/25-O-Mu-F.jpg')"></div>
+        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/26-O-Mu-Z.jpg')"></div>
+        <div class="obra-card-info">
+          <div class="obra-card-title">Bloque Chileno</div>
+          <div class="obra-card-meta">
+            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="obras-footer">
+      <button class="btn-outline btn-accent-outline" onclick="openOverlay('overlay-encargo')"
+              data-es="Obra personalizada" data-en="Custom artwork">Obra personalizada</button>
     </div>
 
   </section>
@@ -193,27 +252,31 @@
 
   <!-- ══════════════ SERVICIOS ══════════════ -->
   <section id="servicios">
-    <div class="servicios-img" data-parallax="0.3"></div>
+    <video class="servicios-video" autoplay muted loop playsinline>
+      <source src="shared/assets/videos/SERVICIOS.mp4" type="video/mp4" />
+    </video>
     <div class="servicios-overlay"></div>
+    <div class="servicios-bottom-gradient"></div>
     <div class="servicios-content">
-      <p class="label reveal" data-es="Para marcas y atletas" data-en="For brands & athletes">Para marcas y atletas</p>
-      <h2 class="servicios-title reveal reveal-d1" data-es="Servicios" data-en="Services">Servicios</h2>
-      <div class="servicios-tags reveal reveal-d2">
-        <span data-es="Marcas" data-en="Brands">Marcas</span>
-        <span>·</span>
-        <span data-es="Atletas" data-en="Athletes">Atletas</span>
-        <span>·</span>
-        <span data-es="Expediciones" data-en="Expeditions">Expediciones</span>
+      <div class="servicios-left">
+        <p class="label reveal"
+           data-es="Para marcas y atletas" data-en="For brands &amp; athletes">Para marcas y atletas</p>
+        <h2 class="servicios-title reveal reveal-d1"
+            data-es="Servicios" data-en="Services">Servicios</h2>
+        <p class="servicios-subtitle reveal reveal-d2">
+          <span data-es="Expediciones – Documentales – Campañas digitales"
+                data-en="Expeditions – Documentaries – Digital campaigns">Expediciones – Documentales – Campañas digitales</span>
+        </p>
+        <p class="servicios-copy reveal reveal-d3"
+           data-es="Fotografía y video para proyectos outdoor y en el territorio. Desde registros de productos o atletas hasta producción, dirección y montaje de documentales."
+           data-en="Photography and video for outdoor and field projects. From product or athlete shoots to production, direction and editing of documentaries.">
+          Fotografía y video para proyectos outdoor y en el territorio. Desde registros de productos o atletas hasta producción, dirección y montaje de documentales.
+        </p>
       </div>
-      <p class="servicios-copy reveal reveal-d3"
-         data-es="Fotografía y video para proyectos con alma outdoor. Desde registros de expediciones hasta campañas digitales."
-         data-en="Photography and video for projects with an outdoor soul. From expedition documentation to digital campaigns.">
-        Fotografía y video para proyectos con alma outdoor. Desde registros de expediciones hasta campañas digitales.
-      </p>
-      <div class="reveal reveal-d4">
-        <button class="btn-outline btn-accent-outline" onclick="openOverlay('overlay-briefing')"
-                data-es="Hablemos de tu proyecto" data-en="Let's talk about your project">
-          Hablemos de tu proyecto
+      <div class="servicios-right reveal reveal-d3">
+        <button class="btn-servicios" onclick="openOverlay('overlay-briefing')"
+                data-es="Hablemos de tu proyecto >>>" data-en="Let's talk about your project >>>">
+          Hablemos de tu proyecto >>>
         </button>
       </div>
     </div>
@@ -222,7 +285,7 @@
   <!-- ══════════════ CLIENTES ══════════════ -->
   <section id="clientes">
     <p class="label reveal" style="text-align:center"
-       data-es="Clientes & Colaboraciones" data-en="Clients & Collaborations">Clientes & Colaboraciones</p>
+       data-es="Clientes &amp; Colaboraciones" data-en="Clients &amp; Collaborations">Clientes &amp; Colaboraciones</p>
     <div class="marquee-track">
       <div class="marquee-inner">
         <img class="logo-client" src="shared/assets/logos-clientes/1. The north face.png" alt="The North Face" loading="lazy">
@@ -286,35 +349,100 @@
   </footer>
 
 
-  <!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════
        OVERLAYS
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
 
-  <!-- Obra detalle -->
+  <!-- O-04: Obra detalle — 3 imágenes scroll + panel sticky -->
   <div class="overlay" id="overlay-obra">
     <button class="overlay-close" onclick="closeOverlay('overlay-obra')">×</button>
-    <div class="obra-detalle-grid">
-      <div class="obra-detalle-foto">
-        <img id="obra-foto" src="" alt="" loading="lazy" />
+    <div class="obra-modal-grid">
+
+      <div class="obra-modal-fotos">
+        <img id="obra-foto-sola" class="obra-modal-foto-item" src="" alt="" loading="lazy" />
+        <img id="obra-foto-zoom" class="obra-modal-foto-item" src="" alt="" loading="lazy" />
+        <img id="obra-foto-full" class="obra-modal-foto-item" src="" alt="" loading="lazy" />
       </div>
-      <div class="obra-detalle-info">
-        <p class="label" data-es="Obra Seriada" data-en="Limited Edition">Obra Seriada</p>
-        <h2 class="obra-detalle-title" id="obra-titulo"></h2>
-        <p class="obra-edicion" id="obra-edicion"></p>
-        <p class="obra-desc" id="obra-desc"></p>
-        <div class="obra-specs">
-          <div class="spec-row"><span class="spec-key">Técnica</span><span class="spec-val">Impresión Fine Art</span></div>
-          <div class="spec-row"><span class="spec-key">Soporte</span><span class="spec-val">Papel 300gsm</span></div>
-          <div class="spec-row"><span class="spec-key">Dimensiones</span><span class="spec-val">60 × 90 cm</span></div>
-          <div class="spec-row"><span class="spec-key">Marco</span><span class="spec-val">Madera natural incluido</span></div>
-          <div class="spec-row"><span class="spec-key">Envío</span><span class="spec-val">Internacional disponible</span></div>
+
+      <div class="obra-modal-panel">
+        <p class="label" style="margin-bottom:8px">Edición Limitada</p>
+        <h2 class="obra-modal-titulo" id="obra-modal-titulo"></h2>
+        <p class="obra-modal-desc" id="obra-modal-desc"></p>
+
+        <div class="obra-series" id="obra-modal-series"></div>
+
+        <div class="obra-modal-sep"></div>
+
+        <div class="obra-modal-specs">
+          <div class="spec-row">
+            <span class="spec-key">Piezas</span>
+            <span class="spec-val" id="obra-modal-piezas"></span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Impresión</span>
+            <span class="spec-val">Fine Art</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Enmarcado</span>
+            <span class="spec-val">A elección</span>
+          </div>
         </div>
-        <p class="obra-precio" id="obra-precio"></p>
-        <div style="margin-top:8px">
-          <a class="btn-outline btn-accent-outline" href="mailto:contacto@gamantri.com"
-             data-es="Comprar esta obra" data-en="Purchase this work">Comprar esta obra</a>
-        </div>
+
+        <p class="obra-ref-label">Referencia imagen:</p>
+        <p class="obra-ref-text" id="obra-modal-ref"></p>
+
+        <p class="obra-precio-grande" id="obra-modal-precio"></p>
+
+        <button class="btn-encargar"
+                onclick="closeOverlay('overlay-obra'); openOverlay('overlay-encargo')">
+          Encargar ahora
+        </button>
       </div>
+
+    </div>
+  </div>
+
+  <!-- O-05: Formulario de encargo -->
+  <div class="overlay" id="overlay-encargo">
+    <button class="overlay-close" onclick="closeOverlay('overlay-encargo')">×</button>
+    <div class="form-overlay-inner">
+      <p class="form-step" data-es="Obras · Encargo" data-en="Works · Order">Obras · Encargo</p>
+      <h2 class="form-title"
+          data-es="Encarga una obra." data-en="Order a work.">Encarga una obra.</h2>
+      <p style="font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:40px;margin-top:-32px"
+         data-es="Personaliza el enmarcado de una fotografía existente o solicita un trabajo comisionado."
+         data-en="Customize the framing of an existing photograph or request a commissioned work.">
+        Personaliza el enmarcado de una fotografía existente o solicita un trabajo comisionado.
+      </p>
+      <form onsubmit="event.preventDefault(); closeOverlay('overlay-encargo'); openOverlay('overlay-ok')">
+        <div class="form-group">
+          <label class="form-label" data-es="Nombre" data-en="Name">Nombre</label>
+          <input class="form-input" type="text" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label>
+          <input class="form-input" type="tel" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Tipo de encargo" data-en="Order type">Tipo de encargo</label>
+          <select class="form-select">
+            <option>Personalizar obra existente</option>
+            <option>Encargo con otra fotografía</option>
+            <option>Fotografía comisionada</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-es="Descripción del encargo" data-en="Order description">Descripción del encargo</label>
+          <textarea class="form-textarea" rows="4"></textarea>
+        </div>
+        <button class="btn-outline btn-accent-outline" type="submit"
+                style="font-family:'Jura',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase"
+                data-es="Enviar" data-en="Send">Enviar</button>
+      </form>
     </div>
   </div>
 
@@ -325,18 +453,13 @@
       <div class="modal-foto"></div>
       <div class="modal-body">
         <p class="label">Fundador · Director</p>
-        <h2 class="modal-name">Cristóbal Posadas</h2>
+        <h2 class="modal-name">Cris Posadas</h2>
         <p class="modal-role">Photographer · Filmmaker · Civil Engineer</p>
         <p class="modal-bio"
            data-es="Fotógrafo, editor digital y filmmaker. Fundador y director de Gamantri, una marca dedicada a rescatar el valor patrimonial de los espacios naturales y fomentar su protección a través de las imágenes. La escalada y el montañismo son el medio para llegar a esos lugares y acercar a las personas a ellos. Trabaja con marcas internacionales, atletas y expediciones en los entornos más exigentes del planeta."
            data-en="Photographer, digital editor and filmmaker. Founder and director of Gamantri, a brand dedicated to capturing the heritage value of natural spaces and fostering their protection through imagery. Climbing and mountaineering are the means to reach those places and connect people with them. Works with international brands, athletes and expeditions in the planet's most demanding environments.">
           Fotógrafo, editor digital y filmmaker. Fundador y director de Gamantri, una marca dedicada a rescatar el valor patrimonial de los espacios naturales y fomentar su protección a través de las imágenes. La escalada y el montañismo son el medio para llegar a esos lugares y acercar a las personas a ellos. Trabaja con marcas internacionales, atletas y expediciones en los entornos más exigentes del planeta.
         </p>
-        <div class="modal-stats">
-          <div><div class="stat-num">2019</div><div class="stat-label" data-es="Fundación" data-en="Founded">Fundación</div></div>
-          <div><div class="stat-num">37</div><div class="stat-label" data-es="Años" data-en="Years old">Años</div></div>
-          <div><div class="stat-num">Intl.</div><div class="stat-label" data-es="Clientes" data-en="Clients">Clientes</div></div>
-        </div>
         <div class="modal-actions">
           <a class="btn-outline" href="https://www.instagram.com/gamantri/" target="_blank">Instagram</a>
           <a class="btn-outline" href="mailto:contacto@gamantri.com">Email</a>
@@ -382,7 +505,8 @@
           <label class="form-label" data-es="Presupuesto aproximado (opcional)" data-en="Approximate budget (optional)">Presupuesto aproximado (opcional)</label>
           <input class="form-input" type="text" />
         </div>
-        <button class="btn-outline btn-accent-outline" type="submit" style="font-family:'Jura',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase"
+        <button class="btn-outline btn-accent-outline" type="submit"
+                style="font-family:'Jura',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase"
                 data-es="Enviar briefing" data-en="Send briefing">Enviar briefing</button>
       </form>
     </div>

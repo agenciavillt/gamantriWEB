@@ -35,7 +35,7 @@
 }
 .cursos-hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.35) 50%, rgba(8,8,8,0.1) 100%);
+  background: linear-gradient(to top, rgba(8,8,8,0.80) 0%, rgba(8,8,8,0.18) 50%, rgba(8,8,8,0.04) 100%);
 }
 .cursos-hero-content {
   position: relative; z-index: 2; max-width: 640px;
