@@ -178,13 +178,40 @@ function openObra(i) {
 
   const seriesEl = document.getElementById('obra-modal-series');
   seriesEl.innerHTML = o.series.map(s => {
-    const cls = s.vendida ? 'serie-item sold' : (s.destacada ? 'serie-item destacada' : 'serie-item');
-    const copiaTxt = s.vendida ? s.copia + ' · SOLD' : s.copia;
-    return `<div class="${cls}"><div class="serie-precio">${s.precio}</div><div class="serie-copia">${copiaTxt}</div></div>`;
+    if (s.vendida) {
+      return `<div class="serie-item sold"><div class="serie-precio">${s.precio}</div><div class="serie-copia">${s.copia} · SOLD</div></div>`;
+    } else if (s.destacada) {
+      return `<div class="serie-item available primera"><div class="serie-precio">${s.precio}</div><div class="serie-copia">${s.copia}</div></div>`;
+    } else {
+      return `<div class="serie-item available"><div class="serie-precio">${s.precio}</div><div class="serie-copia">${s.copia}</div></div>`;
+    }
   }).join('');
 
   document.getElementById('overlay-obra').scrollTop = 0;
   openOverlay('overlay-obra');
+}
+
+// ── ENCARGO CON CONTEXTO (OB-05) ──
+function openOverlayEncargo(source) {
+  const select = document.getElementById('encargo-tipo');
+  if (select) {
+    select.value = source === 'personalizada' ? 'personalizada' : 'catalogo';
+  }
+  openOverlay('overlay-encargo');
+}
+
+// ── VER MÁS / VER MENOS OBRAS (OB-03) ──
+function toggleObras() {
+  const grid = document.querySelector('.obras-grid');
+  const btn = document.getElementById('btn-ver-mas');
+  const expanded = grid.classList.toggle('expanded');
+  btn.textContent = expanded ? 'VER MENOS <<<' : 'VER MÁS OBRAS >>>';
+}
+
+// ── FOOTER FOTO MODAL (FT-02) ──
+function openFooterFoto(codigo) {
+  document.getElementById('footer-modal-foto').src = `shared/assets/fotos-footer/${codigo}-f.jpg`;
+  openOverlay('footer-foto-modal');
 }
 
 // ── OVERLAYS ──
@@ -208,51 +235,25 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ── HERO KEN BURNS SLIDESHOW ──
-function startHeroSlideshow() {
-  const SHOW  = 7;    // segundos visibles
-  const CROSS = 1.5;  // duración del crossfade
-
-  function showImg1() {
-    gsap.set('.hero-img-2', { scale: 1.0 });
-    gsap.fromTo('.hero-img-1', { scale: 1.0 }, { scale: 1.16, duration: SHOW + CROSS, ease: 'none' });
-    gsap.delayedCall(SHOW, () => {
-      gsap.to('.hero-img-1', { opacity: 0, duration: CROSS, ease: 'power2.inOut' });
-      gsap.to('.hero-img-2', { opacity: 1, duration: CROSS, ease: 'power2.inOut' });
-      gsap.delayedCall(CROSS, showImg2);
-    });
-  }
-
-  function showImg2() {
-    gsap.set('.hero-img-1', { scale: 1.0 });
-    gsap.fromTo('.hero-img-2', { scale: 1.0 }, { scale: 1.16, duration: SHOW + CROSS, ease: 'none' });
-    gsap.delayedCall(SHOW, () => {
-      gsap.to('.hero-img-2', { opacity: 0, duration: CROSS, ease: 'power2.inOut' });
-      gsap.to('.hero-img-1', { opacity: 1, duration: CROSS, ease: 'power2.inOut' });
-      gsap.delayedCall(CROSS, showImg1);
-    });
-  }
-
-  showImg1();
-}
-
 // ── GSAP + ScrollTrigger ──
 window.addEventListener('load', () => {
   if (typeof gsap === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
-  // ── HERO INTRO ──
-  gsap.set('.hero-img-2', { opacity: 0, scale: 1.0 });
-  gsap.set('.hero-logo',    { y: 80 });
+  // ── HERO INTRO + KEN BURNS (HR-01) ──
+  gsap.set('.hero-img',   { opacity: 0, scale: 1.0 });
+  gsap.set('.hero-logo',  { y: 80 });
   gsap.set('.hero-tagline', { clipPath: 'inset(0 100% 0 0)', opacity: 1 });
 
   gsap.timeline()
-    .to('.hero-img-1',   { opacity: 1, duration: 1.0, ease: 'power2.inOut' })
-    .to('.logo-btn',     { opacity: 1, duration: 0.5, ease: 'power3.out' }, 1.1)
-    .to('.hero-logo',    { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.2)
+    .to('.hero-img',    { opacity: 1, duration: 1.2, ease: 'power2.inOut' })
+    .to('.logo-btn',    { opacity: 1, duration: 0.5, ease: 'power3.out' }, 1.1)
+    .to('.hero-logo',   { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.2)
     .to('.nav-links, .lang-toggle, .hamburger', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 1.2)
-    .to('.hero-tagline', { clipPath: 'inset(0 0% 0 0)', duration: 1.0, ease: 'power3.inOut' }, 1.5)
-    .call(startHeroSlideshow);
+    .to('.hero-tagline', { clipPath: 'inset(0 0% 0 0)', duration: 1.0, ease: 'power3.inOut' }, 1.5);
+
+  // Ken Burns continuo sobre imagen única
+  gsap.to('.hero-img', { scale: 1.10, duration: 28, ease: 'none' });
 
   // ── REVEALS CON SCROLL ──
   const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');
@@ -281,7 +282,7 @@ window.addEventListener('load', () => {
   document.querySelectorAll('[data-parallax]').forEach(el => {
     const speed = parseFloat(el.dataset.parallax);
     gsap.to(el, {
-      yPercent: speed * 28,
+      yPercent: speed * 50,
       ease: 'none',
       scrollTrigger: {
         trigger: el.parentElement,
@@ -291,11 +292,11 @@ window.addEventListener('load', () => {
     });
   });
 
-  // ── OBRAS HERO parallax ──
+  // ── OBRAS HERO parallax (OB-02) ──
   gsap.fromTo('.obras-hero-img',
-    { yPercent: -10 },
+    { yPercent: -18 },
     {
-      yPercent: 10,
+      yPercent: 18,
       ease: 'none',
       scrollTrigger: {
         trigger: '.obras-hero',
@@ -306,7 +307,7 @@ window.addEventListener('load', () => {
   );
 
   // ── OBRAS CARDS stagger ──
-  gsap.from('.obra-card', {
+  gsap.from('.obra-card:not(.obra-extra)', {
     opacity: 0, y: 50, duration: 0.8, stagger: 0.08, ease: 'power3.out',
     scrollTrigger: { trigger: '.obras-grid', start: 'top 85%', toggleActions: 'play none none none' }
   });

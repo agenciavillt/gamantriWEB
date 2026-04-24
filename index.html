@@ -6,7 +6,7 @@
   <title>GAMANTRI — Fine Art Photography</title>
 
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="preload" href="shared/assets/images/1-H-F.jpg" as="image" />
+  <link rel="preload" href="shared/assets/images/2-H-C.jpg" as="image" />
 
   <link rel="stylesheet" href="shared/styles.css" />
 
@@ -60,8 +60,7 @@
 
   <!-- ══════════════ HERO ══════════════ -->
   <section id="hero">
-    <div class="hero-img-1" style="background-image:url('shared/assets/images/1-H-F.jpg')"></div>
-    <div class="hero-img-2" style="background-image:url('shared/assets/images/2-H-C.jpg')"></div>
+    <div class="hero-img" style="background-image:url('shared/assets/images/2-H-C.jpg')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <img class="hero-logo" src="shared/assets/logo-horizontal-blanco.png" alt="Gamantri" />
@@ -76,8 +75,8 @@
 
   <!-- ══════════════ AFTER HERO ══════════════ -->
   <section id="after-hero">
-    <video class="after-hero-video" autoplay muted loop playsinline data-parallax="-0.2">
-      <source src="shared/assets/videos/After HERO.mp4" type="video/mp4" />
+    <video class="after-hero-video" autoplay muted loop playsinline data-parallax="-0.4">
+      <source src="shared/assets/videos/After HERO 2.mp4" type="video/mp4" />
     </video>
   </section>
 
@@ -105,8 +104,12 @@
     <div class="obras-grid">
 
       <div class="obra-card" onclick="openObra(0)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/1-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/2-O-Mu-Z.jpg')"></div>
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/1-O-Mu-F.jpg" alt="La Cárcel" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/2-O-Mu-Z.jpg" alt="La Cárcel zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">La Cárcel</div>
           <div class="obra-card-meta">
@@ -116,8 +119,12 @@
       </div>
 
       <div class="obra-card" onclick="openObra(1)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/4-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/5-O-Mu-Z.jpg')"></div>
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/4-O-Mu-F.jpg" alt="Llaima en Nubes" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/5-O-Mu-Z.jpg" alt="Llaima en Nubes zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">Llaima en Nubes</div>
           <div class="obra-card-meta">
@@ -127,8 +134,12 @@
       </div>
 
       <div class="obra-card" onclick="openObra(2)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/7-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/8-O-Mu-Z.jpg')"></div>
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/7-O-Mu-F.jpg" alt="Los Cuatro Elementos" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/8-O-Mu-Z.jpg" alt="Los Cuatro Elementos zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">Los Cuatro Elementos</div>
           <div class="obra-card-meta">
@@ -137,9 +148,13 @@
         </div>
       </div>
 
-      <div class="obra-card" onclick="openObra(3)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/10-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/11-O-Mu-Z.jpg')"></div>
+      <div class="obra-card obra-extra" onclick="openObra(3)">
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/10-O-Mu-F.jpg" alt="Era Leo" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/11-O-Mu-Z.jpg" alt="Era Leo zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">Era Leo</div>
           <div class="obra-card-meta">
@@ -148,9 +163,13 @@
         </div>
       </div>
 
-      <div class="obra-card" onclick="openObra(4)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/13-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/14-O-Mu-Z.jpg')"></div>
+      <div class="obra-card obra-extra" onclick="openObra(4)">
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/13-O-Mu-F.jpg" alt="Nodriza" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/14-O-Mu-Z.jpg" alt="Nodriza zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">Nodriza</div>
           <div class="obra-card-meta">
@@ -159,9 +178,13 @@
         </div>
       </div>
 
-      <div class="obra-card" onclick="openObra(5)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/16-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/17-O-Mu-Z.jpg')"></div>
+      <div class="obra-card obra-extra" onclick="openObra(5)">
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/16-O-Mu-F.jpg" alt="Caminos" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/17-O-Mu-Z.jpg" alt="Caminos zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">Caminos</div>
           <div class="obra-card-meta">
@@ -170,9 +193,13 @@
         </div>
       </div>
 
-      <div class="obra-card" onclick="openObra(6)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/19-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/20-O-Mu-Z.jpg')"></div>
+      <div class="obra-card obra-extra" onclick="openObra(6)">
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/19-O-Mu-F.jpg" alt="El Último Tango" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/20-O-Mu-Z.jpg" alt="El Último Tango zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">El Último Tango</div>
           <div class="obra-card-meta">
@@ -181,9 +208,13 @@
         </div>
       </div>
 
-      <div class="obra-card" onclick="openObra(7)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/22-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/23-O-Mu-Z.jpg')"></div>
+      <div class="obra-card obra-extra" onclick="openObra(7)">
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/22-O-Mu-F.jpg" alt="Penitentes" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/23-O-Mu-Z.jpg" alt="Penitentes zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">Penitentes</div>
           <div class="obra-card-meta">
@@ -192,9 +223,13 @@
         </div>
       </div>
 
-      <div class="obra-card" onclick="openObra(8)">
-        <div class="obra-img-base"  style="background-image:url('shared/assets/images/obras/25-O-Mu-F.jpg')"></div>
-        <div class="obra-img-hover" style="background-image:url('shared/assets/images/obras/26-O-Mu-Z.jpg')"></div>
+      <div class="obra-card obra-extra" onclick="openObra(8)">
+        <div class="obra-celda">
+          <div class="obra-img-wrap">
+            <img class="obra-img-base" src="shared/assets/images/obras/25-O-Mu-F.jpg" alt="Bloque Chileno" />
+            <img class="obra-img-hover" src="shared/assets/images/obras/26-O-Mu-Z.jpg" alt="Bloque Chileno zoom" />
+          </div>
+        </div>
         <div class="obra-card-info">
           <div class="obra-card-title">Bloque Chileno</div>
           <div class="obra-card-meta">
@@ -205,14 +240,14 @@
 
     </div>
 
-    <div class="obras-footer">
-      <button class="btn-outline btn-accent-outline" onclick="openOverlay('overlay-encargo')"
-              data-es="Obra personalizada" data-en="Custom artwork">Obra personalizada</button>
+    <div class="obras-footer-row">
+      <button class="btn-ver-mas" id="btn-ver-mas" onclick="toggleObras()"
+              data-es="VER MÁS OBRAS >>>" data-en="SEE MORE WORKS >>>">VER MÁS OBRAS >>></button>
+      <button class="btn-obra-personalizada" onclick="openOverlayEncargo('personalizada')"
+              data-es="OBRA PERSONALIZADA >>>" data-en="CUSTOM ARTWORK >>>">OBRA PERSONALIZADA >>></button>
     </div>
 
   </section>
-
-  <div class="section-sep"></div>
 
   <!-- ══════════════ CURSOS ══════════════ -->
   <section id="cursos">
@@ -247,8 +282,6 @@
     </div>
 
   </section>
-
-  <div class="section-sep" style="transform:scaleX(-1)"></div>
 
   <!-- ══════════════ SERVICIOS ══════════════ -->
   <section id="servicios">
@@ -288,49 +321,47 @@
        data-es="Clientes &amp; Colaboraciones" data-en="Clients &amp; Collaborations">Clientes &amp; Colaboraciones</p>
     <div class="marquee-track">
       <div class="marquee-inner">
-        <img class="logo-client" src="shared/assets/logos-clientes/1. The north face.png" alt="The North Face" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/2. Mammut.png" alt="Mammut" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/3. patagonia.png" alt="Patagonia" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/4. La Sportiva.png" alt="La Sportiva" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/5. Mapo Tapo.png" alt="Mapo Tapo" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/6. Andesgear.png" alt="Andesgear" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/7. Austerra.png" alt="Austerra" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/8. Cordis.png" alt="Cordis" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/9. Roxtar.png" alt="Roxtar" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/10. Dimm Chile.png" alt="Dimm Chile" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/11. DiMM Andes.png" alt="DiMM Andes" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/12. SelKN.png" alt="SelKN" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/13. GREMM.png" alt="GREMM" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/14. Chileclimbers.png" alt="Chileclimbers" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/15. Muro Mall Sport.png" alt="Muro Mall Sport" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/17. RAMS.png" alt="RAMS" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/18. GOHARD.png" alt="GOHARD" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/20. EL OCHO.png" alt="EL OCHO" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/21. TCH.png" alt="TCH" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/22. SIRAWE.png" alt="SIRAWE" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/Palestras.png" alt="Palestras" loading="lazy">
-        <!-- duplicado para loop continuo -->
-        <img class="logo-client" src="shared/assets/logos-clientes/1. The north face.png" alt="The North Face" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/2. Mammut.png" alt="Mammut" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/3. patagonia.png" alt="Patagonia" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/4. La Sportiva.png" alt="La Sportiva" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/5. Mapo Tapo.png" alt="Mapo Tapo" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/6. Andesgear.png" alt="Andesgear" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/7. Austerra.png" alt="Austerra" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/8. Cordis.png" alt="Cordis" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/9. Roxtar.png" alt="Roxtar" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/10. Dimm Chile.png" alt="Dimm Chile" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/11. DiMM Andes.png" alt="DiMM Andes" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/12. SelKN.png" alt="SelKN" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/13. GREMM.png" alt="GREMM" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/14. Chileclimbers.png" alt="Chileclimbers" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/15. Muro Mall Sport.png" alt="Muro Mall Sport" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/17. RAMS.png" alt="RAMS" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/18. GOHARD.png" alt="GOHARD" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/20. EL OCHO.png" alt="EL OCHO" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/21. TCH.png" alt="TCH" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/22. SIRAWE.png" alt="SIRAWE" loading="lazy">
-        <img class="logo-client" src="shared/assets/logos-clientes/Palestras.png" alt="Palestras" loading="lazy">
+        <img class="logo-client" src="shared/assets/logos-footer/1-TNF.png" alt="The North Face" loading="lazy" onclick="openFooterFoto('1-TNF')">
+        <img class="logo-client" src="shared/assets/logos-footer/2-M.png" alt="2-M" loading="lazy" onclick="openFooterFoto('2-M')">
+        <img class="logo-client" src="shared/assets/logos-footer/3-P.png" alt="3-P" loading="lazy" onclick="openFooterFoto('3-P')">
+        <img class="logo-client" src="shared/assets/logos-footer/4-LS.png" alt="4-LS" loading="lazy" onclick="openFooterFoto('4-LS')">
+        <img class="logo-client" src="shared/assets/logos-footer/5-MT.png" alt="5-MT" loading="lazy" onclick="openFooterFoto('5-MT')">
+        <img class="logo-client" src="shared/assets/logos-footer/6-AG.png" alt="6-AG" loading="lazy" onclick="openFooterFoto('6-AG')">
+        <img class="logo-client" src="shared/assets/logos-footer/7-A.png" alt="7-A" loading="lazy" onclick="openFooterFoto('7-A')">
+        <img class="logo-client" src="shared/assets/logos-footer/8-C.png" alt="8-C" loading="lazy" onclick="openFooterFoto('8-C')">
+        <img class="logo-client" src="shared/assets/logos-footer/9-R.png" alt="9-R" loading="lazy" onclick="openFooterFoto('9-R')">
+        <img class="logo-client" src="shared/assets/logos-footer/10-DC.png" alt="10-DC" loading="lazy" onclick="openFooterFoto('10-DC')">
+        <img class="logo-client" src="shared/assets/logos-footer/11-DA.png" alt="11-DA" loading="lazy" onclick="openFooterFoto('11-DA')">
+        <img class="logo-client" src="shared/assets/logos-footer/12-S.png" alt="12-S" loading="lazy" onclick="openFooterFoto('12-S')">
+        <img class="logo-client" src="shared/assets/logos-footer/13-G.png" alt="13-G" loading="lazy" onclick="openFooterFoto('13-G')">
+        <img class="logo-client" src="shared/assets/logos-footer/14-CC.png" alt="14-CC" loading="lazy" onclick="openFooterFoto('14-CC')">
+        <img class="logo-client" src="shared/assets/logos-footer/15-G.png" alt="15-G" loading="lazy" onclick="openFooterFoto('15-G')">
+        <img class="logo-client" src="shared/assets/logos-footer/16-OC.png" alt="16-OC" loading="lazy" onclick="openFooterFoto('16-OC')">
+        <img class="logo-client" src="shared/assets/logos-footer/17-TCH.png" alt="17-TCH" loading="lazy" onclick="openFooterFoto('17-TCH')">
+        <img class="logo-client" src="shared/assets/logos-footer/18-S.png" alt="18-S" loading="lazy" onclick="openFooterFoto('18-S')">
+        <img class="logo-client" src="shared/assets/logos-footer/19-M.png" alt="19-M" loading="lazy" onclick="openFooterFoto('19-M')">
+        <img class="logo-client" src="shared/assets/logos-footer/20-RM.png" alt="20-RM" loading="lazy" onclick="openFooterFoto('20-RM')">
+        <!-- Duplicado para loop continuo -->
+        <img class="logo-client" src="shared/assets/logos-footer/1-TNF.png" alt="The North Face" loading="lazy" onclick="openFooterFoto('1-TNF')">
+        <img class="logo-client" src="shared/assets/logos-footer/2-M.png" alt="2-M" loading="lazy" onclick="openFooterFoto('2-M')">
+        <img class="logo-client" src="shared/assets/logos-footer/3-P.png" alt="3-P" loading="lazy" onclick="openFooterFoto('3-P')">
+        <img class="logo-client" src="shared/assets/logos-footer/4-LS.png" alt="4-LS" loading="lazy" onclick="openFooterFoto('4-LS')">
+        <img class="logo-client" src="shared/assets/logos-footer/5-MT.png" alt="5-MT" loading="lazy" onclick="openFooterFoto('5-MT')">
+        <img class="logo-client" src="shared/assets/logos-footer/6-AG.png" alt="6-AG" loading="lazy" onclick="openFooterFoto('6-AG')">
+        <img class="logo-client" src="shared/assets/logos-footer/7-A.png" alt="7-A" loading="lazy" onclick="openFooterFoto('7-A')">
+        <img class="logo-client" src="shared/assets/logos-footer/8-C.png" alt="8-C" loading="lazy" onclick="openFooterFoto('8-C')">
+        <img class="logo-client" src="shared/assets/logos-footer/9-R.png" alt="9-R" loading="lazy" onclick="openFooterFoto('9-R')">
+        <img class="logo-client" src="shared/assets/logos-footer/10-DC.png" alt="10-DC" loading="lazy" onclick="openFooterFoto('10-DC')">
+        <img class="logo-client" src="shared/assets/logos-footer/11-DA.png" alt="11-DA" loading="lazy" onclick="openFooterFoto('11-DA')">
+        <img class="logo-client" src="shared/assets/logos-footer/12-S.png" alt="12-S" loading="lazy" onclick="openFooterFoto('12-S')">
+        <img class="logo-client" src="shared/assets/logos-footer/13-G.png" alt="13-G" loading="lazy" onclick="openFooterFoto('13-G')">
+        <img class="logo-client" src="shared/assets/logos-footer/14-CC.png" alt="14-CC" loading="lazy" onclick="openFooterFoto('14-CC')">
+        <img class="logo-client" src="shared/assets/logos-footer/15-G.png" alt="15-G" loading="lazy" onclick="openFooterFoto('15-G')">
+        <img class="logo-client" src="shared/assets/logos-footer/16-OC.png" alt="16-OC" loading="lazy" onclick="openFooterFoto('16-OC')">
+        <img class="logo-client" src="shared/assets/logos-footer/17-TCH.png" alt="17-TCH" loading="lazy" onclick="openFooterFoto('17-TCH')">
+        <img class="logo-client" src="shared/assets/logos-footer/18-S.png" alt="18-S" loading="lazy" onclick="openFooterFoto('18-S')">
+        <img class="logo-client" src="shared/assets/logos-footer/19-M.png" alt="19-M" loading="lazy" onclick="openFooterFoto('19-M')">
+        <img class="logo-client" src="shared/assets/logos-footer/20-RM.png" alt="20-RM" loading="lazy" onclick="openFooterFoto('20-RM')">
       </div>
     </div>
   </section>
@@ -353,7 +384,7 @@
        OVERLAYS
   ══════════════════════════════════════ -->
 
-  <!-- O-04: Obra detalle — 3 imágenes scroll + panel sticky -->
+  <!-- Obra detalle -->
   <div class="overlay" id="overlay-obra">
     <button class="overlay-close" onclick="closeOverlay('overlay-obra')">×</button>
     <div class="obra-modal-grid">
@@ -394,7 +425,7 @@
         <p class="obra-precio-grande" id="obra-modal-precio"></p>
 
         <button class="btn-encargar"
-                onclick="closeOverlay('overlay-obra'); openOverlay('overlay-encargo')">
+                onclick="closeOverlay('overlay-obra'); openOverlayEncargo('catalogo')">
           Encargar ahora
         </button>
       </div>
@@ -402,7 +433,7 @@
     </div>
   </div>
 
-  <!-- O-05: Formulario de encargo -->
+  <!-- Formulario de encargo -->
   <div class="overlay" id="overlay-encargo">
     <button class="overlay-close" onclick="closeOverlay('overlay-encargo')">×</button>
     <div class="form-overlay-inner">
@@ -414,7 +445,7 @@
          data-en="Customize the framing of an existing photograph or request a commissioned work.">
         Personaliza el enmarcado de una fotografía existente o solicita un trabajo comisionado.
       </p>
-      <form onsubmit="event.preventDefault(); closeOverlay('overlay-encargo'); openOverlay('overlay-ok')">
+      <form onsubmit="event.preventDefault(); closeOverlay('overlay-encargo'); openOverlay('overlay-ok-obras')">
         <div class="form-group">
           <label class="form-label" data-es="Nombre" data-en="Name">Nombre</label>
           <input class="form-input" type="text" required />
@@ -429,10 +460,10 @@
         </div>
         <div class="form-group">
           <label class="form-label" data-es="Tipo de encargo" data-en="Order type">Tipo de encargo</label>
-          <select class="form-select">
-            <option>Personalizar obra existente</option>
-            <option>Encargo con otra fotografía</option>
-            <option>Fotografía comisionada</option>
+          <select class="form-select" id="encargo-tipo">
+            <option value="catalogo">Encargar obra del catálogo</option>
+            <option value="personalizada">Personalizar obra existente</option>
+            <option value="comision">Fotografía comisionada</option>
           </select>
         </div>
         <div class="form-group">
@@ -474,7 +505,7 @@
     <div class="form-overlay-inner">
       <p class="form-step" data-es="Servicios · Briefing" data-en="Services · Briefing">Servicios · Briefing</p>
       <h2 class="form-title" data-es="Tu proyecto" data-en="Your project">Tu proyecto</h2>
-      <form onsubmit="event.preventDefault(); closeOverlay('overlay-briefing'); openOverlay('overlay-ok')">
+      <form onsubmit="event.preventDefault(); closeOverlay('overlay-briefing'); openOverlay('overlay-ok-servicios')">
         <div class="form-group">
           <label class="form-label" data-es="Nombre / Empresa" data-en="Name / Company">Nombre / Empresa</label>
           <input class="form-input" type="text" required />
@@ -512,21 +543,46 @@
     </div>
   </div>
 
-  <!-- Confirmación -->
-  <div class="overlay" id="overlay-ok">
-    <button class="overlay-close" onclick="closeOverlay('overlay-ok')">×</button>
+  <!-- Confirmación Obras (FM-02) -->
+  <div class="overlay" id="overlay-ok-obras">
+    <button class="overlay-close" onclick="closeOverlay('overlay-ok-obras')">×</button>
     <div class="confirm-screen">
       <div>
-        <p class="label" style="text-align:center;margin-bottom:16px" data-es="Enviado" data-en="Sent">Enviado</p>
-        <h2 class="confirm-title" data-es="Gracias" data-en="Thank you">Gracias</h2>
-        <p class="confirm-copy"
-           data-es="Cris va a revisar tu mensaje y te va a contactar pronto con una respuesta personalizada."
-           data-en="Cris will review your message and get back to you shortly with a personalized response.">
-          Cris va a revisar tu mensaje y te va a contactar pronto con una respuesta personalizada.
-        </p>
-        <button class="btn-outline" onclick="closeOverlay('overlay-ok')"
-                style="font-family:'Jura',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase"
-                data-es="Volver" data-en="Back">Volver</button>
+        <img src="shared/assets/logo-simbolo-blanco.png" alt="Gamantri" class="confirm-logo" />
+        <p class="label" style="text-align:center;margin-bottom:16px">Mensaje recibido</p>
+        <h2 class="confirm-title">Gracias</h2>
+        <p class="confirm-copy">Recibimos tu pedido. Nos comunicaremos contigo a la brevedad para coordinar la producción de tu obra.</p>
+        <button class="btn-outline" onclick="closeOverlay('overlay-ok-obras')"
+                style="font-family:'Jura',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmación Servicios (FM-03) -->
+  <div class="overlay" id="overlay-ok-servicios">
+    <button class="overlay-close" onclick="closeOverlay('overlay-ok-servicios')">×</button>
+    <div class="confirm-screen">
+      <div>
+        <img src="shared/assets/logo-simbolo-blanco.png" alt="Gamantri" class="confirm-logo" />
+        <p class="label" style="text-align:center;margin-bottom:16px">Mensaje recibido</p>
+        <h2 class="confirm-title">Gracias</h2>
+        <p class="confirm-copy">Recibimos tu propuesta. Nos comunicaremos contigo a la brevedad para coordinar los detalles del proyecto.</p>
+        <button class="btn-outline" onclick="closeOverlay('overlay-ok-servicios')"
+                style="font-family:'Jura',sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal foto de cliente/colaborador (FT-02) -->
+  <div class="overlay" id="footer-foto-modal">
+    <button class="overlay-close" onclick="closeOverlay('footer-foto-modal')">×</button>
+    <div class="footer-modal-inner">
+      <div class="footer-modal-passe">
+        <img id="footer-modal-foto" src="" alt="" />
       </div>
     </div>
   </div>
