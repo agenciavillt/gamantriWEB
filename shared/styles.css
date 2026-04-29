@@ -439,9 +439,6 @@ footer {
 .overlay.open { opacity: 1; pointer-events: all; }
 
 #footer-foto-modal { background: rgba(8,8,8,0.82); }
-#overlay-obra { overflow-y: hidden; }
-.obra-modal-scroll-wrap { height: 100vh; overflow-y: auto; }
-
 .overlay-close {
   position: fixed; top: 28px; right: 40px;
   background: none; border: none; color: var(--muted);
@@ -449,23 +446,6 @@ footer {
   transition: color 0.3s; font-weight: 300;
 }
 .overlay-close:hover { color: var(--text); }
-
-/* OB-04 — scroll hint en modal obra */
-.obra-scroll-hint {
-  position: fixed;
-  bottom: 40px; right: 0;
-  width: 420px; text-align: center;
-  font-size: 22px; color: var(--muted);
-  pointer-events: none;
-  opacity: 0; transition: opacity 0.4s;
-  animation: bounceHint 1.5s ease infinite;
-  z-index: 200;
-}
-.obra-scroll-hint.visible { opacity: 1; }
-@keyframes bounceHint {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(6px); }
-}
 
 /* ── OBRA MODAL — layout scroll izquierda + panel sticky derecha ── */
 .obra-modal-grid {
@@ -676,7 +656,6 @@ footer {
   .obra-modal-grid { grid-template-columns: 1fr; }
   .obra-modal-foto-item { height: 60vw; }
   .obra-modal-panel { position: static; height: auto; }
-  .obra-scroll-hint { display: none; }
   .modal-cris { grid-template-columns: 1fr; }
   .modal-foto { display: none; }
   header { padding: 20px 24px; }
