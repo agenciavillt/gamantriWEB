@@ -362,7 +362,7 @@
 
   <!-- Obra detalle -->
   <div class="overlay" id="overlay-obra">
-    <button class="overlay-close" onclick="closeOverlay('overlay-obra')">×</button>
+    <div class="overlay-close-wrap"><button class="overlay-close" onclick="closeOverlay('overlay-obra')">×</button></div>
     <div class="obra-modal-grid">
 
       <div class="obra-modal-fotos">
@@ -410,7 +410,7 @@
 
   <!-- Formulario de encargo -->
   <div class="overlay" id="overlay-encargo">
-    <button class="overlay-close" onclick="closeOverlay('overlay-encargo')">×</button>
+    <div class="overlay-close-wrap"><button class="overlay-close" onclick="closeOverlay('overlay-encargo')">×</button></div>
     <div class="form-overlay-inner">
       <p class="form-step" data-es="Obras · Encargo" data-en="Works · Order">Obras · Encargo</p>
       <h2 class="form-title"
@@ -454,7 +454,7 @@
 
   <!-- Sobre Cris -->
   <div class="overlay" id="overlay-cris">
-    <button class="overlay-close" onclick="closeOverlay('overlay-cris')">×</button>
+    <div class="overlay-close-wrap"><button class="overlay-close" onclick="closeOverlay('overlay-cris')">×</button></div>
     <div class="modal-cris">
       <div class="modal-foto"></div>
       <div class="modal-body">
@@ -476,7 +476,7 @@
 
   <!-- Briefing Servicios -->
   <div class="overlay" id="overlay-briefing">
-    <button class="overlay-close" onclick="closeOverlay('overlay-briefing')">×</button>
+    <div class="overlay-close-wrap"><button class="overlay-close" onclick="closeOverlay('overlay-briefing')">×</button></div>
     <div class="form-overlay-inner">
       <p class="form-step" data-es="Servicios · Briefing" data-en="Services · Briefing">Servicios · Briefing</p>
       <h2 class="form-title" data-es="Tu proyecto" data-en="Your project">Tu proyecto</h2>
@@ -520,7 +520,7 @@
 
   <!-- Confirmación Obras (FM-02) -->
   <div class="overlay" id="overlay-ok-obras">
-    <button class="overlay-close" onclick="closeOverlay('overlay-ok-obras')">×</button>
+    <div class="overlay-close-wrap"><button class="overlay-close" onclick="closeOverlay('overlay-ok-obras')">×</button></div>
     <div class="confirm-screen">
       <div>
         <img src="shared/assets/logo-simbolo-blanco.png" alt="Gamantri" class="confirm-logo" />
@@ -537,7 +537,7 @@
 
   <!-- Confirmación Servicios (FM-03) -->
   <div class="overlay" id="overlay-ok-servicios">
-    <button class="overlay-close" onclick="closeOverlay('overlay-ok-servicios')">×</button>
+    <div class="overlay-close-wrap"><button class="overlay-close" onclick="closeOverlay('overlay-ok-servicios')">×</button></div>
     <div class="confirm-screen">
       <div>
         <img src="shared/assets/logo-simbolo-blanco.png" alt="Gamantri" class="confirm-logo" />
@@ -554,12 +554,20 @@
 
   <!-- Modal foto de cliente/colaborador (FT-02) -->
   <div class="overlay" id="footer-foto-modal">
-    <button class="overlay-close" onclick="closeOverlay('footer-foto-modal')">×</button>
+    <div class="overlay-close-wrap"><button class="overlay-close" onclick="closeOverlay('footer-foto-modal')">×</button></div>
     <div class="footer-modal-inner">
       <div class="footer-modal-passe">
         <img id="footer-modal-foto" src="" alt="" />
       </div>
     </div>
+  </div>
+
+  <!-- Scroll hint obras (fuera del overlay para evitar backdrop-filter) -->
+  <div class="obra-scroll-hint" id="obra-scroll-hint" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+    <span>Scroll</span>
   </div>
 
 </body>

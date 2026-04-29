@@ -439,13 +439,53 @@ footer {
 .overlay.open { opacity: 1; pointer-events: all; }
 
 #footer-foto-modal { background: rgba(8,8,8,0.82); }
+.overlay-close-wrap {
+  position: sticky;
+  top: 0;
+  height: 0;
+  overflow: visible;
+  text-align: right;
+  z-index: 200;
+}
 .overlay-close {
-  position: fixed; top: 28px; right: 40px;
+  position: relative;
+  top: 28px;
+  right: 40px;
+  display: inline-block;
   background: none; border: none; color: var(--muted);
-  font-size: 28px; cursor: pointer; z-index: 200;
+  font-size: 28px; cursor: pointer;
   transition: color 0.3s; font-weight: 300;
 }
 .overlay-close:hover { color: var(--text); }
+
+/* ── SCROLL HINT obras ── */
+.obra-scroll-hint {
+  position: fixed;
+  bottom: 48px;
+  left: calc(50% - 210px);
+  transform: translateX(-50%);
+  z-index: 700;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-family: 'Jura', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.obra-scroll-hint.visible { display: flex; }
+.obra-scroll-hint.fade-out { opacity: 0; }
+.obra-scroll-hint svg {
+  animation: scrollBounce 1.4s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(7px); }
+}
 
 /* ── OBRA MODAL — layout scroll izquierda + panel sticky derecha ── */
 .obra-modal-grid {

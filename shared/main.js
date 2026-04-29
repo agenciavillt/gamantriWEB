@@ -189,6 +189,7 @@ function openObra(i) {
 
   document.getElementById('overlay-obra').scrollTop = 0;
   openOverlay('overlay-obra');
+  showScrollHint();
 }
 
 // ── ENCARGO CON CONTEXTO (OB-05) ──
@@ -214,12 +215,29 @@ function openFooterFoto(codigo) {
   openOverlay('footer-foto-modal');
 }
 
+// ── SCROLL HINT obras ──
+function showScrollHint() {
+  const hint = document.getElementById('obra-scroll-hint');
+  const overlay = document.getElementById('overlay-obra');
+  hint.classList.remove('fade-out');
+  hint.classList.add('visible');
+  overlay.addEventListener('scroll', function hideHint() {
+    hint.classList.add('fade-out');
+    setTimeout(() => hint.classList.remove('visible', 'fade-out'), 400);
+    overlay.removeEventListener('scroll', hideHint);
+  }, { once: true });
+}
+
 // ── OVERLAYS ──
 function openOverlay(id) {
   document.getElementById(id).classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 function closeOverlay(id) {
+  if (id === 'overlay-obra') {
+    const hint = document.getElementById('obra-scroll-hint');
+    hint.classList.remove('visible', 'fade-out');
+  }
   document.getElementById(id).classList.remove('open');
   const anyOpen = document.querySelector('.overlay.open');
   if (!anyOpen) document.body.style.overflow = '';
