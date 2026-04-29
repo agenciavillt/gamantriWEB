@@ -439,6 +439,8 @@ footer {
 .overlay.open { opacity: 1; pointer-events: all; }
 
 #footer-foto-modal { background: rgba(8,8,8,0.82); }
+#overlay-obra { overflow-y: hidden; }
+.obra-modal-scroll-wrap { height: 100vh; overflow-y: auto; }
 
 .overlay-close {
   position: fixed; top: 28px; right: 40px;

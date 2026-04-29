@@ -187,7 +187,8 @@ function openObra(i) {
     }
   }).join('');
 
-  document.getElementById('overlay-obra').scrollTop = 0;
+  const scrollWrap = document.querySelector('.obra-modal-scroll-wrap');
+  if (scrollWrap) scrollWrap.scrollTop = 0;
   openOverlay('overlay-obra');
 
   const hint = document.getElementById('obra-scroll-hint');
@@ -224,6 +225,10 @@ function openOverlay(id) {
 }
 function closeOverlay(id) {
   document.getElementById(id).classList.remove('open');
+  if (id === 'overlay-obra') {
+    const hint = document.getElementById('obra-scroll-hint');
+    if (hint) hint.classList.remove('visible');
+  }
   const anyOpen = document.querySelector('.overlay.open');
   if (!anyOpen) document.body.style.overflow = '';
 }
@@ -233,7 +238,8 @@ document.querySelectorAll('.overlay').forEach(o => {
   });
 });
 
-document.getElementById('overlay-obra').addEventListener('scroll', () => {
+const obraScrollWrap = document.querySelector('.obra-modal-scroll-wrap');
+if (obraScrollWrap) obraScrollWrap.addEventListener('scroll', () => {
   const hint = document.getElementById('obra-scroll-hint');
   if (hint) hint.classList.remove('visible');
 }, { passive: true });
