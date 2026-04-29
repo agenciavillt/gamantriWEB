@@ -6,7 +6,6 @@
   <title>GAMANTRI — Fine Art Photography</title>
 
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="preload" href="shared/assets/images/2-H-C.jpg" as="image" />
 
   <link rel="stylesheet" href="shared/styles.css" />
 
@@ -60,7 +59,9 @@
 
   <!-- ══════════════ HERO ══════════════ -->
   <section id="hero">
-    <div class="hero-img" style="background-image:url('shared/assets/images/2-H-C.jpg')"></div>
+    <video class="hero-img" autoplay muted loop playsinline>
+      <source src="shared/assets/videos/HERO_3.mp4" type="video/mp4" />
+    </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <img class="hero-logo" src="shared/assets/logo-horizontal-blanco.png" alt="Gamantri" />
@@ -71,13 +72,6 @@
       </p>
     </div>
     <div class="scroll-indicator">Scroll</div>
-  </section>
-
-  <!-- ══════════════ AFTER HERO ══════════════ -->
-  <section id="after-hero">
-    <video class="after-hero-video" autoplay muted loop playsinline data-parallax="-0.4">
-      <source src="shared/assets/videos/After HERO 2.mp4" type="video/mp4" />
-    </video>
   </section>
 
   <!-- ══════════════ OBRAS ══════════════ -->
@@ -108,12 +102,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/1-O-Mu-F.jpg" alt="La Cárcel" />
             <img class="obra-img-hover" src="shared/assets/images/obras/2-O-Mu-Z.jpg" alt="La Cárcel zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">La Cárcel</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            <div class="obra-label">
+              <div class="obra-card-title">La Cárcel</div>
+              <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            </div>
           </div>
         </div>
       </div>
@@ -123,12 +115,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/4-O-Mu-F.jpg" alt="Llaima en Nubes" />
             <img class="obra-img-hover" src="shared/assets/images/obras/5-O-Mu-Z.jpg" alt="Llaima en Nubes zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">Llaima en Nubes</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="2 disponibles" data-en="2 available">2 disponibles</span>
+            <div class="obra-label">
+              <div class="obra-card-title">Llaima en Nubes</div>
+              <span class="obra-badge" data-es="2 disponibles" data-en="2 available">2 disponibles</span>
+            </div>
           </div>
         </div>
       </div>
@@ -138,12 +128,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/7-O-Mu-F.jpg" alt="Los Cuatro Elementos" />
             <img class="obra-img-hover" src="shared/assets/images/obras/8-O-Mu-Z.jpg" alt="Los Cuatro Elementos zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">Los Cuatro Elementos</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="2 disponibles" data-en="2 available">2 disponibles</span>
+            <div class="obra-label">
+              <div class="obra-card-title">Los Cuatro Elementos</div>
+              <span class="obra-badge" data-es="2 disponibles" data-en="2 available">2 disponibles</span>
+            </div>
           </div>
         </div>
       </div>
@@ -153,12 +141,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/10-O-Mu-F.jpg" alt="Era Leo" />
             <img class="obra-img-hover" src="shared/assets/images/obras/11-O-Mu-Z.jpg" alt="Era Leo zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">Era Leo</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            <div class="obra-label">
+              <div class="obra-card-title">Era Leo</div>
+              <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            </div>
           </div>
         </div>
       </div>
@@ -168,12 +154,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/13-O-Mu-F.jpg" alt="Nodriza" />
             <img class="obra-img-hover" src="shared/assets/images/obras/14-O-Mu-Z.jpg" alt="Nodriza zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">Nodriza</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            <div class="obra-label">
+              <div class="obra-card-title">Nodriza</div>
+              <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            </div>
           </div>
         </div>
       </div>
@@ -183,12 +167,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/16-O-Mu-F.jpg" alt="Caminos" />
             <img class="obra-img-hover" src="shared/assets/images/obras/17-O-Mu-Z.jpg" alt="Caminos zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">Caminos</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            <div class="obra-label">
+              <div class="obra-card-title">Caminos</div>
+              <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            </div>
           </div>
         </div>
       </div>
@@ -198,12 +180,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/19-O-Mu-F.jpg" alt="El Último Tango" />
             <img class="obra-img-hover" src="shared/assets/images/obras/20-O-Mu-Z.jpg" alt="El Último Tango zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">El Último Tango</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="1 disponible" data-en="1 available">1 disponible</span>
+            <div class="obra-label">
+              <div class="obra-card-title">El Último Tango</div>
+              <span class="obra-badge" data-es="1 disponible" data-en="1 available">1 disponible</span>
+            </div>
           </div>
         </div>
       </div>
@@ -213,12 +193,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/22-O-Mu-F.jpg" alt="Penitentes" />
             <img class="obra-img-hover" src="shared/assets/images/obras/23-O-Mu-Z.jpg" alt="Penitentes zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">Penitentes</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            <div class="obra-label">
+              <div class="obra-card-title">Penitentes</div>
+              <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            </div>
           </div>
         </div>
       </div>
@@ -228,12 +206,10 @@
           <div class="obra-img-wrap">
             <img class="obra-img-base" src="shared/assets/images/obras/25-O-Mu-F.jpg" alt="Bloque Chileno" />
             <img class="obra-img-hover" src="shared/assets/images/obras/26-O-Mu-Z.jpg" alt="Bloque Chileno zoom" />
-          </div>
-        </div>
-        <div class="obra-card-info">
-          <div class="obra-card-title">Bloque Chileno</div>
-          <div class="obra-card-meta">
-            <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            <div class="obra-label">
+              <div class="obra-card-title">Bloque Chileno</div>
+              <span class="obra-badge" data-es="3 disponibles" data-en="3 available">3 disponibles</span>
+            </div>
           </div>
         </div>
       </div>
@@ -251,6 +227,12 @@
 
   <!-- ══════════════ CURSOS ══════════════ -->
   <section id="cursos">
+
+    <div class="cursos-video">
+      <video autoplay muted loop playsinline>
+        <source src="shared/assets/videos/CURSOS_2.mp4" type="video/mp4" />
+      </video>
+    </div>
 
     <div class="cursos-text">
       <p class="label reveal"
@@ -273,12 +255,6 @@
            data-es="&rsaquo;&rsaquo; Ver Cursos"
            data-en="&rsaquo;&rsaquo; View Courses">&rsaquo;&rsaquo; Ver Cursos</a>
       </div>
-    </div>
-
-    <div class="cursos-video">
-      <video autoplay muted loop playsinline>
-        <source src="shared/assets/videos/CURSOS_1_web.mp4" type="video/mp4" />
-      </video>
     </div>
 
   </section>
@@ -387,6 +363,7 @@
   <!-- Obra detalle -->
   <div class="overlay" id="overlay-obra">
     <button class="overlay-close" onclick="closeOverlay('overlay-obra')">×</button>
+    <div class="obra-scroll-hint" id="obra-scroll-hint">↓</div>
     <div class="obra-modal-grid">
 
       <div class="obra-modal-fotos">

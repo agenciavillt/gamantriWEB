@@ -44,7 +44,7 @@ const obras = [
     imgFoto: 'shared/assets/images/obras/6-O-O.jpg',
     imgZoom: 'shared/assets/images/obras/5-O-Mu-Z.jpg',
     imgFull: 'shared/assets/images/obras/4-O-Mu-F.jpg',
-    descripcion: 'Episodio púnico y poético de un volcán icónico, que luego de muchas visitas se mostró de una manera irrepetible: vestido de nubes por tan solo unos breves minutos.',
+    descripcion: 'Episodio único y poético de un volcán icónico, que luego de muchas visitas se mostró de una manera irrepetible: vestido de nubes por tan solo unos breves minutos.',
     series: [
       { precio: '350 USD', copia: '1/3', vendida: true },
       { precio: '680 USD', copia: '2/3', vendida: false, destacada: true },
@@ -121,7 +121,7 @@ const obras = [
     imgFoto: 'shared/assets/images/obras/21-O-O.jpg',
     imgZoom: 'shared/assets/images/obras/20-O-Mu-Z.jpg',
     imgFull: 'shared/assets/images/obras/19-O-Mu-F.jpg',
-    descripcion: 'Entre las paredes de la mina en el Cajón del Maipo aparece este icónico multilargo. La foto muestra el segundo ascenso de dos de los mejores escaladores de Chile, Ronny Escobar y Benja Vargas.',
+    descripcion: 'Entre las paredes de la mina en el Cajón del Maipo aparece este icónico multilargo. Captura del primer ascenso masculino, de dos de los mejores escaladores de Chile, Ronny Escobar y Benja Vargas para el Documental homónimo.',
     series: [
       { precio: '250 USD', copia: '1/3', vendida: true },
       { precio: '380 USD', copia: '2/3', vendida: true },
@@ -136,7 +136,7 @@ const obras = [
     imgFoto: 'shared/assets/images/obras/24-O-O.jpg',
     imgZoom: 'shared/assets/images/obras/23-O-Mu-Z.jpg',
     imgFull: 'shared/assets/images/obras/22-O-Mu-F.jpg',
-    descripcion: 'El cerro El Plomo, el más alto de la Región Metropolitana de Chile. Esta imagen muestra unos penitentes casi diseñados en su campamento base, el Federación, a 5424 msnm.',
+    descripcion: 'El cerro El Plomo, el más alto de la región de Santiago, con su historia Inca y su cumbre de 5424 msnm. Esta imagen muestra unos penitentes casi diseñados en su campamento base, el Federación.',
     series: [
       { precio: '350 USD', copia: '1/3', vendida: false, destacada: true },
       { precio: '680 USD', copia: '2/3', vendida: false },
@@ -151,7 +151,7 @@ const obras = [
     imgFoto: 'shared/assets/images/obras/27-O-O.jpg',
     imgZoom: 'shared/assets/images/obras/26-O-Mu-Z.jpg',
     imgFull: 'shared/assets/images/obras/25-O-Mu-F.jpg',
-    descripcion: 'Composición de 4 fotografías de lugares icónicos de Chile (Cajón del Maipo, Valle de los Cóndores, Cerro Castillo y Cochamó) que conecta a los escaladores en una diagonal ascendente.',
+    descripcion: 'Composición meticulosamente diseñada de 4 sectores icónicos de Chile (Cajón del Maipo, Valle de los Cóndores, Cerro Castillo y Cochamó) en una formación armónica que unifica a las rocas y a los escaladores en una diagonal ascendente.',
     series: [
       { precio: '480 USD', copia: '1/3', vendida: false, destacada: true },
       { precio: '760 USD', copia: '2/3', vendida: false },
@@ -189,6 +189,9 @@ function openObra(i) {
 
   document.getElementById('overlay-obra').scrollTop = 0;
   openOverlay('overlay-obra');
+
+  const hint = document.getElementById('obra-scroll-hint');
+  if (hint) hint.classList.add('visible');
 }
 
 // ── ENCARGO CON CONTEXTO (OB-05) ──
@@ -229,6 +232,11 @@ document.querySelectorAll('.overlay').forEach(o => {
     if (e.target === o) closeOverlay(o.id);
   });
 });
+
+document.getElementById('overlay-obra').addEventListener('scroll', () => {
+  const hint = document.getElementById('obra-scroll-hint');
+  if (hint) hint.classList.remove('visible');
+}, { passive: true });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     document.querySelectorAll('.overlay.open').forEach(o => closeOverlay(o.id));
@@ -240,8 +248,8 @@ window.addEventListener('load', () => {
   if (typeof gsap === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
-  // ── HERO INTRO + KEN BURNS (HR-01) ──
-  gsap.set('.hero-img',   { opacity: 0, scale: 1.0 });
+  // ── HERO INTRO ──
+  gsap.set('.hero-img',   { opacity: 0 });
   gsap.set('.hero-logo',  { y: 80 });
   gsap.set('.hero-tagline', { clipPath: 'inset(0 100% 0 0)', opacity: 1 });
 
@@ -251,9 +259,6 @@ window.addEventListener('load', () => {
     .to('.hero-logo',   { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.2)
     .to('.nav-links, .lang-toggle, .hamburger', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 1.2)
     .to('.hero-tagline', { clipPath: 'inset(0 0% 0 0)', duration: 1.0, ease: 'power3.inOut' }, 1.5);
-
-  // Ken Burns continuo sobre imagen única
-  gsap.to('.hero-img', { scale: 1.10, duration: 28, ease: 'none' });
 
   // ── REVEALS CON SCROLL ──
   const revealEls = document.querySelectorAll('.reveal:not(#hero .reveal)');
