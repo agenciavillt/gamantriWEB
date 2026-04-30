@@ -426,6 +426,26 @@ footer {
 .footer-copy { font-size: 15px; color: var(--stone); letter-spacing: 0.08em; }
 
 /* ══════════════════════════════════════
+   LOADER
+══════════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #080808;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.7s ease;
+}
+#loader.fade-out { opacity: 0; pointer-events: none; }
+#loader img {
+  width: 72px; height: auto;
+  clip-path: inset(100% 0 0 0);
+  animation: loaderReveal 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+@keyframes loaderReveal {
+  from { clip-path: inset(100% 0 0 0); }
+  to   { clip-path: inset(0% 0 0 0); }
+}
+
+/* ══════════════════════════════════════
    OVERLAYS
 ══════════════════════════════════════ */
 .overlay {

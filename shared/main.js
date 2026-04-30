@@ -255,7 +255,7 @@ document.addEventListener('keydown', e => {
 });
 
 // ── GSAP + ScrollTrigger ──
-window.addEventListener('load', () => {
+function initHeroAnimations() {
   if (typeof gsap === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
@@ -327,6 +327,20 @@ window.addEventListener('load', () => {
     opacity: 0, y: 50, duration: 0.8, stagger: 0.08, ease: 'power3.out',
     scrollTrigger: { trigger: '.obras-grid', start: 'top 85%', toggleActions: 'play none none none' }
   });
+}
+
+window.addEventListener('load', () => {
+  const REVEAL_MS = 2000; // 300ms delay + 1500ms animación + 200ms pausa
+  const wait = Math.max(0, REVEAL_MS - performance.now());
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+      loader.classList.add('fade-out');
+      setTimeout(() => { loader.remove(); initHeroAnimations(); }, 700);
+    } else {
+      initHeroAnimations();
+    }
+  }, wait);
 });
 
 // ── HEADER HIDE/SHOW ──
