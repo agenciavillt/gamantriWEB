@@ -733,7 +733,11 @@ footer {
 
 @media (max-width: 768px) {
   .obras-grid { grid-template-columns: 1fr; }
+  .obras-hero { min-height: 380px; }
   .obras-hero-img { background-position: 70% center; }
+  .obras-hero-text { bottom: 28px; left: 24px; right: 24px; gap: 12px; }
+  .obras-hero-title { font-size: 30px; line-height: 1.1; }
+  .obras-hero-copy { font-size: 14px; line-height: 1.6; max-width: 100%; }
 }
 
 @media (max-width: 900px) {
