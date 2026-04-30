@@ -439,6 +439,15 @@ footer {
 .overlay.open { opacity: 1; pointer-events: all; }
 
 #footer-foto-modal { background: rgba(8,8,8,0.82); }
+.overlay-close {
+  position: fixed; top: 28px; right: 40px;
+  background: none; border: none; color: var(--muted);
+  font-size: 28px; cursor: pointer; z-index: 200;
+  transition: color 0.3s; font-weight: 300;
+}
+.overlay-close:hover { color: var(--text); }
+
+/* Solo overlay-obra scrollea mucho — necesita wrapper sticky para que la cruz no desaparezca */
 .overlay-close-wrap {
   position: sticky;
   top: 0;
@@ -447,16 +456,12 @@ footer {
   text-align: right;
   z-index: 200;
 }
-.overlay-close {
+#overlay-obra .overlay-close {
   position: relative;
   top: 28px;
   right: 40px;
   display: inline-block;
-  background: none; border: none; color: var(--muted);
-  font-size: 28px; cursor: pointer;
-  transition: color 0.3s; font-weight: 300;
 }
-.overlay-close:hover { color: var(--text); }
 
 /* ── SCROLL HINT obras ── */
 .obra-scroll-hint {
