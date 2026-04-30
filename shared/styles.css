@@ -335,7 +335,7 @@ header.scrolled {
   color: var(--muted); margin-bottom: 20px;
 }
 .servicios-copy {
-  font-size: 18px; line-height: 1.85; color: var(--muted); max-width: 420px;
+  font-size: 18px; line-height: 1.85; color: rgba(242,237,232,0.9); max-width: 420px;
 }
 .servicios-right { flex-shrink: 0; padding-bottom: 4px; }
 .btn-servicios {
