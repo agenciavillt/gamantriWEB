@@ -329,9 +329,59 @@ function initHeroAnimations() {
   });
 }
 
+// ── LOADER PROGRESS ──
+(function() {
+  let current = 0;
+  let target = 0;
+  let raf = null;
+  let done = false;
+
+  function setTarget(pct) {
+    target = Math.max(target, Math.min(pct, done ? 100 : 92));
+  }
+
+  function tick() {
+    if (current < target) {
+      current = Math.min(target, current + 1);
+      const fill = document.getElementById('loader-bar-fill');
+      const pctEl = document.getElementById('loader-percent');
+      if (fill) fill.style.width = current + '%';
+      if (pctEl) pctEl.textContent = current + '%';
+    }
+    if (current < 100) raf = requestAnimationFrame(tick);
+  }
+
+  function countLoaded() {
+    return performance.getEntriesByType('resource').filter(e => e.responseEnd > 0).length;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    let peakCount = Math.max(countLoaded(), 10);
+
+    if (window.PerformanceObserver) {
+      const obs = new PerformanceObserver(function() {
+        const loaded = countLoaded();
+        peakCount = Math.max(peakCount, loaded + 4);
+        setTarget(Math.round((loaded / peakCount) * 92));
+      });
+      obs.observe({ entryTypes: ['resource'] });
+    }
+
+    setTarget(5);
+    raf = requestAnimationFrame(tick);
+  });
+
+  window._completeLoader = function() {
+    done = true;
+    setTarget(100);
+    if (!raf) raf = requestAnimationFrame(tick);
+  };
+})();
+
 window.addEventListener('load', () => {
-  const REVEAL_MS = 2000; // 300ms delay + 1500ms animación + 200ms pausa
+  const REVEAL_MS = 2000;
   const wait = Math.max(0, REVEAL_MS - performance.now());
+  window._completeLoader();
   setTimeout(() => {
     const loader = document.getElementById('loader');
     if (loader) {
