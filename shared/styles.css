@@ -445,6 +445,19 @@ footer {
   from { clip-path: inset(100% 0 0 0); }
   to   { clip-path: inset(0% 0 0 0); }
 }
+#loader-bar {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: rgba(255,255,255,0.08);
+}
+#loader-bar-fill {
+  height: 100%; width: 0%;
+  background: #D4571E;
+  animation: loaderProgress 1.8s cubic-bezier(0.1, 0, 0.3, 1) 0.2s forwards;
+}
+@keyframes loaderProgress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
 
 /* ══════════════════════════════════════
    OVERLAYS
@@ -715,7 +728,8 @@ footer {
 /* ── Responsive ── */
 @media (max-width: 900px) {
   #cursos { grid-template-columns: 1fr; }
-  .cursos-video { aspect-ratio: 1 / 1; width: 100%; padding: 24px 0; }
+  .cursos-video { aspect-ratio: 1 / 1; width: 100%; padding: 24px 0; background-image: url('../assets/images/cursos/1-C-I.jpg'); background-size: cover; background-position: center; }
+  .cursos-video video { display: none; }
   .obras-grid { grid-template-columns: 1fr 1fr; }
   .obras-hero-text { flex-direction: column; gap: 24px; }
   .obras-hero-copy { text-align: left; }
