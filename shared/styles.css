@@ -539,21 +539,18 @@ footer {
 }
 .obra-modal-panel {
   position: sticky; top: 0;
-  height: 100vh; overflow-y: auto;
+  height: 100vh; overflow: hidden;
   background: var(--surface);
-  padding: 80px 52px;
-  display: flex; flex-direction: column; gap: 16px;
+  padding: clamp(28px, 4.5vh, 64px) clamp(24px, 3.5vw, 52px);
+  display: flex; flex-direction: column; gap: clamp(6px, 1vh, 14px);
 }
-.obra-modal-panel::-webkit-scrollbar { width: 3px; }
-.obra-modal-panel::-webkit-scrollbar-track { background: transparent; }
-.obra-modal-panel::-webkit-scrollbar-thumb { background: var(--stone); }
 
 .obra-modal-titulo {
   font-family: 'Play', sans-serif;
-  font-size: clamp(24px, 3vw, 38px); font-weight: 400; line-height: 1.1;
+  font-size: clamp(16px, 2.4vh, 32px); font-weight: 400; line-height: 1.1;
 }
 .obra-modal-desc {
-  font-size: 18px; line-height: 1.9; color: var(--muted);
+  font-size: clamp(11px, 1.4vh, 15px); line-height: 1.6; color: var(--muted);
 }
 
 /* Series de precios */
@@ -563,7 +560,7 @@ footer {
 }
 .serie-item {
   display: flex; flex-direction: column; align-items: center;
-  padding: 8px 10px; min-width: 72px;
+  padding: clamp(4px, 0.6vh, 8px) clamp(6px, 0.8vw, 10px); min-width: 60px;
   border: 1px solid transparent;
 }
 .serie-item.sold .serie-precio,
@@ -573,33 +570,33 @@ footer {
 .serie-item.primera { border-color: var(--accent); }
 .serie-precio {
   font-family: 'Jura', sans-serif;
-  font-size: 15px; letter-spacing: 0.06em; color: var(--muted);
+  font-size: clamp(11px, 1.3vh, 14px); letter-spacing: 0.06em; color: var(--muted);
 }
 .serie-copia {
-  font-size: 13px; color: var(--muted);
-  margin-top: 4px; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: clamp(9px, 1vh, 12px); color: var(--muted);
+  margin-top: 2px; letter-spacing: 0.1em; text-transform: uppercase;
 }
 
 .obra-modal-sep {
-  height: 1px; background: var(--stone); margin: 4px 0;
+  height: 1px; background: var(--stone); margin: 2px 0; flex-shrink: 0;
 }
 
 /* Specs */
-.obra-modal-specs { display: flex; flex-direction: column; gap: 10px; }
-.spec-row { display: flex; justify-content: space-between; font-size: 17px; }
+.obra-modal-specs { display: flex; flex-direction: column; gap: clamp(4px, 0.7vh, 10px); }
+.spec-row { display: flex; justify-content: space-between; font-size: clamp(11px, 1.4vh, 15px); }
 .spec-key { color: var(--muted); }
 .spec-val { color: var(--text); }
 
 .obra-ref-label {
-  font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--accent); margin-bottom: -8px;
+  font-size: clamp(10px, 1.2vh, 13px); letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: -4px;
 }
-.obra-ref-text { font-size: 18px; color: var(--muted); }
+.obra-ref-text { font-size: clamp(11px, 1.4vh, 15px); color: var(--muted); }
 
 .obra-precio-grande {
   font-family: 'Play', sans-serif;
-  font-size: clamp(28px, 3.5vw, 44px); font-weight: 400;
-  margin-top: 4px;
+  font-size: clamp(20px, 2.8vh, 38px); font-weight: 400;
+  margin-top: 2px;
 }
 .btn-encargar {
   display: inline-block;
