@@ -334,46 +334,31 @@ function initHeroAnimations() {
   let current = 0;
   let target = 0;
   let raf = null;
-  let done = false;
+  let startTime = null;
 
-  function setTarget(pct) {
-    target = Math.max(target, Math.min(pct, done ? 100 : 92));
+  function setFill(pct) {
+    const fill = document.getElementById('loader-bar-fill');
+    const pctEl = document.getElementById('loader-percent');
+    if (fill) fill.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '%';
   }
 
-  function tick() {
-    if (current < target) {
-      current = Math.min(target, current + 1);
-      const fill = document.getElementById('loader-bar-fill');
-      const pctEl = document.getElementById('loader-percent');
-      if (fill) fill.style.width = current + '%';
-      if (pctEl) pctEl.textContent = current + '%';
-    }
-    if (current < 100) raf = requestAnimationFrame(tick);
-  }
-
-  function countLoaded() {
-    return performance.getEntriesByType('resource').filter(e => e.responseEnd > 0).length;
+  function simulate(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    // exponential easing: fast start, slows near 88%
+    const simulated = Math.round(88 * (1 - Math.exp(-elapsed / 1200)));
+    target = Math.max(target, simulated);
+    if (current < target) { current++; setFill(current); }
+    if (current < 100) raf = requestAnimationFrame(simulate);
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    let peakCount = Math.max(countLoaded(), 10);
-
-    if (window.PerformanceObserver) {
-      const obs = new PerformanceObserver(function() {
-        const loaded = countLoaded();
-        peakCount = Math.max(peakCount, loaded + 4);
-        setTarget(Math.round((loaded / peakCount) * 92));
-      });
-      obs.observe({ entryTypes: ['resource'] });
-    }
-
-    setTarget(5);
-    raf = requestAnimationFrame(tick);
+    raf = requestAnimationFrame(simulate);
   });
 
   window._completeLoader = function() {
-    done = true;
-    setTarget(100);
+    target = 100;
     if (!raf) raf = requestAnimationFrame(tick);
   };
 })();
