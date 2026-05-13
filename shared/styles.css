@@ -542,15 +542,15 @@ footer {
   height: 100vh; overflow: hidden;
   background: var(--surface);
   padding: clamp(28px, 4.5vh, 64px) clamp(24px, 3.5vw, 52px);
-  display: flex; flex-direction: column; gap: clamp(6px, 1vh, 14px);
+  display: flex; flex-direction: column; gap: clamp(7px, 1.2vh, 17px);
 }
 
 .obra-modal-titulo {
   font-family: 'Play', sans-serif;
-  font-size: clamp(16px, 2.4vh, 32px); font-weight: 400; line-height: 1.1;
+  font-size: clamp(19px, 2.9vh, 38px); font-weight: 400; line-height: 1.1;
 }
 .obra-modal-desc {
-  font-size: clamp(11px, 1.4vh, 15px); line-height: 1.6; color: var(--muted);
+  font-size: clamp(13px, 1.7vh, 18px); line-height: 1.6; color: var(--muted);
 }
 
 /* Series de precios */
@@ -570,10 +570,10 @@ footer {
 .serie-item.primera { border-color: var(--accent); }
 .serie-precio {
   font-family: 'Jura', sans-serif;
-  font-size: clamp(11px, 1.3vh, 14px); letter-spacing: 0.06em; color: var(--muted);
+  font-size: clamp(13px, 1.6vh, 17px); letter-spacing: 0.06em; color: var(--muted);
 }
 .serie-copia {
-  font-size: clamp(9px, 1vh, 12px); color: var(--muted);
+  font-size: clamp(11px, 1.2vh, 14px); color: var(--muted);
   margin-top: 2px; letter-spacing: 0.1em; text-transform: uppercase;
 }
 
@@ -582,20 +582,20 @@ footer {
 }
 
 /* Specs */
-.obra-modal-specs { display: flex; flex-direction: column; gap: clamp(4px, 0.7vh, 10px); }
-.spec-row { display: flex; justify-content: space-between; font-size: clamp(11px, 1.4vh, 15px); }
+.obra-modal-specs { display: flex; flex-direction: column; gap: clamp(5px, 0.8vh, 12px); }
+.spec-row { display: flex; justify-content: space-between; font-size: clamp(13px, 1.7vh, 18px); }
 .spec-key { color: var(--muted); }
 .spec-val { color: var(--text); }
 
 .obra-ref-label {
-  font-size: clamp(10px, 1.2vh, 13px); letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: clamp(12px, 1.4vh, 16px); letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--accent); margin-bottom: -4px;
 }
-.obra-ref-text { font-size: clamp(11px, 1.4vh, 15px); color: var(--muted); }
+.obra-ref-text { font-size: clamp(13px, 1.7vh, 18px); color: var(--muted); }
 
 .obra-precio-grande {
   font-family: 'Play', sans-serif;
-  font-size: clamp(20px, 2.8vh, 38px); font-weight: 400;
+  font-size: clamp(24px, 3.4vh, 46px); font-weight: 400;
   margin-top: 2px;
 }
 .btn-encargar {
